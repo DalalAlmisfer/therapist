@@ -95,7 +95,7 @@ app.use('/list', require('./routes/list'));
 app.use('/rest', require('./routes/rest'));
 //app.use('/index', require('./routes/index'));
 
-module.exports.handler = server; 
+module.exports.handler = server(app); 
 app.listen(8443, function() {
     console.log('listening on port 8444 ..');
 });
