@@ -1,0 +1,40 @@
+
+    <% if(typeof errors != 'undefined') { %>
+      <% errors.forEach(function(error) { %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <%= error.msg %>
+              <button  class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+      <% }) %>
+  <% } %>
+
+
+  <div class="uk-margin uk-margin-right uk-padding-large">
+
+        <form class="add-form-box" action="/home/contact" method="POST">
+
+           <label>  Name </label>
+           <input type="text" class="uk-input" name="contact_email" > 
+           <label>  Email </label>
+           <input type="text" class="uk-input" name="phone_number" > 
+           <label> Massage </label>
+           <textarea class="uk-textarea" name="contact_msg"> </textarea>
+           <div class="uk-margin-small"> 
+            <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"> 
+              Send
+            </button>
+            
+          </div>
+
+        </form>
+
+    </div>   
+
+
+
+
+
+
+

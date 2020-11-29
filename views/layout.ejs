@@ -1,0 +1,482 @@
+
+<html lang="en">
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title> <%= title %>  </title>
+
+      <!-- UIkit -->
+      <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit-icons.min.js"></script>
+      <link rel="stylesheet" href="/css/uikit.css"> 
+
+      <!-- Chart js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+      <!-- CSS -->
+      <style>
+        /** Global **/
+        *{
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          text-decoration: none;
+          box-sizing: border-box;
+          font-family: 'Montserrat', sans-serif;
+    
+        }
+
+        body {
+          background-color: #f8f8f8 !important;
+        }
+
+        #env-selecter {
+          background-color: #EEF1FC  !important;
+          box-sizing: border-box;
+                box-shadow: 0 15px 25px rgba(0,0,0,.6);
+                border-radius: 10px;
+               padding: 10px;
+        }
+
+        .selecter {
+          margin-bottom: 10px;
+          position: relative;
+        }
+
+        .nav-a small {
+          color: #222;
+
+        }
+
+        .nav-a small:hover{
+          text-decoration: underline;
+        }
+    
+        nav {
+          background-color: #222 !important;
+        }
+    
+        .search {
+          margin-left: 100px;
+          padding-left: 100px;
+        }
+
+        #index_content {
+          margin-right: 40px;
+          
+        }
+
+        #user_manual {
+          position: fixed;
+          bottom: 100px;
+          right: 0px;
+        }
+
+        #table-index {
+          margin-top: 50px;
+          margin-left: 50px;
+        }
+
+        .cards .card {
+          background: #fff;
+          border-radius: 5px;
+          padding: 20px;
+          width: 300px;
+          display: inline-flex;
+          margin: 5px;
+          
+        }
+
+        .cards .cards .result{
+          padding-top: 5px;
+        }
+
+        #add-form-box #last-button{
+          margin-bottom: 15px;
+        }
+    
+        #navigation li a {
+          text-decoration:none;
+        }
+        
+        #navigation li a.on {
+          background:yellow;
+        }
+
+        #mobile-menu {
+          display: none;
+                }
+
+        #mobile-menu-button {
+          display: none;
+
+        }
+        
+        ul li a.active {
+          text-decoration: none;
+          border-bottom: #4285E9 0.125em solid
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 120%;
+            background-color: #222;
+            color: white;
+            
+            height:60px;
+            
+        }
+        .footer p {
+          color: #fff;
+        }
+
+        /** Responsive  */
+        @media only screen and (min-width: 768px) {
+        .add-form-box {
+          padding-left: 100px;
+          padding-right: 100px;
+        }
+      }
+
+      /* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+  body {
+    height: 130%;
+  }
+  #mobile-menu {
+    display: inline;
+    margin-top: 25px;
+  }
+
+        #mobile-menu-button {
+          display: inline;
+
+        }
+
+  #navigation {
+    display: none;
+  }
+
+  #profile-button {
+    display: none;
+  }
+
+}
+
+
+      </style>
+
+    </head>
+
+    <body>
+
+      <!-- Header -->
+         <nav class="uk-navbar uk-navbar-container uk-margin uk-background-secondary" >     
+        <div class="uk-navbar-left uk-background-secondary">
+         <ul class="uk-navbar-nav">
+           <li>
+             <a class="uk-logo">
+              <img src="/images/Anees logo.png" alt="logo" class="logo"/>
+             </a>     
+           </li>
+         </ul>
+        </div> 
+
+      <!-- Profile -->
+        <div  class="uk-navbar-right uk-background-secondary">
+          <ul class="uk-navbar-nav">
+            <li>
+              <div class="uk-inline">
+                <button id="profile-button" class="uk-button uk-button-secondary uk-button-small uk-text-capitalize uk-text-small" type="button">          
+                  Hello, Dr. <%= user.first_name %>   
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                  </svg>
+                </button>
+                <div uk-dropdown>
+                  <ul class="uk-nav uk-dropdown-nav">
+                    <li> <a href="/profile"> profile </a> </li>
+                  </ul>
+                </div>
+             </div>
+             </li>
+          </ul>
+
+      
+        <!-- Mobile Nav -->
+          <ul id="mobile-menu" class="uk-navbar-nav">
+            <li>
+              <div class="uk-inline">
+                <button id="mobile-menu-button" class="uk-button uk-button-secondary uk-button-small uk-text-capitalize uk-text-small" type="button">          
+                  <spa uk-icon="icon: menu"> </spa>
+                </button>
+                <div uk-dropdown>
+                  <ul class="uk-nav uk-dropdown-nav">
+                    <li class="uk-nav-divider uk-padding-small">
+                      <a class="nav-a" href="/" class="uk-text-secondary uk-text-light"> 
+                        <small>
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                          </svg>
+                          Home
+                      </small>
+                      </a>
+                    </li>
+      
+                    <li class="uk-nav-divider uk-padding-small">
+                      <a class="nav-a" href="/home/list" class="uk-text-secondary uk-text-light">              
+                        <small>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                              <path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+                              <circle cx="3.5" cy="5.5" r=".5"/>
+                              <circle cx="3.5" cy="8" r=".5"/>
+                              <circle cx="3.5" cy="10.5" r=".5"/>
+                            </svg>
+                        Patients 
+                      </small> 
+                      </a>
+                    </li>
+      
+                    <li class="uk-nav-divider uk-padding-small">
+                      <a class="nav-a" href="/home/add" class="uk-text-secondary uk-text-light"> 
+                        <small>
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                          </svg>
+                          Add patient
+                        </small>
+        
+                      </a>
+                    </li>
+      
+                    <li class="uk-nav-divider uk-padding-small">
+                      <a class="nav-a" href="/home/aboutUs"  class="uk-text-secondary uk-text-light"> 
+                        <small>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                          <circle cx="8" cy="4.5" r="1"/>
+                        </svg>
+                          About us
+                        </small>
+                      
+                      
+                      </a>
+                    </li>
+      
+                    <li class="uk-nav-divider uk-padding-small">
+                      <a class="nav-a" href="/home/contact" class="uk-text-secondary uk-text-light"> 
+                       <small>
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                          </svg> 
+                        Contact us
+                      </small>
+                    </a>
+                    </li>
+
+
+                    <li class="uk-nav-divider uk-padding-small"> 
+                      <a class="nav-a" class="uk-text-secondary uk-text-light"  href="/profile"> 
+                        <small>
+                          <span uk-icon="icon: user; ratio: 0.7"></span>
+                          Profile </a>
+                        </small>
+                     </li>
+      
+                    <li class="uk-nav-divider uk-padding-small" >
+                      <a class="nav-a" href="/users/logout" class="uk-text-secondary uk-text-light"> 
+                       <small>
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                          </svg>
+                          Sign out 
+                          </small>
+                         </a>
+                    </li>
+                    
+                  </ul>
+                  
+                </div>
+             </div>
+             </li>
+          </ul>
+        </div>
+      </nav>
+
+     <!-- sideNav + Content -->
+      <div class="uk-continer">
+      <div class="uk-grid-divider uk-height-max-large uk-background-muted" uk-grid>
+        <div>
+          <div class="uk-width-1-1" >
+            <ul id="navigation" class="uk-nav-parent-icon uk-nav-primary" uk-nav>
+              <li class="uk-nav-divider uk-padding-small">
+                <a class="nav-a" href="/" class="uk-text-secondary uk-text-light"> 
+                  <small>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                      <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    </svg>
+                    Home
+                </small>
+                </a>
+              </li>
+
+              <li class="uk-nav-divider uk-padding-small">
+                <a class="nav-a" href="/home/list" class="uk-text-secondary uk-text-light">              
+                  <small>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                        <path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+                        <circle cx="3.5" cy="5.5" r=".5"/>
+                        <circle cx="3.5" cy="8" r=".5"/>
+                        <circle cx="3.5" cy="10.5" r=".5"/>
+                      </svg>
+                  Patients 
+                </small> 
+                </a>
+              </li>
+
+              <li class="uk-nav-divider uk-padding-small">
+                <a class="nav-a" href="/home/add" class="uk-text-secondary uk-text-light"> 
+                  <small>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                    Add patient
+                  </small>
+  
+                </a>
+              </li>
+
+              <li class="uk-nav-divider uk-padding-small">
+                <a class="nav-a" href="/home/aboutUs"  class="uk-text-secondary uk-text-light"> 
+                  <small>
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                    <circle cx="8" cy="4.5" r="1"/>
+                  </svg>
+                    About us
+                  </small>
+                
+                
+                </a>
+              </li>
+
+              <li class="uk-nav-divider uk-padding-small">
+                <a class="nav-a" href="/home/contact" class="uk-text-secondary uk-text-light"> 
+                 <small>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                    </svg> 
+                  Contact us
+                </small>
+              </a>
+              </li>
+
+              <li class="uk-nav-divider uk-padding-small" >
+                <a class="nav-a" href="/users/logout" class="uk-text-secondary uk-text-light"> 
+                 <small>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                      <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                    </svg>
+                    Sign out 
+                    </small>
+                   </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <div id="index_content" class="uk-width-expand" >
+
+          <%- body %> 
+      
+        </div>
+      </div>
+      
+      <!-- User Manual -->
+      <div class="uk-position-center-botton " id="user_manual">
+
+        <a class="uk-button " href="#modal-overflow" uk-toggle>
+          <span uk-icon="icon: question; ratio: 1"></span>
+
+        </a>
+
+        <div id="modal-overflow" uk-modal>
+        <div class="uk-modal-dialog">
+
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title"> Manual </h2>
+        </div>
+
+        <div class="uk-modal-body" uk-overflow-auto>
+
+          <p class="uk-text-large"> What to find in this dashboard ? </p>
+
+          <p> 1. Total number of patients registered in the system, including the one who registered in the game and who are not.
+            <br>
+            <br>
+             2. Total number of patients has actulay registered successfuly in the game.
+             <br>
+             <br>
+             3. Total number of patients has finished the game, its means they exceeds all levels successfuly.
+             <br> <br>
+          </p>
+          <p class="uk-text-large"> What the table in the home page is for ? </p>
+
+          <p>
+            its displays recently viewd patients with notes and progress for each patients.
+          </p>
+
+
+
+        </div>
+
+        <div class="uk-modal-footer uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+        </div>
+
+    </div>
+</div>
+
+      </div>
+
+
+      </div>
+     
+     <!-- Footer -->
+      <div class="footer_navbar">   
+        <div class="footer">
+            <p>
+                © 2020 Anees.
+            </p>
+    
+        </div>
+      </div>
+
+      <script type="text/javascript">
+      const currentLocation = location.href;
+      const menuItem = document.querySelectorAll('a');
+      const menuLength = menuItem.length;
+      for (var i = 0; i< menuLength; i++) {
+        if(menuItem[i].href === currentLocation) {
+          menuItem[i].className = "active"
+        }
+      }
+      </script>
+
+
+    </body>
+
+</html>

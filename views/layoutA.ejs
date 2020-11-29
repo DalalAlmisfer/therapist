@@ -1,0 +1,208 @@
+
+<html>
+    <head>
+    <title> Sign in </title>
+        <!-- Fonts -->
+         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+     rel="stylesheet">
+
+         <!-- UIkit -->
+         <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+         <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.9/dist/js/uikit-icons.min.js"></script>
+         <link rel="stylesheet" href="/css/uikit.css"> 
+
+         <!--- CSS -->
+         <style>
+             /** colors: 
+             milky : EEF1FC 
+             **/
+             .wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                margin: 0;
+                padding: 0;
+                height: 100%;
+             }
+
+             .header {
+                padding: 30px;
+                
+             }
+
+            .right-grid {
+                 width: 65%;
+                 margin-top: 10px;
+                 margin-left: 160px;
+                 scrollbar-shadow-color: aliceblue;
+             }
+
+             .left-grid {
+                 background-color: #1e87f0;
+                 color: white;
+             }
+
+             .right-grid h1 {
+                 font-size: 19px;
+             }
+
+             #form-area { 
+                right:0;  
+             }
+             .right-grid #form-area form {
+                box-sizing: border-box;
+                box-shadow: 0 15px 25px rgba(0,0,0,.6);
+                border-radius: 10px;
+               padding: 10px;
+             }
+
+             .right-grid #login-form-area form {
+                box-sizing: border-box;
+                box-shadow: 0 15px 25px rgba(0,0,0,.6);
+                border-radius: 10px;
+               padding: 10px;
+             }
+
+
+             #last-form {
+                padding: 10px;
+             }
+
+             #login-form-area {
+                 margin-top: 130px;
+             }
+ 
+             .text-area {
+                margin-top: 200px; 
+                margin-left: 100px;  
+             }
+
+             .text-area .header {
+                 font-size: 18px;
+             }
+
+             .text-area .content {
+                 font-size: 16px;
+                 line-height: 24px;
+                 font-weight: 4px;
+                 width: 435px;
+                 grid-row: 8px;
+                 text-align: left;
+                 text-align: justify;
+             }
+
+             .logo {
+                margin-left: 130px;
+             }
+
+
+            #form-header {
+                padding-top: 10px;
+                margin:0;
+                font-size: 30px;
+                left: 0;
+            }
+
+            #form-header small {
+                font-size: 12px;
+            }
+
+            #form-header span {
+                margin-left: 200px;
+                font-size: 12px;
+            }
+            #form-header-rest p {
+                margin-bottom: 5px;
+                font-size: 19px;
+                font-weight: bold;
+            }
+
+            #form-header-rest span{
+                margin-left: 30px;
+                font-size: 12px;
+
+            }
+
+            #form-header-reg {
+                padding-top: 10px;
+                margin:0;
+                font-size: 27px;
+                left: 0;
+            }
+
+            #form-header-reg small {
+                font-size: 12px;
+            }
+
+            #form-header-reg span{
+                margin-left: 90px;
+            }
+
+             .underline {
+                text-decoration: underline;
+                color: rgba(0,0,0,.6);
+            }
+
+             /* Extra small devices (phones, 600px and down) */
+                  
+            @media only screen and (max-width: 600px) {
+                .wrapper .left-grid {
+                    display: none;
+                }
+
+                .wrapper {
+                    grid-template-columns: 1fr;
+                    
+                }
+            }
+
+            @media only screen and (max-width: 700px) {
+                .left-grid {
+                    visibility: hidden;  
+                    margin-top: 0;
+                }
+
+                .wrapper {
+                    display: inline;
+                    margin-top: 0;
+                    
+                }
+            }
+
+            @media only screen and (max-width: 800px) {
+                .wrapper .left-grid {
+                    visibility: hidden;
+                    margin-top: 0;
+                }
+                .wrapper {
+                    grid-template-columns: 1fr;
+                    margin-top: 0;
+                    
+                }
+            }
+
+
+         </style>
+
+    </head>
+
+    <body>
+
+
+         <%- body %> 
+
+         <script type="text/javascript">
+            // const left = document.getElementsByClassName('left-grid ');
+            // for (var i = 0; i< menuLength; i++) {
+            //   if(menuItem[i].href === currentLocation) {
+            //     menuItem[i].className = "active"
+            //   }
+            // }
+            </script>
+    
+
+    
+    </body>
+    </html>
+    

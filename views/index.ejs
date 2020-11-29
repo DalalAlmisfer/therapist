@@ -1,0 +1,95 @@
+<style>
+
+#table-scroll {
+  height: 340px;
+  overflow:auto;  
+}
+
+td {
+  background-color: #EEF1FC;
+}
+
+</style>
+
+<div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
+
+  <div>
+      <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+          <h3 class="uk-card-title"> <%= count %>  </h3>
+          <p> Total number of patients in the system </p>
+      </div>
+  </div>
+
+  <div>
+      <div class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
+          <h3 class="uk-card-title"> 0 </h3>
+          <p> Patients finished all levels </p>
+      </div>
+  </div>
+
+  <div>
+    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light uk-margin">
+        <h3 class="uk-card-title"> 1 </h3>
+        <p> Patients registerd in the game </p>
+    </div>
+</div>
+
+</div>
+
+<div id="table-wrapper" class="uk-overflow-auto uk-preserve-width"> 
+  <div id="table-scroll">
+<table  id="table-index" class="uk-table uk-table-striped uk-table-large uk-width-5-6">
+
+  <thead uk-sticky>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"> Name </th>
+      <th scope="col"> Anxiety Status </th>
+      <th scope="col"> Note </th>
+     
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if (typeof data != 'undefined' && data.length > 0) { %>
+      <% var i = 1 %> 
+      <% data.forEach(function(row){ %>
+    <tr>
+      <td> <%= i++ %>  </td>
+      <td> <%= row.first_name %> </td>
+      <td>
+        <a href="/list/chart/:<%=row.player_id%> ">
+          <span class="title">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+            </svg>
+            view
+          </span>
+        </a>
+      </td>
+
+      <td>
+        <a href="/list/note/:<%=row.player_id%> ">
+          <span class="title">
+
+            Note
+          </span>
+        </a>
+      </td>
+
+    </tr>
+    <% }) %>
+  <% } else { %> 
+      <tr>
+          <td colspan="6">No records is there yet </td>
+          
+     </tr>
+  <% } %>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+

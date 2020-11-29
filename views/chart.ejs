@@ -1,0 +1,128 @@
+<!-- Patient's progress -->
+
+<style>
+
+    #chart-box {
+        margin-bottom: 30px;
+    }
+    .chart {
+        width:100px;
+        height:100px;
+        display:inline-block;
+        border-radius:50%;
+        border:5px solid transparent;
+        background:
+        linear-gradient(#ccc, #ccc) padding-box, 
+        linear-gradient(var(--v), #1e87f0 50%, transparent 0) border-box,
+        linear-gradient(to right, #f2f2f2 50%, #1e87f0 0) border-box;
+    }
+
+    .chart-zero {
+        width:100px;
+        height:100px;
+        display:inline-block;
+        border-radius:50%;
+        border:5px solid transparent;
+        background:
+        linear-gradient(#ccc, #ccc) padding-box, 
+        linear-gradient(var(--v), #f2f2f2 50%, transparent 0) border-box,
+        linear-gradient(to right, #f2f2f2 50%, #1e87f0 0) border-box;
+    }
+
+    .chart-one {
+        width:100px;
+        height:100px;
+        display:inline-block;
+        border-radius:50%;
+        border:5px solid transparent;
+        background:
+        linear-gradient(#ccc, #ccc) padding-box, 
+        linear-gradient(var(--v), #f2f2f2 50%, transparent 0) border-box,
+        linear-gradient(to right, #f2f2f2 50%, #1e87f0 0) border-box;
+
+    }
+
+</style>
+
+<div class="wrapper-env">
+    <div class="selecter">
+        <form>
+            <button class="uk-button uk-button-default uk-text-small" type="button"> Select anxiety status for specific enviorment 
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                  </svg>
+            </button>
+            <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000">
+                <% if(typeof userdata != 'undefined' ) { %> 
+                <ul class="uk-nav uk-dropdown-nav">
+                    <li class="uk-active"><a href="/list/chart/:<%= userdata.player_id %>/school"> School </a></li>
+                    <li class="uk-active"><a href="/list/chart/:<%= userdata.player_id %>/market"> Market </a></li>
+                    <li class="uk-active"><a href="/list/chart/:<%= userdata.player_id %>/garden"> Garden </a></li>
+                </ul>
+            <% } %> 
+            </div>
+        </form>
+</div>
+
+
+<div id="env-selecter">
+    <% if (typeof chosen != 'undefined') {%> 
+        <% if ( chosen == 'yes') { %> 
+
+<div id="chart-box">
+
+   <p class="uk-text-lead uk-text-light"> Patient progress </p>
+   <hr class="uk-divider-small">
+
+    <div class="chart-zero" style="--v: -90deg"> </div> <!-- zero level -->
+    <div class="chart-one" style="--v:  35deg"></div> <!-- 37.5% first level -->
+    <div class="chart" style="--v:  -45deg"></div><!-- 12.5% second level -->
+    <div class="chart" style="--v:  90deg"></div><!-- 100% third level -->
+
+
+</div>
+
+<div id="chart-box-second">
+
+    <p class="uk-text-lead uk-text-light"> Anxiety status </p>
+    <hr class="uk-divider-small">
+    <canvas id="myChart" width="250" height="60px">
+
+    </canvas>
+
+</div>
+
+<% } else if (chosen == 'no') { %> 
+    <p> This environment is not available for now. </p>
+<% } } else {%> 
+    <p> Select an environment to show the anxiety status of the patient for a specific environment</p>
+<% } %>
+
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['Level One', 'Level Two', 'Level Three' ],
+        datasets: [{
+            label: 'Anxiety status',
+            backgroundColor: '#1e87f0',
+            borderColor: ' #155ea8',
+            data: [0, 1, 2, 3 ]
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+</script>
+
+</div>
+
+</div>
+

@@ -1,0 +1,116 @@
+<style>
+     .Emailemsg, .Passemsg {
+	  color: red;
+	  font-size: 10px;
+	  margin: 0;
+	  padding: 0;
+	}
+  
+	
+  
+	.hidden {
+	  visibility: hidden;
+	  margin: 0;
+	  padding: 0;
+	  font-size: 0px;
+	}
+  </style>
+<div class="wrapper">
+	<div class="left-grid">
+		<div class="text-area">
+		  <h2>Welcome To Anees Dashboard</h2>
+		  <p class="content">
+			This website is a dashboard for Therapists. Its allows therapists to
+			follow up with their patients via visualising data about their patient
+			anxiety status. The data is inferred from patient reactions while
+			playing with Anees Video Game. <br />
+			<br />
+			Anees Video Game and Anees Dashboard are
+			<span class="underline">
+			  only available for therapists in King Khalid University Hospital,
+			  Riyadh.
+			</span>
+		  </p>
+		</div>
+	  </div>
+  
+  
+	<div class="right-grid">
+	  <div id="login-form-area"> 
+		<img src="/images/Anees logo.png" alt="logo" class="logo" />
+
+	  <form  id="form" action="/users/login" method="POST" class="uk-grid-small" uk-grid>
+
+		<div id="form-header">
+		  <p> 
+			  Login
+			<small>
+				<span uk-icon="icon: lock"> </span> 
+				Secured connection
+			</small> 
+		</p> 
+		</div>
+
+		
+		<div class="uk-form-controls  uk-width-1-1">
+			<label> Email </label>
+			<input id="email" class="uk-input uk-form-large" type="text" name="email" placeholder="Email">
+			<span class="Emailemsg hidden">Please Enter A Valid Email</span>
+		</div>
+    	
+		<div class="uk-form-controls uk-width-1-1">
+			<label> Password </label>
+			<input class="uk-input uk-form-large" type="password" name="password" placeholder="Password">
+			<span class="Passemsg hidden" >
+				
+			  </span>	
+		</div>
+
+        <div id="last-form"class="uk-form-controls uk-width-1-1">
+
+			<p class="uk-text-right">
+				
+				<a href="/rest/forget"> Forget password? </a>
+			</p>
+
+			<button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Login</button>
+
+			<p class="uk-text-center">
+			  You Don't have an account?
+			  <a href="/users/register"> Register </a>
+			</p>
+	  
+	  </form>
+
+
+	  </div>
+  
+</div>
+
+</div>
+  
+<script>
+	const email = document.getElementById("email");
+	var $regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+	$(document).ready(function() {
+
+		    //check email field
+			$(email).keyup( function () {
+      if (!$(this).val().match($regexemail)) {
+        // there is a mismatch, hence show the error message
+        $(".Emailemsg").removeClass("hidden");
+        $(".Emailemsg").show();
+      } else {
+        // else, do not display message
+        $(".Emailemsg").addClass("hidden");
+      }
+    });
+
+	});
+
+</script>
+       
+
+
+

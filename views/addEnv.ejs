@@ -1,0 +1,50 @@
+
+<div class="uk-margin uk-margin-right">
+
+  <% if(typeof data != 'undefined' ) { %>
+    <form class="add-form-box" method="POST" action="/list/:<%= data.player_id %> /edit/submit">
+
+        <label class="username"> First Name </label >
+        <input class="uk-input" name="name" value="<%= data.first_name %> " readonly >
+
+        <label class="username"> Last Name </label >
+          <input class="uk-input" name="name" value="<%= data.last_name %> " readonly>
+
+        <label> Email </label>
+        <input class="uk-input" name="email" value="<%= data.email %> " readonly> 
+
+        <label> Gander </label>
+        <select name="gander" class="uk-select"  value="<%= data.gander %> " disabled="true">
+            <option value="Female" > Female </option>
+            <option value="Male"  > Male </option>
+        </select>
+
+        <label> Date of birth </label>
+        <input type="text" class="uk-input" name="birth_date" value="<%= data.birth_date %>" readonly> 
+   
+      </form>
+ <% } %> 
+
+    <p class="add-form-box" style="color:black;">* You are about to add enviroment to the above patient. </p>
+ 
+
+    <form class="add-form-box" action="/list/submit" method="POST"> 
+      <label class=" uk-text-light "> Select Enviroment </label>
+      <select class="uk-select" name="env">
+          <option class="option" value="school"> School </option>
+          <option class="option" value="market" disabled> Market </option>
+          <option class="option" value="garden" disabled> Garden </option>
+      </select>
+
+     <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-margin-small-top" type="submit"> Add </button>
+    </form>
+
+</div>
+
+
+
+
+
+  
+
+

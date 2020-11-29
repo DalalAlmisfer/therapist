@@ -1,0 +1,60 @@
+ <div class="uk-margin-right">
+
+              <% if(typeof errors != 'undefined') { %>
+                <% errors.forEach(function(error) { %>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%= error.msg %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                <% }) %>
+            <% } %>
+     
+            <div  class="uk-margint"> 
+            <form class="add-form-box " method="POST" action="/home/add">
+              <p> Fill the form blow to add your patient in our system </p>
+                 <label>  First Name </label>
+                 <input type="text" class="uk-input" name="first_name">
+                 <label>  Last Name </label>
+                 <input type="text" class="uk-input" name="last_name"> 
+                 <label>  Email </label>
+                 <input type="text" class="uk-input" name="email">
+                 <label>  Password </label>
+                 <input type="password" class="uk-input" name="password">
+
+                 <label> Gander </label>
+                 <select name="gander" class="uk-select">
+                    <option > select gander </option>
+                    <option value="Female"> Female </option>
+                    <option value="Male"> Male </option>
+                 </select>
+
+                 <label> Date of birth </label>
+                 <input type="date" class="uk-input" name="child_birth"> 
+                 <label> Anxiety type </label>
+                 <select name="anxiety_type" class="uk-select">
+                     <option > select anxiety type </option>
+                     <option value="Social Anxiety"> Social Anxiety </option>
+                 </select>            
+                <label> Enviroment title </label>
+                <select name="env_title" class="uk-select">
+                  <option > select enviroment </option>
+                  <option value="School"> School </option>
+                  <option value="Mall" disabled > Market </option>
+                  <option value="Garden" disabled> Garden </option>
+                </select>
+                <div class="uk-margin"> 
+                  <button type="submit" class="uk-button uk-button-primary uk-width-1-1">  Add </button>
+                </div>
+            </form>
+            </div>
+</div>
+
+       
+
+
+
+
+
+  

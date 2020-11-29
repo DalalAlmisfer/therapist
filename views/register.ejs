@@ -1,0 +1,288 @@
+<style>
+  .Firstemsg, .Familyemsg, .Phoneemsg, .Emailemsg, .Dateemsg, .Passemsg, .Confemsg{
+    color: red;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+  }
+
+  
+
+  .hidden {
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    font-size: 0px;
+  }
+</style>
+
+<div class="wrapper">
+
+  <div class="left-grid">
+    <div class="text-area">
+      <h2>Welcome To Anees Dashboard</h2>
+      <p class="content">
+        This website is a dashboard for Therapists. Its allows therapists to
+        follow up with their patients via visualising data about their patient
+        anxiety status. The data is inferred from patient reactions while
+        playing with Anees Video Game. <br />
+        <br />
+        Anees Video Game and Anees Dashboard are
+        <span class="underline">
+          only available for therapists in King Khalid University Hospital,
+          Riyadh.
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="right-grid">
+    <div id="form-area">
+      <img src="/images/Anees logo.png" alt="logo" class="logo" />
+      <form
+        action="/users/register"
+        method="POST"
+        class="uk-grid-small"
+        uk-grid
+        id="form"
+      >
+
+      <div id="form-header-reg">
+        <p> 
+          Create account
+        <small>
+          <span uk-icon="icon: lock"> </span> 
+          Secured connection
+        </small> 
+      </p> 
+      </div>
+  
+
+        <div class="uk-width-1-2@s">
+          <label for="first_name"> First Name *</label>
+          <input
+            id="first_name"
+            class="uk-input"
+            type="text"
+            placeholder="First Name"
+            name="first_name"
+          />
+          <span class="Firstemsg hidden">Please Enter a Valid Name</span>
+        </div>
+
+        <div class="uk-width-1-2@s">
+          <label> Family Name *</label>
+          <input
+            class="uk-input"
+            id="family_name"
+            type="text"
+            placeholder="Family Name"
+            name="family_name"
+          />
+          <span id="emsg" class="Familyemsg hidden">Please Enter a Valid Family Name</span>
+        </div>
+
+        <div class="uk-form-controls uk-width-1-1">
+          <label> Email *</label>
+          <input class="uk-input" id="email" placeholder="Email" name="email" />
+          <span id="emsg" class="Emailemsg hidden">Please Enter a Valid Email</span>
+        </div>
+
+        <div class="uk-form-controls uk-width-1-1">
+          <label> Phone Number *</label>
+          <input
+            class="uk-input"
+            id="phone_number"
+            type="tel"
+            placeholder="Phone Number"
+            name="phone_number"
+          />
+          <span id="emsg" class="Phoneemsg hidden">Please Enter a Valid Phone Number </span>
+        </div>
+
+        <div class="uk-form-controls uk-width-1-1">
+          <label> Gander *</label>
+          <select name="gander" class="uk-select" id="gander">
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+          </select>
+          <span id="emsg" class="Genderemsg hidden"> </span>
+        </div>
+
+        <div class="uk-form-controls uk-width-1-1">
+          <lable> Date of birth *</lable>
+          <input
+            class="uk-input"
+            id="date"
+            type="date"
+            placeholder="birth_date"
+            name="birth_date"
+          />
+          <span id="emsg" class="Dateemsg hidden"> Please Select Your Date of birth </span>
+        </div>
+
+        <div class="uk-form-controls uk-width-1-1">
+          <label> Job Title *</label>
+          <select name="job_title" class="uk-select" id="job_title">
+            <option value="Consultant Psychiatrist">
+              Consultant Psychiatrist
+            </option>
+            <option value="Practitioner Psychologist">
+              Practitioner Psychologist
+            </option>
+            <option value="Senior Psychologist">Senior Psychologist</option>
+          </select>
+          <span id="emsg" class="Jobemsg hidden"> </span>
+        </div>
+
+        <div  class="uk-form-controls uk-width-1-2@s">
+          <label> Password *</label>
+          <input
+            class="uk-input"
+            id="password"
+            type="password"
+            placeholder="Password"
+            name="password"
+          />
+          <span id="emsg" class="Passemsg hidden" >
+            Please Enter a 8 long password with uppercase and lowercase Letters, numbers, special characters.
+          </span>
+        </div>
+
+
+
+        <div class="uk-form-controls uk-width-1-2@s">
+          <label> Confirm Password *</label>
+          <input
+            class="uk-input"
+            id="Confirm_Password"
+            for="form-stacked-text"
+            type="password"
+            placeholder="Confirm Password"
+            name="Confirm_Password"
+          />
+          <span id="emsg" class="Confemsg hidden"> Doesn't Match Your Password</span>
+        </div>
+
+        <div id="last-form"class="uk-form-controls uk-width-1-1">
+          <button
+            type="submit"
+            class="uk-button uk-button-primary uk-width-1-1"
+          >
+            Request Registration
+          </button>
+
+          <p class="uk-text-center">
+            You already have an account?
+            <a href="/users/login"> Sign in </a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  const first_name = document.getElementById("first_name");
+  const family_name = document.getElementById("family_name");
+  const email = document.getElementById("email");
+  const phone_number = document.getElementById("phone_number");
+  const gander = document.getElementById("gander");
+  const date = document.getElementById("date");
+  const job_title = document.getElementById("job_title");
+  const password = document.getElementById("password");
+  const Confirm_Password = document.getElementById("Confirm_Password");
+
+  var $regexname = /^([a-zA-Z]{3,16})$/;
+  var $regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  var $regexnum = /^[0-9][A-Za-z0-9 -]*$/;
+  var $regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  var $date = "dd/mm/yyyy";
+
+  $(document).ready(function () {
+
+    //check first name field
+    $(first_name).keyup(function () {
+      if (!$(this).val().match($regexname)) {
+        // there is a mismatch, hence show the error message
+        $(".Firstemsg").removeClass("hidden");
+        $(".Firstemsg").show();
+      } else {
+        // else, do not display message
+        $(".Firstemsg").addClass("hidden");
+      }
+    });
+
+    //check family name field
+    $(family_name).keyup(function () {
+      if (!$(this).val().match($regexname)) {
+        // there is a mismatch, hence show the error message
+        $(".Familyemsg").removeClass("hidden");
+        $(".Familyemsg").show();
+      } else {
+        // else, do not display message
+        $(".Familyemsg").addClass("hidden");
+      }
+    });
+
+    //check phone number name field
+    $(phone_number).keyup(function () {
+      if (!$(this).val().match($regexnum)) {
+        // there is a mismatch, hence show the error message
+        $(".Phoneemsg").removeClass("hidden");
+        $(".Phoneemsg").show();
+      } else {
+        // else, do not display message
+        $(".Phoneemsg").addClass("hidden");
+      }
+    });
+
+    //check email field
+    $(email).keyup( function () {
+      if (!$(this).val().match($regexemail)) {
+        // there is a mismatch, hence show the error message
+        $(".Emailemsg").removeClass("hidden");
+        $(".Emailemsg").show();
+      } else {
+        // else, do not display message
+        $(".Emailemsg").addClass("hidden");
+      }
+    });
+
+    //check birth of date field
+    $(date).change(function () {
+      if ($(this).val().match($date)) {
+        // there is a mismatch, hence show the error message
+        $(".Dateemsg").removeClass("hidden");
+        $(".Dateemsg").show();
+      } else {
+        // else, do not display message
+        $(".Dateemsg").addClass("hidden");
+      }
+    });
+
+    //check password field
+    $(password).keyup (function () {
+      if (!$(this).val().match($regexpassword)) {
+        // there is a mismatch, hence show the error message
+        $(".Passemsg").removeClass("hidden");
+        $(".Passemsg").show();
+      } else {
+        // else, do not display message
+        $(".Passemsg").addClass("hidden");
+      }
+    });
+
+    //check password field
+    $(Confirm_Password).keyup(function () {
+      if (!$(this).val().match(password)) {
+        // there is a mismatch, hence show the error message
+        $(".Confemsg").removeClass("hidden");
+        $(".Confemsg").show();
+      } else {
+        // else, do not display message
+        $(".Confemsg").addClass("hidden");
+      }
+    });
+  });
+</script>
