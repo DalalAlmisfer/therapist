@@ -115,7 +115,6 @@ router.post("/register", async (req, res) => {
               })
               .catch((err) => {
                 console.log(err);
-                req.flash("errorMasg", "there an error");
                 res.redirect("https://therapistdashbaord.herokuapp.com/users/login");              });
           }
         })
