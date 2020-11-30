@@ -23,11 +23,11 @@ const app = express();
 const router = express.Router();
 
 
-var connection = sql.createPool({
-    host: eu-cdbr-west-03.cleardb.net,
-    user: b630bdd6b6e1b9,
-    password: d159c434,
-    database: heroku_195f706910a16f0
+var connection = sql.createConnection({
+    host: 'eu-cdbr-west-03.cleardb.net',
+    user: 'b630bdd6b6e1b9',
+    password: 'd159c434',
+    database: 'heroku_195f706910a16f0'
 });
 
 module.exports = connection;
