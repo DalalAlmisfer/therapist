@@ -94,9 +94,11 @@ app.use('/home', require('./routes/home'));
 app.use('/home', require('./routes/list'));
 app.use('/list', require('./routes/list'));
 app.use('/rest', require('./routes/rest'));
-//app.use('/index', require('./routes/index'));
+app.use(( req, res, nesxt ) => {
+    res.status(404);
+    res.render('not-found');
+});
 
-module.exports.handler = server(app); 
 app.listen( process.env.PORT || 8443, function() {
     console.log('listening on port 8444 ..');
 });
