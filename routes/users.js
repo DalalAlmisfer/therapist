@@ -41,9 +41,9 @@ router.get("/login", (req, res) => {
 
 router.post("/login",
   passport.authenticate("local", {
-    // //successRedirect: '/',
-    // failureRedirect: "/users/login",
-    // failureFlash: true,
+    //successRedirect: '/',
+    failureRedirect: "/users/login",
+    failureFlash: true,
   }),
   function (req, res) {
     res.redirect("/");
@@ -56,7 +56,7 @@ router.get("/register", (req, res) => {
 });
 
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res, next) => {
   const {
     email,
     first_name,
@@ -82,6 +82,7 @@ router.post("/register", async (req, res) => {
           //is the already user exist?
           console.log('email is already used');
           res.render("register", { layout: "layoutA" });
+          next()
         } else {
           User.create({
             email: email,
@@ -93,6 +94,7 @@ router.post("/register", async (req, res) => {
             gander: gander,
             birth_date: birth_date,
             password: password,
+            accepted: 0,
             Confirm_Password: Confirm_Password,
             admains_FK: 1,
           })
