@@ -99,6 +99,11 @@ app.use(( req, res, nesxt ) => {
     res.render('not-found');
 });
 
+app.use(( req, res, nesxt ) => {
+    res.status(500);
+    res.render('not-found');
+});
+
 app.listen( process.env.PORT || 8443, function() {
     console.log('listening on port 8444 ..');
 });
