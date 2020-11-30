@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const http2 = require('http2');
+const sql = require('mysql');
 //const server = http2.createSecureServer()
 const db = require('./config/database');
 //import all needed 
@@ -22,7 +23,14 @@ const app = express();
 const router = express.Router();
 
 
+var connection = sql.createPool({
+    host: eu-cdbr-west-03.cleardb.net,
+    user: b630bdd6b6e1b9,
+    password: d159c434,
+    database: heroku_195f706910a16f0
+});
 
+module.exports = connection;
 
 //allow our application to use json
 app.use(express.json());
