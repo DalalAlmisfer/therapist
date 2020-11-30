@@ -82,6 +82,7 @@ router.post(
       let errors = "";
       var int = parseInt(phone_number);
 
+      console.log('this is', gander);
       await User.findOne({
         where: {
           email: email,
@@ -104,7 +105,7 @@ router.post(
               phone_number: phone_number,
               major: major,
               job_title: job_title,
-              gander: gander,
+              gander: 'gander',
               birth_date: birth_date,
               password: password,
               Confirm_Password: Confirm_Password,

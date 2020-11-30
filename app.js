@@ -1,8 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 const http2 = require('http2');
-var mysql = require('mysql');
-const server = require('serverless-http');
 //const server = http2.createSecureServer()
 const db = require('./config/database');
 //import all needed 
