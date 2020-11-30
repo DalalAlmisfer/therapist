@@ -23,7 +23,7 @@ const app = express();
 const router = express.Router();
 
 
-var connection = sql.createPool({
+var connection = sql.createConnection({
     host: 'eu-cdbr-west-03.cleardb.net',
     user: 'b630bdd6b6e1b9',
     password: 'd159c434',
