@@ -26,11 +26,11 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-router.get("/loginn", (req, res) => {
-  console.log("this is req.user" + req.user);
-  console.log(req.isAuthenticated());
-  res.render("loginn", { layout: "layoutA", user: req.user });
-});
+// router.get("/loginn", (req, res) => {
+//   console.log("this is req.user" + req.user);
+//   console.log(req.isAuthenticated());
+//   res.render("loginn", { layout: "layoutA", user: req.user });
+// });
 
 //login form
 router.get("/login", (req, res) => {
@@ -41,9 +41,9 @@ router.get("/login", (req, res) => {
 
 router.post("/login",
   passport.authenticate("local", {
-    //successRedirect: '/',
-    failureRedirect: "/users/login",
-    failureFlash: true,
+    // //successRedirect: '/',
+    // failureRedirect: "/users/login",
+    // failureFlash: true,
   }),
   function (req, res) {
     res.redirect("/");
@@ -64,7 +64,6 @@ router.post("/register", async (req, res) => {
     birth_date,
     password,
     Confirm_Password,
-    address,
     phone_number,
     gander,
     major,

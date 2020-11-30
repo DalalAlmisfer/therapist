@@ -22,6 +22,7 @@ const SessionStore = require('express-session-sequelize')(session.Store);
 const app = express();
 const router = express.Router();
 
+app.enable('trust proxy'); 
 
 var connection = sql.createConnection({
     host: 'eu-cdbr-west-03.cleardb.net',
@@ -57,6 +58,7 @@ app.use(cookieParser("secret"));
     secret:'secret',
     cookie:{httpOnly:true/*, secure: true*/},
     resave: false,
+    proxy: true,
     saveUninitialized: false,
     store: sessionIntoDB,
 
