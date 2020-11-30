@@ -1,5 +1,0 @@
-[build]
-  publish = "views"
-  command = "gulp build"
-
-home = "home"
