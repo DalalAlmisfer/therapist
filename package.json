@@ -24,6 +24,7 @@
     "gulp-open": "^3.0.1",
     "livevalidator": "^1.0.0-2",
     "mssql-session-store": "^1.0.0",
+    "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "netlify-lambda": "^2.0.1",
     "nodemailer": "^6.4.14",
