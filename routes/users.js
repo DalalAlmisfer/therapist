@@ -57,21 +57,21 @@ router.get("/register", (req, res) => {
 
 
 router.post("/register", async (req, res) => {
-  try {
-    const {
-      email,
-      first_name,
-      family_name,
-      birth_date,
-      password,
-      Confirm_Password,
-      address,
-      phone_number,
-      gander,
-      major,
-      job_title,
-    } = req.body;
+  const {
+    email,
+    first_name,
+    family_name,
+    birth_date,
+    password,
+    Confirm_Password,
+    address,
+    phone_number,
+    gander,
+    major,
+    job_title,
+  } = req.body;
 
+  try {
 
     await User.findOne({
       where: {
