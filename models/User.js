@@ -27,11 +27,6 @@ const User = sequelize.define('therapists', {
           //allowNull: false,
           defaultValue: true
         },
-        address: {
-            type: Sequelize.STRING,
-            //allowNull: false,
-            defaultValue: false
-          },
           phone_number: {
             type: Sequelize.STRING,
             //allowNull: false,
@@ -53,7 +48,7 @@ const User = sequelize.define('therapists', {
             defaultValue: true
           },
           birth_date: {
-            type: Sequelize.STRING,
+            type: Sequelize.DATE,
             //allowNull: false,
             defaultValue: true
           },
