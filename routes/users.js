@@ -57,70 +57,77 @@ router.get("/register", (req, res) => {
 
 
 router.post("/register", async (req, res) => {
-      const {
-        email,
-        first_name,
-        family_name,
-        birth_date,
-        password,
-        Confirm_Password,
-        address,
-        phone_number,
-        gander,
-        major,
-        job_title,
-      } = req.body;
+  try {
+    const {
+      email,
+      first_name,
+      family_name,
+      birth_date,
+      password,
+      Confirm_Password,
+      address,
+      phone_number,
+      gander,
+      major,
+      job_title,
+    } = req.body;
 
-      console.log('this is', gander);
-      await User.findOne({
-        where: {
-          email: email,
-        },
-      })
-        .then((user) => {
-          if (user) {
-            //is the already user exist?
-            console.log('email is already used');
-            res.render("register", { layout: "layoutA" });
-          } else {
-            User.create({
-              email: email,
-              first_name: first_name,
-              family_name: family_name,
-              address: address,
-              phone_number: phone_number,
-              major: major,
-              job_title: job_title,
-              gander: gander,
-              birth_date: birth_date,
-              password: password,
-              Confirm_Password: Confirm_Password,
-              admains_FK: 1,
+
+    await User.findOne({
+      where: {
+        email: email,
+      },
+    })
+      .then((user) => {
+        if (user) {
+          //is the already user exist?
+          console.log('email is already used');
+          res.render("register", { layout: "layoutA" });
+        } else {
+          User.create({
+            email: email,
+            first_name: first_name,
+            family_name: family_name,
+            phone_number: phone_number,
+            major: major,
+            job_title: job_title,
+            gander: gander,
+            birth_date: birth_date,
+            password: password,
+            Confirm_Password: Confirm_Password,
+            admains_FK: 1,
+          })
+            .then((user) => {
+              console.log("new account created");
+              // req.flash(
+              //   "successMasg",
+              //   "your account has been created, please log in"
+              // );
+
+              // mail(email).then((res) => {
+              // })
+              // .catch((err) => {
+              //     console.log('err from mail func', err);
+              // });
+
+              res.redirect("https://therapistdashbaord.herokuapp.com/users/login");
+
             })
-              .then((user) => {
-                console.log("new account created");
-                // req.flash(
-                //   "successMasg",
-                //   "your account has been created, please log in"
-                // );
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-                // mail(email).then((res) => {
-                // })
-                // .catch((err) => {
-                //     console.log('err from mail func', err);
-                // });
 
-                res.redirect("https://therapistdashbaord.herokuapp.com/users/login");
+  } catch(err) {
+    console.log(err, 'in adding user');
+    res.status(500);
+  }
 
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
 
       // async function mail(email, name) {
       //   // create a message for register request confirmation
