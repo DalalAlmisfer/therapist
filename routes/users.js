@@ -58,12 +58,7 @@ router.get("/register", (req, res) => {
 router.post(
   "/register",
   async (req, res) => {
-    var errors = validationResult(req);
-    //var err = JSON.parse(validationResult(req));
-    console.log("this is err", errors);
-    if (!errors.isEmpty()) {
-      res.render("register", { layout: "layoutA", errors: errors });
-    } else {
+
       const {
         email,
         first_name,
@@ -113,11 +108,6 @@ router.post(
             })
               .then((user) => {
                 console.log("new account created");
-                req.flash(
-                  "successMasg",
-                  "your account has been created, please log in"
-                );
-
                 // mail(email).then((res) => {
                 // })
                 // .catch((err) => {
@@ -129,7 +119,6 @@ router.post(
               })
               .catch((err) => {
                 console.log(err);
-                req.flash("errorMasg", "there an error");
                 res.redirect("/users/register");
               });
           }
@@ -138,7 +127,7 @@ router.post(
           console.log(err);
         });
     }
-  }
+  
 );
 
 //logout
