@@ -56,11 +56,7 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  res.redirect("login", { layout: "layoutA" })
-  .catch((err) => {
-    console.log(err);
-    res.end();
-  });
+  res.redirect("https://therapistdashbaord.herokuapp.com/users/login", { layout: "layoutA" });
 });
 
 
