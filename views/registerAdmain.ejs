@@ -1,0 +1,29 @@
+
+
+
+        <% if(typeof errors != 'undefined') { %>
+            <% errors.forEach(function(error) { %>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <%= error.msg %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+            <% }) %>
+        <% } %>
+    
+    
+              
+            <form action="/usersAdmain/register" method="post">
+
+                <h1>Sign up</h1>
+                <input type="email" placeholder="Email" name="email"/>
+                <input type="password" placeholder="Password" name="password"/>
+                <input type="password" placeholder="Confirm Password" name="Confirm_Password"/>
+                <button type="submit"> Sign up </button>
+                <p> You already have an account? 
+                    <a href="/usersAdmain/login"> Sign in </a>
+                </p>
+                
+                
+            </form>

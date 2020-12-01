@@ -1,4 +1,5 @@
 //express
+const { render } = require('ejs');
 const express = require('express');
 const app = express();
 const router = express.Router();
@@ -10,28 +11,28 @@ const therapist = require('../models/User');
 
 
 router.get('/', (req,res) => {
-    console.log(req.isAuthenticated());
-    var json = JSON.parse(req.user);
-    console.log('this is therapistid', json['therapist_id']);
+    res.render('home');
+    // var json = JSON.parse(req.user);
+    // console.log('this is therapistid', json['therapist_id']);
 
-    player.findAll({ raw : true,
-        where: {
-            therapist_FK: json['therapist_id'],
-       }
-     })
-    .then( (players) => {
-        console.log(players);
-            //Get total registered patients 
-        player.count({
-            where: {
-                therapist_FK: json['therapist_id'],
-            }
-        }).then( (number) => {
-        console.log('number_of_patients', number);
-        res.render("index", {layout: "layout" , count:number, data:players , user: json, title: "Home"});
-        }).catch((error) => console.log(error));
+    // player.findAll({ raw : true,
+    //     where: {
+    //         therapist_FK: json['therapist_id'],
+    //    }
+    //  })
+    // .then( (players) => {
+    //     console.log(players);
+    //         //Get total registered patients 
+    //     player.count({
+    //         where: {
+    //             therapist_FK: json['therapist_id'],
+    //         }
+    //     }).then( (number) => {
+    //     console.log('number_of_patients', number);
+    //     res.render("index", {layout: "layout" , count:number, data:players , user: json, title: "Home"});
+    //     }).catch((error) => console.log(error));
 
-    }).catch( err => console.log(err));
+    // }).catch( err => console.log(err));
 
 });
 

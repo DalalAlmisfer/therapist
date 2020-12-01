@@ -32,6 +32,10 @@ var transporter = nodemailer.createTransport({
 //   res.render("loginn", { layout: "layoutA", user: req.user });
 // });
 
+router.get('/registerTherapist' , (req, res) => { 
+  res.render('register');
+})
+
 //login form
 router.get("/login", (req, res) => {
   console.log("this is req.user" + req.user);

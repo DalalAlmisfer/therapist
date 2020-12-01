@@ -1,0 +1,20 @@
+          <% if(typeof myJSON != 'undefined' ? myJSON : '') { %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <%= myJSON %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+    <% } %>
+
+      <form action="/usersAdmain/login" method="post">
+        <h1>Sign in</h1>
+        <input type="email" placeholder="Email" name="email" />
+        <input type="password" placeholder="Password" name="password" />
+        <a href="#" class="forgot">Forgot your password ?</a>
+        <button type="submit">Sign In</button>
+        <p>
+          Don't have an account?
+          <a href="/usersAdmain/register"> Sign up </a>
+        </p>
+      </form>

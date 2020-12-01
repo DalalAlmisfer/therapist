@@ -97,6 +97,8 @@ app.use('/home', require('./routes/home'));
 app.use('/home', require('./routes/list'));
 app.use('/list', require('./routes/list'));
 app.use('/rest', require('./routes/rest'));
+app.use('/usersAdmain', require("./routes/usersAdmain"));
+
 app.use(( req, res, nesxt ) => {
     res.status(404);
     res.render('not-found');
