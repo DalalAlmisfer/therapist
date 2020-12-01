@@ -39,13 +39,7 @@ router.get("/login", (req, res) => {
   res.render("login", { layout: "layoutA", user: req.user });
 });
 
-router.post("/login",
-  passport.authenticate("local", {
-    //successRedirect: '/',
-    failureRedirect: "/users/login",
-    failureFlash: true,
-  }),
-  function (req, res) {
+router.post("/login", (req, res) => {
     res.redirect("/");
   }
 );
@@ -81,7 +75,7 @@ router.post("/register", async (req, res, next) => {
         if (user) {
           //is the already user exist?
           console.log('email is already used');
-          //res.render("register", { layout: "layoutA" });
+          res.render("register", { layout: "layoutA" });
           next()
         } else {
           User.create({
