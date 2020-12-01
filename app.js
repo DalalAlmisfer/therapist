@@ -24,9 +24,16 @@ const router = express.Router();
 
 app.enable('trust proxy'); 
 
-var connection = sql.createConnection('mysql://b630bdd6b6e1b9:d159c434@eu-cdbr-west-03.cleardb.net/heroku_195f706910a16f0?reconnect=true');
-connection.connect();
-module.exports = connection;
+// var connectionpool = sql.createPool({
+//     host: 'eu-cdbr-west-03.cleardb.net',
+//     user: 'b630bdd6b6e1b9',
+//     password: 'd159c434',
+//     database: 'heroku_195f706910a16f0'
+//   });
+  
+
+// var connection = sql.createConnection('mysql://b630bdd6b6e1b9:d159c434@eu-cdbr-west-03.cleardb.net/heroku_195f706910a16f0?reconnect=true');
+// connection.connect();
 
 //allow our application to use json
 app.use(express.json());
@@ -99,15 +106,15 @@ app.use('/list', require('./routes/list'));
 app.use('/rest', require('./routes/rest'));
 app.use('/usersAdmain', require("./routes/usersAdmain"));
 
-app.use(( req, res, nesxt ) => {
-    res.status(404);
-    res.render('not-found');
-});
+// app.use(( req, res, nesxt ) => {
+//     res.status(404);
+//     res.render('not-found');
+// });
 
-app.use(( req, res, nesxt ) => {
-    res.status(500);
-    res.render('not-found');
-});
+// app.use(( req, res, nesxt ) => {
+//     res.status(500);
+//     res.render('not-found');
+// });
 
 app.listen( process.env.PORT || 8443, function() {
     console.log('listening on port 8444 ..');

@@ -42,7 +42,7 @@ const User = sequelize.define('therapists', {
             //allowNull: false,
             defaultValue: true
           },
-          gender: {
+          gander: {
             type: Sequelize.STRING,
             //allowNull: false,
             defaultValue: true

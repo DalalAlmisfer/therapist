@@ -20,4 +20,5 @@ sequelize
     console.log('not connected');
    });
 
-   module.exports = sequelize;
+
+module.exports = sequelize;
