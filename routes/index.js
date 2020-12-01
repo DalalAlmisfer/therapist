@@ -98,19 +98,19 @@ router.post('/profile', async (req, res) => {
 
 
 router.get('/home/add', (req,res) => {
-    var json = JSON.parse(req.user);
-    res.render('addChild', {layout: "layout", user: json, title: "Add patient"});
+   // var json = JSON.parse(req.user);
+    res.render('addChild', {layout: "layout", user: 'json', title: "Add patient"});
 });
 
 
 router.get('/home/contact', (req,res) => {
-    var json = JSON.parse(req.user);
-    res.render('contactUs', {layout: "layout", user: json, title: 'contact us'});
+    //var json = JSON.parse(req.user);
+    res.render('contactUs', {layout: "layout", user: 'json', title: 'contact us'});
 });
 
 router.get('/home/aboutUs', (req, res) => {
-    var json = JSON.parse(req.user);
-    res.render('aboutUs', {layout: "layout", user: json, title: 'about us'});
+    //var json = JSON.parse(req.user);
+    res.render('aboutUs', {layout: "layout", user: 'json', title: 'about us'});
 
 })
 

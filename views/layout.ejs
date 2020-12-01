@@ -3,15 +3,7 @@
     <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title> <%= title %>  </title>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/8.1.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/8.1.1/firebase-analytics.js"></script>
-
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
       <!-- UIkit -->
       <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -198,8 +190,10 @@
           <ul class="uk-navbar-nav">
             <li>
               <div class="uk-inline">
-                <button id="profile-button" class="uk-button uk-button-secondary uk-button-small uk-text-capitalize uk-text-small" type="button">          
+                <button id="profile-button" class="uk-button uk-button-secondary uk-button-small uk-text-capitalize uk-text-small" type="button">      
+                  <%  if (typeof user != 'undefined') {%>     
                   Hello, Dr. <%= user.first_name %>   
+                  <% } %> 
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
                   </svg>
@@ -325,7 +319,7 @@
           <div class="uk-width-1-1" >
             <ul id="navigation" class="uk-nav-parent-icon uk-nav-primary" uk-nav>
               <li class="uk-nav-divider uk-padding-small">
-                <a class="nav-a" href="/" class="uk-text-secondary uk-text-light"> 
+                <a class="nav-a" href="/users/index" class="uk-text-secondary uk-text-light"> 
                   <small>
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
