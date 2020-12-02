@@ -1,0 +1,53 @@
+
+
+        <!-- List of therapists  -->
+
+        <form id="list" method="POST"> 
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">Name</th>
+                  <th scope="col"> Status </th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+  
+              <tbody id="Table-data">
+  
+                <% if(typeof data != 'undefined' ){ %>
+                  <% var i = 1 %> 
+                  <%  data.forEach(function(row)  { %>
+                <tr>
+                  <td> <%= i++ %> </td>
+                  <td> <%= row.first_name %> </td>
+                    <% if( row.accepted == 1) { %> 
+                  <td> accepted </td>
+                    <% } else if (row.accepted == 0){ %> 
+                      <td> rejected </td>
+                  <% } else { %> 
+                    <td> Not decieded yet </td>
+                  <% } %> 
+       
+                  <td>
+                    <a  href="/registerRequest/:<%=row.therapist_id %>/decision/accept" > accept </a>
+                  </td>
+                  <td>
+                    <a href="/registerRequest/:<%=row.therapist_id %>/decision/reject" > reject </a>
+                  </td>
+                </tr>
+  
+                <% })} else{ %>
+                    <tr>
+                      <td colspan="6">No Record Found</td>
+                      
+                    </tr>
+                  <% } %>
+  
+              </tbody>
+            </table>
+          </form>
+  
+  

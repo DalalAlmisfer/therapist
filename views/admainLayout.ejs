@@ -1,0 +1,375 @@
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+      <title> Home </title>
+      <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
+    
+    *{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    body{
+    
+    
+    }
+    
+    .logo {
+      background-image: url(/images/Anees\ logo.png);
+    }
+    
+    
+    h4 {
+        margin-left: 45px;
+        color: gray;
+    }
+    
+    .wrapper{
+      margin: 10px;
+    }
+    .wrapper .top_navbar{
+      width: calc(100% - 20px);
+      height:60px;
+      display: flex;
+      position: fixed;
+      top: 10px;
+    }
+    
+    .wrapper .top_navbar .hamburger{
+      width: 70px;
+      height: 100%;
+      background: #378be5;
+      padding: 15px 17px;
+      border-top-left-radius: 20px;
+      cursor: pointer;
+    }
+    
+    .wrapper .top_navbar .hamburger div{
+      width: 35px;
+      height: 4px;
+      background: #92a6e2;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+    
+    .wrapper .top_navbar .top_menu{
+      width: calc(100% - 70px);
+      height: 100%;
+      background: #fff;
+      border-top-right-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    }
+    
+    .wrapper .top_navbar .top_menu .logo{
+      color: #378be5;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+    
+    .wrapper .top_navbar .top_menu ul{
+      display: flex;
+    }
+    
+    .wrapper .top_navbar .top_menu ul li a {
+      display: block;
+      margin: 0 10px;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      border: 1px solid #378be5;
+      border-radius: 50%;
+      color: #378be5;
+    }
+    
+    .wrapper .top_navbar .top_menu ul li a:hover{
+      background: #378be5;
+      color: #fff;
+    }
+    
+    .wrapper .top_navbar .top_menu ul li a:hover i{
+      color: white;
+    }
+    
+    .wrapper .sidebar{
+      position: fixed;
+      top: 70px;
+      left: 10px;
+      background: #378be5;
+      width: 250px;
+      height: calc(100% - 80px);
+      border-bottom-left-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .wrapper .sidebar ul li a{
+        display: block;
+        padding: 20px;
+        color: #fff;
+        position: relative;
+        margin-bottom: 1px;
+        color: #92a6e2;
+        white-space: nowrap;
+    }
+    
+    .wrapper .sidebar ul li a:before{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: #92a6e2;
+      display: none;
+    }
+    
+    .wrapper .sidebar ul li a span.icon{
+      margin-right: 10px;
+      display: inline-block;
+    }
+    
+    .wrapper .sidebar ul li a span.title{
+      display: inline-block;
+    }
+    
+    .wrapper .sidebar ul li a:hover,
+    .wrapper .sidebar ul li a.active{
+      background: #4360b5;
+      color: #fff;
+    }
+    
+    .wrapper .sidebar ul li a:hover:before,
+    .wrapper .sidebar ul li a.active:before{
+      display: block;
+    }
+    
+    .wrapper .main_container{
+      width: 1fr;
+      margin-top: 70px;
+      margin-left: 250px;
+      padding: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .wrapper .main_container .item{
+      background: #fff;
+      margin-bottom: 10px;
+      padding: 15px;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    
+    .wrapper.collapse .sidebar{
+      width: 70px;
+    }
+    
+    .wrapper.collapse .sidebar ul li a{
+      text-align: center; 
+    }
+    
+    .wrapper.collapse .sidebar ul li a img h4 span.icon{
+      margin: 0;
+    }
+    
+    .wrapper.collapse .sidebar ul li a span.title {
+      display: none;
+    }
+    
+    .wrapper.collapse .main_container{
+      width: (100% - 70px);
+      margin-left: 70px;
+    }
+    
+    /*table */
+    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        
+      }
+      
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #383838;
+      }
+    
+      td {
+          color: #383838;
+      }
+    
+    
+      tr:hover {background-color: #f5f5f5;}
+    
+    .add-form {
+    
+            font-size: 16px;
+            font-family: inherit;
+            padding: 0.25em 0.5em;
+            border: 2px solid var(--input-border);
+            border-radius: 4px;
+            transition: 180ms box-shadow ease-in-out;
+            direction: none;
+            margin-bottom: 12px;
+    }
+    
+    .add-form-box {
+        display: grid;
+        color: #383838;
+    }
+    
+    .add-form-box p {
+        margin-bottom: 25px;
+    }
+    
+    .add-form-box textarea {
+        width: 100%;
+        height: 100px;
+        padding: 12px;
+    }
+    
+    button {
+        border-radius: 2px;
+        padding: 1rem 2rem;
+        margin-top: 10px;
+        text-decoration: none;
+        background: #005eb2;
+        color: #ffffff;
+        font-family: sans-serif;
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        text-align: center;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+    
+    .add-btn {
+        border-radius: 10px;
+        border-style: none;
+        background: #005eb2;
+        padding: 15px;
+        width: 80px;
+    
+    }
+    
+    .footer {
+        position: fixed;
+        left: 2;
+        bottom: 0;
+        width: 100%;
+        background-color:#ffffff;
+        color: white;
+        width: calc(100% - 20px);
+        height:60px;
+        
+    }
+    .footer p {
+      color: black;
+    }
+      </style>
+    
+      <link rel="stylesheet" type="text/css" href="/css/style.css">
+    
+    
+      <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                $(".hamburger").click(function(){
+                   $(".wrapper").toggleClass("collapse");
+                });
+            });
+        </script>
+    </head>
+    <body>
+    
+    <div class="wrapper">
+      <div class="top_navbar">
+    
+        <div class="hamburger">
+           <div class="one"></div>
+           <div class="two"></div>
+           <div class="three"></div>
+        </div>
+    
+        <div class="top_menu">
+          <div class="logo">
+        
+            <img src="/Users/almisfer/Downloads/project/therapist/public/images" class="logo"/>
+    
+          </div>
+    
+        </div>
+      </div>
+      
+      <div class="sidebar">
+        <ul>
+    
+          <li><a href="/">
+            <span class="title">
+              Home
+            </span>
+          </a>
+          </li>
+    
+    
+            <li><a href="/registerRequest/addtherapist">
+              <span class="title"> 
+                Add therapist requests </span></a></li>
+    
+    
+            <li><a href="/AddRequest/addenv">
+                <span class="title"> 
+                Add enviroment requests </span>
+              </a></li>
+    
+    
+    
+            <li><a href="/users/logout">
+              <span class="title">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+                Sign out </span>
+              </a></li>
+        </ul>
+      </div>
+      
+      <div class="main_container">
+
+        <%- body %> 
+    
+    
+    
+      </div>
+    
+    
+    
+    
+    
+    
+    
+      <div class="footer_navbar">   
+        <div class="footer">
+            <p>
+                © 2020 Anees.
+            </p>
+    
+        </div>
+      </div>
+    
+    </div>       
+    </body>
+    </html>

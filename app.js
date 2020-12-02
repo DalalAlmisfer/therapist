@@ -108,18 +108,22 @@ app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-app.set('layout', 'layoutA', 'layout');
+app.set('layout', 'layoutA', 'layout', 'admainLayout');
 app.use(expressLayouts);
 
 
 //routes 
-app.use('/', require("./routes/index"));
-app.use('/users', require("./routes/users"));
-app.use('/home', require('./routes/home'));
-app.use('/home', require('./routes/list'));
-app.use('/list', require('./routes/list'));
-app.use('/rest', require('./routes/rest'));
-app.use('/usersAdmain', require("./routes/usersAdmain"));
+app.use('/', require("./routes/therapist/index"));
+app.use('/users', require("./routes/therapist/users"));
+app.use('/home', require('./routes/therapist/home'));
+app.use('/home', require('./routes/therapist/list'));
+app.use('/list', require('./routes/therapist/list'));
+app.use('/rest', require('./routes/therapist/rest'));
+app.use('/usersAdmain', require("./routes/Admain/usersAdmain"));
+app.use('/registerRequest', require("./routes/Admain/registerRequest"));
+app.use('/AddRequest', require("./routes/Admain/AddRequest"));
+
+
 
 // app.use(( req, res, nesxt ) => {
 //     res.status(404);

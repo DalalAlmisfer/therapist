@@ -13,84 +13,71 @@ const { check, validationResult } = require('express-validator');
 
 
 //model
-const User = require("../models/admain");
+const User = require("../../models/admain");
 
 //parser
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 //login form
-router.get("/login", (req, res) => {
+router.get("/loginAdmain", (req, res) => {
   console.log(req.isAuthenticated);
-  res.render("login", {layout: "authLayout" });
+  res.render("loginAdmain", {layout: "layoutA" });
 });
 
 
-router.post('/login', function(req, res, next) {
-  passport.authenticate('local', 
-  { session : false , 
-    //successRedirect: "/",
-    //failureRedirect: "/users/login",
-    failureFlash: true
-  },
-    function(error, user, info) {
-    if (error) return next(error);
-    if (! user) {
-      var infoString = JSON.stringify(info).toString();
-      var myJSON ='';
-      
-      if( infoString ){
-         myJSON = "Enter both email and password";
-      } else {
-        myJSON = "Either password or email is wrong";
-      }
-     
-      res.render('login', {myJSON: myJSON});
-      console.log(info);
-      //return res.status(400).json(info);
-    } else {
-      res.redirect('/');
-    }
-   
-  })(req, res, next);
+router.post('/loginAdmain', (req, res) => {
+  if ( req.body.email === 'aneesksuteam@gmail.com' && req.body.password === '12341234') {
+    res.redirect('/usersAdmain/homeAdmain');
+  } else {
+    res.render('/loginAdmain');
+  }
+
 });
 
-router.post('/register',
-    [
-        check('email', 'Email is required')
-            .isEmail(),
-        check('password', 'Password is requried')
-            .isLength({ min: 8 })
-            .custom((val, { req, loc, path }) => {
-                if (val !== req.body.Confirm_Password) {
-                    throw new Error("Passwords don't match");
-                } else {
-                    return value;
-                }
-            }),
-    ], (req, res) => {
-        var errors = validationResult(req).array();
-        if (errors) {
-            req.session.errors = errors;
-            req.session.success = false;
-            console.log(errors);
-            res.render('register',  {layout: "authLayout", errors});
-        } else {
-            req.session.success = true;
-            res.redirect('/users/login');
-        }
-    });
+
+
+// router.post('/registerAdmain',
+//     [
+//         check('email', 'Email is required')
+//             .isEmail(),
+//         check('password', 'Password is requried')
+//             .isLength({ min: 8 })
+//             .custom((val, { req, loc, path }) => {
+//                 if (val !== req.body.Confirm_Password) {
+//                     throw new Error("Passwords don't match");
+//                 } else {
+//                     return value;
+//                 }
+//             }),
+//     ], (req, res) => {
+//         var errors = validationResult(req).array();
+//         if (errors) {
+//             req.session.errors = errors;
+//             req.session.success = false;
+//             console.log(errors);
+//             res.render('registerAdmain',  {errors});
+//         } else {
+//             req.session.success = true;
+//             res.redirect('/usersAdmain/homeAdmain');
+//         }
+//     });
+
+router.get('/homeAdmain', (req, res) => {
+  res.render('homeAdmain', {layout: 'admainLayout'});
+
+})
 
     // register form
-router.get("/register", (req, res) => {
-  res.render("register", {layout: "authLayout"});
-});
+// router.get("/registerAdmain", (req, res) => {
+//   res.render("registerAdmain");
+// });
 
 
 //logout
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/users/login");
+  res.redirect("/users/loginAdmain");
 });
 
 module.exports = router;
