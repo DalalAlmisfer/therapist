@@ -53,7 +53,11 @@ const player = sequelize.define('players', {
      //   allowNull: false,
     },
     therapist_FK: 
-   { type: Sequelize.INTEGER,}
+   { type: Sequelize.INTEGER,},
+   islogged_in: {
+       type: Sequelize.TINYINT,
+       defaultValue: false,
+   }
 });
 
 

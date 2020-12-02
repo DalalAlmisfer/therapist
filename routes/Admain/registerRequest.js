@@ -39,10 +39,6 @@ router.get('/addtherapist', (req,res) => {
     }).catch( err => console.log(err));
 });
 
-router.get('/addenv', (req,res) => {
-    res.render('addTherapist', {layout: "admainLayout" });
-});
-
 router.get('/:id/decision/accept', async (req,res) => {
 
     var id = req.params.id;

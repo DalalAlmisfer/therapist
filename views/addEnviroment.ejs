@@ -1,0 +1,55 @@
+
+            <!-- List of Children  --> 
+            <table >
+                <thead>
+                    <tr>
+                        <th> id </th>
+                        <th scope="col">  Full Name </th> 
+                        <th scope="col">  title </th>
+                        <th scope="col">  Anxiety type </th>
+                        <th scope="col">  status        </th>
+                        <th scope="col">  Accept     </th>
+                        <th scope="col">  Reject     </th>
+
+
+                     </tr>
+                </thead>
+        
+                <tbody id="Table-data">
+                    <% if(typeof data != 'undefined' ){ %>
+                        <% var string = '' %> 
+                        <% var i = 1 %> 
+                        <%  data.forEach(function(row)  { %>
+                    <tr>
+                        <td> <%= i++ %> </td>
+                        <td> <%= string.concat(row.first_name,"  " ,row.last_name) %> </td>
+                        <td> <%= row.env_title %> </td>
+                        <td> <%= row.anxiety_type %> </td>
+                        <% if( typeof status != 'undefined') { %> 
+                            <% if(status == 'accepted'){ %> 
+                            <td> accepted </td>
+                              <% } else if (status == 'rejected'){ %> 
+                                <td> rejected </td>
+                            <% } else { %> 
+                              <td> Not decieded yet </td>
+                            <% } %> 
+                            <% } %> 
+                        <td>
+                            <a  href="/AddRequest/:<%=row.player_id %>/decision/accept" > accept </a>
+                        </td> 
+                        <td> 
+                            <a href="/AddRequest/:<%=row.player_id %>/decision/reject" > reject </a>
+                        </td>
+                    </tr>
+
+                    <% })} else{ %>
+                        <tr>
+                          <td colspan="6">No Record Found</td>
+                          
+                        </tr>
+                      <% } %>
+                      
+                </tbody>
+            </table>
+
+         

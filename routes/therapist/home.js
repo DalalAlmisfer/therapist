@@ -123,7 +123,8 @@ router.post('/add', urlencodedParser, (req,res) => {
         env_title: env_title,
         anxiety_type: anxiety_type,
         birth_date: child_birth,
-        therapist_FK: 21
+        therapist_FK: 21,
+        islogged_in:0,
     },
     {include: [thearpists]})
     .then( (user) => {
