@@ -10,11 +10,14 @@ const { check, validationResult, body } = require("express-validator");
 const session = require("express-session");
 const admain = require("../models/admain");
 const players = require("../models/player");
+var cookieParser = require('cookie-parser');
 const nodemailer = require("nodemailer");
-
+var Users = [];
 //parser
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(cookieParser());
+app.use(session({secret: "Your secret key"}));
 
 // create reusable transporter object using SMTP transport
 var transporter = nodemailer.createTransport({
@@ -38,19 +41,17 @@ router.get('/registerTherapist' , (req, res) => {
 
 //login form
 router.get("/login", (req, res) => {
-  console.log("this is req.user" + req.user);
-  console.log(req.isAuthenticated());
-  res.render("login", { layout: "layoutA", user: req.user });
+  res.render("login", { layout: "layoutA"});
 });
 
 
 router.get('/index', (req,res) => {
-   //var json = JSON.parse(req.user);
-  //console.log('this is therapistid', json['therapist_id']);
+  var json = JSON.parse(req.user);
+  console.log('this is therapistid', json['therapist_id']);
 
   players.findAll({ raw : true,
       where: {
-          therapist_FK: 21,
+          therapist_FK: json['therapist_id'],
      }
    })
   .then( (player) => {
@@ -58,20 +59,34 @@ router.get('/index', (req,res) => {
           //Get total registered patients 
       players.count({
           where: {
-              therapist_FK: 21,
+              therapist_FK: json['therapist_id'],
           }
       }).then( (number) => {
       console.log('number_of_patients', number);
-      res.render("index", {layout: "layout" , count:number, data:player , user: 'json', title: "Home"});
+      res.render("index", {layout: "layout" , count:number, data:player , user: json, title: "Home"});
       }).catch((error) => console.log(error));
 
   }).catch( err => console.log(err));
 });
 
 
-router.post("/login", (req, res) => {
-    res.redirect("/users/index");
-  }
+router.post("/login",    passport.authenticate("local", {
+  successRedirect: "/users/index",
+  failureRedirect: "/users/login",
+  failureFlash: true
+})
+  // if( !req.body.email || !req.body.password){
+  //   res.render('login');
+  // } else {
+  //   Users.filter(function(user){
+  //     if(user.email === req.body.email && user.password === req.body.password) {
+  //       req.session.user = user;
+  //       res.redirect("/users/index");
+  //     }
+  //   });
+  //   res.redirect("/users/index");
+  // }
+  // }
 );
 
 // register form
@@ -81,24 +96,24 @@ router.get("/register", (req, res) => {
 
 
 router.post("/register", async (req, res, next) => {
-  const {
-    email,
-    first_name,
-    family_name,
-    birth_date,
-    password,
-    Confirm_Password,
-    phone_number,
-    gander,
-    major,
-    job_title,
-  } = req.body;
+  var newUser = {
+    email: req.body.email,
+    first_name: req.body.first_name,
+    family_name: req.body.family_name,
+    birth_date: req.body.birth_date,
+    password: req.body.password,
+    Confirm_Password: req.body.Confirm_Password,
+    phone_number: req.body.phone_number,
+    gander: req.body.gander,
+    major: req.body.major,
+    job_title: req.body.job_title,
+  };
 
   try {
 
     await User.findOne({
       where: {
-        email: email,
+        email: req.body.email,
       },
     })
       .then((user) => {
@@ -108,22 +123,25 @@ router.post("/register", async (req, res, next) => {
           res.render("register", { layout: "layoutA" });
           next()
         } else {
+          Users.push( newUser );
           User.create({
-            email: email,
-            first_name: first_name,
-            family_name: family_name,
-            phone_number: phone_number,
-            major: major,
-            job_title: job_title,
-            gander: gander,
-            birth_date: birth_date,
-            password: password,
+            email: req.body.email,
+            first_name: req.body.first_name,
+            family_name: req.body.family_name,
+            birth_date: req.body.birth_date,
+            password: req.body.password,
+            Confirm_Password: req.body.Confirm_Password,
+            phone_number: req.body.phone_number,
+            gander: req.body.gander,
+            major: req.body.major,
+            job_title: req.body.job_title,
             accepted: 0,
-            Confirm_Password: Confirm_Password,
             admains_FK: 1,
           })
-            .then((user) => {
+          .then((user) => {
               console.log("new account created");
+              req.session.user = newUser;
+
               // req.flash(
               //   "successMasg",
               //   "your account has been created, please log in"
@@ -135,7 +153,7 @@ router.post("/register", async (req, res, next) => {
               //     console.log('err from mail func', err);
               // });
 
-              res.redirect("https://therapistdashbaord.herokuapp.com/users/login");
+              res.redirect("/users/login");
 
             })
             .catch((err) => {

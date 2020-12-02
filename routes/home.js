@@ -81,8 +81,8 @@ router.get('/add', (req,res) => {
 
 router.post('/add', urlencodedParser, (req,res) => {
 
-    var json = JSON.parse(req.user);
-    console.log('this is therapistid in add', json['therapist_id']);
+  //  var json = JSON.parse(req.user);
+ //   console.log('this is therapistid in add', json['therapist_id']);
 
     const  {first_name, last_name, child_birth, email, anxiety_type, env_title, gander, password} = req.body;
 
@@ -123,13 +123,13 @@ router.post('/add', urlencodedParser, (req,res) => {
         env_title: env_title,
         anxiety_type: anxiety_type,
         birth_date: child_birth,
-        therapist_FK: json['therapist_id']
+        therapist_FK: 21
     },
     {include: [thearpists]})
     .then( (user) => {
           console.log(' right');
           req.flash('successMasg', 'your msg is submitted');
-          res.redirect('/');
+          res.redirect('/users/index');
 
     })
     .catch( err => {

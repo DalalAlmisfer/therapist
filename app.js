@@ -17,7 +17,8 @@ const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const User = require("./models/User");
 const Sequelize = require('sequelize');
-const SessionStore = require('express-session-sequelize')(session.Store);
+//const SessionStore = require('express-session-sequelize')(session.Store);
+var MySQLStore = require('mysql-express-session')(session);
 
 const app = express();
 const router = express.Router();
@@ -38,19 +39,31 @@ app.enable('trust proxy');
 //allow our application to use json
 app.use(express.json());
 
-//create session table 
-const myDatabase = new Sequelize('heroku_195f706910a16f0', 'b630bdd6b6e1b9', 'd159c434', {
-    host: 'eu-cdbr-west-03.cleardb.net',
-    dialect: 'mysql',
-    define: {
-        timestamps: false,
-        
-    }
-});
+var options = {
+	host: 'eu-cdbr-west-03.cleardb.net',
+	port: process.env.PORT,
+	user: 'b630bdd6b6e1b9',
+	password: 'd159c434',
+    database: 'heroku_195f706910a16f0',
+    resave: true,
+    saveUninitialized: true
+};
 
-const sessionIntoDB = new SessionStore({
-    db: myDatabase,
-});
+var sessionStore = new MySQLStore(options);
+
+//create session table 
+// const myDatabase = new Sequelize('heroku_195f706910a16f0', 'b630bdd6b6e1b9', 'd159c434', {
+//     host: 'eu-cdbr-west-03.cleardb.net',
+//     dialect: 'mysql',
+//     define: {
+//         timestamps: false,
+        
+//     }
+// });
+
+// const sessionIntoDB = new SessionStore({
+//     db: myDatabase,
+// });
 
 app.use(cookieParser("secret"));
 
@@ -62,7 +75,7 @@ app.use(cookieParser("secret"));
     resave: false,
     proxy: true,
     saveUninitialized: false,
-    store: sessionIntoDB,
+    store: sessionStore,
 
 }));
 require("./config/passport");

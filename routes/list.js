@@ -22,17 +22,17 @@ function idsetter(val) {
     }
 
 router.get('/list', (req,res) => {
-   // var json = JSON.parse(req.user);
+   var json = JSON.parse(req.user);
     console.log('this is therapistid', json['therapist_id']);
     player.findAll({ 
         raw : true, 
         where: {
-            therapist_FK: 21,}
+            therapist_FK: json['therapist_id'],}
 })
     .then( (players) => {
        // var id = json.therapist_id; 
         console.log(players);
-        res.render("list", {layout: "layout" , data:players , user: 'json', title: "list"});
+        res.render("list", {layout: "layout" , data:players , user: json, title: "list"});
 
     }).catch( err => console.log(err));
 });
