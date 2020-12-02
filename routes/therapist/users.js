@@ -1,15 +1,15 @@
 //express
 const express = require("express");
 const router = express.Router();
-const User = require("/Users/almisfer/Downloads/project/therapist/models/User");
+const User = require("../../models/User");
 const app = express();
 var bodyParser = require("body-parser");
 const bycrypt = require("bcrypt");
 const passport = require("passport");
 const { check, validationResult, body } = require("express-validator");
 const session = require("express-session");
-const admain = require("/Users/almisfer/Downloads/project/therapist/models/admain");
-const players = require("/Users/almisfer/Downloads/project/therapist/models/player");
+const admain = require("../../models/admain");
+const players = require("../../models/player");
 var cookieParser = require('cookie-parser');
 const nodemailer = require("nodemailer");
 var Users = [];

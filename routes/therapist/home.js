@@ -5,12 +5,12 @@ const router = express.Router();
 
 const { check, validationResult } = require('express-validator');
 
-const db = require('/Users/almisfer/Downloads/project/therapist/config/database');
+const db = require('../../config/database');
 
-const page = require('/Users/almisfer/Downloads/project/therapist/models/contact_us');
-const player = require('/Users/almisfer/Downloads/project/therapist/models/player');
-const thearpists = require('/Users/almisfer/Downloads/project/therapist/models/User');
-const enviroment = require('/Users/almisfer/Downloads/project/therapist/models/enviroment');
+const page = require('../../models/contact_us');
+const player = require('../../models/player');
+const thearpists = require('../../models/User');
+const enviroment = require('../../models/enviroment');
 var body_parser = require('body-parser');
 app.use(body_parser.json());
 var urlencodedParser = body_parser.urlencoded({ extended: true });

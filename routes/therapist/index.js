@@ -3,11 +3,11 @@ const { render } = require('ejs');
 const express = require('express');
 const app = express();
 const router = express.Router();
-const { isAuthenticated } = require('/Users/almisfer/Downloads/project/therapist/config/auth');
+const { isAuthenticated } = require('../../config/auth');
 
 //Models 
-const player = require('/Users/almisfer/Downloads/project/therapist/models/player');
-const therapist = require('/Users/almisfer/Downloads/project/therapist/models/User');
+const player = require('../../models/player');
+const therapist = require('../../models/User');
 
 
 router.get('/', (req,res) => {

@@ -4,9 +4,9 @@ const app = express();
 
 const router = express.Router();
 
-const { isAuthenticated } = require('/Users/almisfer/Downloads/project/therapist/config/auth.js');
+const { isAuthenticated } = require('../../config/auth');
 
-const therapist = require('/Users/almisfer/Downloads/project/therapist/models/User.js');
+const therapist = require('../../models/User');
 
 const nodemailer = require("nodemailer");
 

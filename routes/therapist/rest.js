@@ -8,8 +8,8 @@ app.use(cookieParser());
 
 
 const router = express.Router();
-const player = require('/Users/almisfer/Downloads/project/therapist/models/player');
-const therapist = require('/Users/almisfer/Downloads/project/therapist/models/User');
+const player = require('../../models/player');
+const therapist = require('../../models/User');
 
 router.get('/forget', (req, res) => {
     res.render( 'restpassword' , {layout: "layoutA" });

@@ -8,9 +8,9 @@ app.use(cookieParser());
 
 
 const router = express.Router();
-const player = require('/Users/almisfer/Downloads/project/therapist/models/player');
-const therapist = require('/Users/almisfer/Downloads/project/therapist/models/User');
-const enviroment = require('/Users/almisfer/Downloads/project/therapist/models/enviroment');
+const player = require('../../models/player');
+const therapist = require('../../models/User');
+const enviroment = require('../../models/enviroment');
 //id set and get 
 var idObject = ''; 
 
