@@ -52,8 +52,15 @@ const player = sequelize.define('players', {
         defaultValue: false,
      //   allowNull: false,
     },
-    therapist_FK: 
-   { type: Sequelize.INTEGER,},
+    accepted_env: {
+         type: Sequelize.INTEGER,
+        },
+    request_sent: {
+        type: Sequelize.INTEGER,
+        },
+    therapist_FK: { 
+        type: Sequelize.INTEGER,
+    },
    islogged_in: {
        type: Sequelize.TINYINT,
        defaultValue: false,
@@ -65,7 +72,8 @@ const player = sequelize.define('players', {
 player.hasMany(enviroments, {foreignKey: 'player_FK', sourceKey: 'player_id'});
 enviroments.belongsTo(player, {
   foreignKey: 'player_FK',
-  targetKey: 'player_id'
+  targetKey: 'player_id',
+  onDelete: 'cascade'
 });
 
 module.exports = player;

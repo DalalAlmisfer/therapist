@@ -77,7 +77,8 @@ const User = sequelize.define('therapists', {
 User.hasMany(players, {foreignKey: 'therapist_FK', sourceKey: 'therapist_id'});
 players.belongsTo(User, {
   foreignKey: 'therapist_FK',
-  targetKey: 'therapist_id'
+  targetKey: 'therapist_id',
+  onDelete: 'cascade'
 });
 
   module.exports = User;

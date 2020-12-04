@@ -12,28 +12,28 @@ td {
 </style>
 
 <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
-
+  <% if (typeof count != 'undefined') { %>
   <div>
       <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
-          <h3 class="uk-card-title"> <%= count %>  </h3>
+          <h3 class="uk-card-title"> <%= count[0] %>  </h3>
           <p> Total number of patients in the system </p>
       </div>
   </div>
 
   <div>
       <div class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
-          <h3 class="uk-card-title"> 0 </h3>
+          <h3 class="uk-card-title"> <%= count[1] %>  </h3>
           <p> Patients finished all levels </p>
       </div>
   </div>
 
   <div>
     <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light uk-margin">
-        <h3 class="uk-card-title"> 1 </h3>
-        <p> Patients registerd in the game </p>
+        <h3 class="uk-card-title"> <%= count[2]%> </h3>
+        <p> Patients logged in the game </p>
     </div>
 </div>
-
+<% } %> 
 </div>
 
 <div id="table-wrapper" class="uk-overflow-auto uk-preserve-width"> 

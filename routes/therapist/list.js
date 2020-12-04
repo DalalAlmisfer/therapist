@@ -196,55 +196,6 @@ router.post('/:id/edit/submit', async (req, res) => {
     })
 });
 
-router.get('/addEnv/:id', (req,res) => {
-
-    var json = JSON.parse(req.user);
-    var id = req.params.id;
-    var sub = id.substring(1, 3);
-    console.log(sub);
-    
-    player.findOne({
-        where: {
-            player_id: sub
-        }
-    })
-    .then((result) => {
-        console.log(result);
-        res.render('addEnv' ,{layout: "layout" , user: json, title: "Add Enviroment", data: result});
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-});
-
-router.post('/submit', async (req, res) => {
-    const { env } = req.body;
-    console.log('this is env', env);
-    var json = JSON.parse(req.user);
-    // var id = req.params.id;
-    // //var sub = id.substring(1, 2);
-    // console.log("this is sec id ", id);
-
-
-    await enviroment.create({
-        title: env,
-        ishedden: 0, 
-        progress: 1, 
-        dialouge: '',
-        player_FK: 20
-    },
-    {include: [player]})
-    .then((result) => {
-        console.log('this is user', result);
-        res.render('list', {layout: "layout", user: json, title: 'edit ', body:'done' });
-
-    })
-    .catch(err => {
-        console.log(err);
-    });
-
-
-});
 
 router.get('/delete/:id', async (req, res) => {
     var json = JSON.parse(req.user);
@@ -255,19 +206,19 @@ router.get('/delete/:id', async (req, res) => {
     player.destroy({
         where: {
             player_id: sub,
-        }
-    })
+        },
+    },
+    {include: [therapist]})
     .then((result) => {
         player.findAll({ 
             raw : true, 
             where: {
                 therapist_FK: json['therapist_id'],}
-    })
-            .then((data) => {
+    }).then((data) => {
             res.render("list", {layout: "layout" , data:data , user: json, title: "list"});
          });
 
-         }).catch((err) => {
+    }).catch((err) => {
         console.log(err);
     });
 

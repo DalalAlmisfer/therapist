@@ -8,10 +8,11 @@
               <thead>
                 <tr>
                   <th scope="col"> </th>
-                  <th scope="col">Name</th>
+                  <th scope="col"> Full Name </th>
+                  <th scope="col"> Profile </th>
                   <th scope="col"> Status </th>
                   <th scope="col"></th>
-                  <th scope="col"></th>
+                  <th> </th>
                 </tr>
               </thead>
   
@@ -19,10 +20,14 @@
   
                 <% if(typeof data != 'undefined' ){ %>
                   <% var i = 1 %> 
+                  <% var string ='' %> 
                   <%  data.forEach(function(row)  { %>
                 <tr>
                   <td> <%= i++ %> </td>
-                  <td> <%= row.first_name %> </td>
+                  <td> <%= string.concat(row.first_name, " ", row.family_name) %> </td>
+                  <td> 
+                    <a href="/registerRequest/:<%=row.therapist_id %>/profile"> Profile </a>
+                  </td>
                     <% if( row.accepted == 1) { %> 
                   <td> accepted </td>
                     <% } else if (row.accepted == 0){ %> 

@@ -9,7 +9,10 @@ const router = express.Router();
 
 router.get('/addenv', (req,res) => {
     player.findAll({
-        raw: true
+        raw: true, 
+        where: {
+            request_sent: 1
+        }
     })
     .then((result) => {
         res.render('addEnviroment', {layout: "admainLayout", data: result, status: '' });
@@ -27,8 +30,19 @@ router.get('/:id/decision/accept', async (req, res) => {
     var subint = parseInt(sub);
     console.log('this is sub',subint);
 
+    await player.update(
+        {accepted_env: 2},
+        {
+            where: 
+            {
+                player_id: subint
+
+            }
+        }
+    ).catch(err => console.log('err is updaing env', err));
+
     await enviroment.update(
-        {ishedden: 1},
+        {ishedden: 2},
         {
             where:
             {
@@ -36,9 +50,10 @@ router.get('/:id/decision/accept', async (req, res) => {
             }
         }
     ).then((result) => {
+
         player.findAll({raw: true}).then((data) => {
-            console.log('this is result', data);
-            res.render('addEnviroment', {layout: 'admainLayout', data:data, status:'accepted'});
+             res.render('addEnviroment', {layout: 'admainLayout', data:data });
+
         });
 
     }).catch( (err) => {
@@ -47,7 +62,7 @@ router.get('/:id/decision/accept', async (req, res) => {
 
 });
 
-router.get('/:id/decision/reject', async (req, res) => {
+router.get('/:id/decision/terminate', async (req, res) => {
     var id = req.params.id;
     console.log('this is id', id);
     var sub = id.substring(1, 4);
@@ -55,29 +70,32 @@ router.get('/:id/decision/reject', async (req, res) => {
     var subint = parseInt(sub);
     console.log('this is sub',subint);
 
-    await enviroment.update(
-        {ishedden: 0},
+    await enviroment.destroy({
+            where: 
+            {
+                player_FK: subint
+
+            }
+        }).catch(err => console.log('err is updaing env', err));
+
+    await player.update(
+        {
+            accepted_env: 0,
+            request_sent:0,
+            env_title: '',
+        },
         {
             where:
             {
-                player_FK: subint
+                player_id: subint
             }
         }
     ).then((result) => {
+
         player.findAll({raw: true}).then((data) => {
-            enviroment.findOne({
-                    attributes: ['ishedden'],
-                    where: {
-                        player_FK: subint
-                    }
-            }).then((result) => {
-                 console.log('this is ishedden', result)
-             }).catch((err) => { console.log(err)});
-             res.render('addEnviroment', {layout: 'admainLayout', data:data, status:'rejected'});
+             res.render('addEnviroment', {layout: 'admainLayout', data:data });
 
         });
-
-
     }).catch( (err) => {
         console.log(err);
     });

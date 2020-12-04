@@ -5,11 +5,11 @@
                     <tr>
                         <th> id </th>
                         <th scope="col">  Full Name </th> 
-                        <th scope="col">  title </th>
+                        <th scope="col">  Title </th>
                         <th scope="col">  Anxiety type </th>
-                        <th scope="col">  status        </th>
+                        <th scope="col">  Status        </th>
                         <th scope="col">  Accept     </th>
-                        <th scope="col">  Reject     </th>
+                        <th scope="col">  Terminate     </th>
 
 
                      </tr>
@@ -25,20 +25,19 @@
                         <td> <%= string.concat(row.first_name,"  " ,row.last_name) %> </td>
                         <td> <%= row.env_title %> </td>
                         <td> <%= row.anxiety_type %> </td>
-                        <% if( typeof status != 'undefined') { %> 
-                            <% if(status == 'accepted'){ %> 
+                           <% if(row.accepted_env == 2){ %> 
                             <td> accepted </td>
-                              <% } else if (status == 'rejected'){ %> 
-                                <td> rejected </td>
-                            <% } else { %> 
-                              <td> Not decieded yet </td>
-                            <% } %> 
-                            <% } %> 
+                           <% } else if (row.accepted_env == 1){ %> 
+                                 <td> rejected </td>
+                                 <% } else {%> 
+                                <td> Not decieded yet </td>
+                                <% } %> 
+
                         <td>
                             <a  href="/AddRequest/:<%=row.player_id %>/decision/accept" > accept </a>
                         </td> 
                         <td> 
-                            <a href="/AddRequest/:<%=row.player_id %>/decision/reject" > reject </a>
+                            <a href="/AddRequest/:<%=row.player_id %>/decision/terminate" > terminate </a>
                         </td>
                     </tr>
 

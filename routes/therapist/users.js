@@ -12,7 +12,12 @@ const admain = require("../../models/admain");
 const players = require("../../models/player");
 var cookieParser = require('cookie-parser');
 const nodemailer = require("nodemailer");
+const enviroment = require("../../models/enviroment");
+const e = require("express");
+const { render } = require("ejs");
 var Users = [];
+var parameters = [];
+
 //parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
@@ -55,16 +60,39 @@ router.get('/index', (req,res) => {
      }
    })
   .then( (player) => {
-      console.log(players);
           //Get total registered patients 
       players.count({
           where: {
               therapist_FK: json['therapist_id'],
           }
       }).then( (number) => {
-      console.log('number_of_patients', number);
-      res.render("index", {layout: "layout" , count:number, data:player , user: json, title: "Home"});
+      console.log('number_of_patients',number );
+      parameters.push(number);
       }).catch((error) => console.log(error));
+
+      enviroment.count({
+        where: {
+          progress: 4
+        }
+      }).then((levels) => {
+        console.log('number_of_patients_finished_game', levels);
+        parameters.push(levels);
+      }).catch(err => console.log(err));
+
+      players.count({
+        where: {
+          islogged_in: 1
+        }
+      }).then((loggedin) => {
+        console.log('number_of_patients_loggedin', loggedin);
+        parameters.push(loggedin);
+      }).catch((err => console.log(err)));
+
+      console.log('------this parameters------',parameters);
+
+
+      res.render('index', {layout: 'layout', title: 'Home', user: json, count: parameters, data:player});
+
 
   }).catch( err => console.log(err));
 });

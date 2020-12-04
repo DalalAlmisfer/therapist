@@ -119,6 +119,8 @@ app.use('/home', require('./routes/therapist/home'));
 app.use('/home', require('./routes/therapist/list'));
 app.use('/list', require('./routes/therapist/list'));
 app.use('/rest', require('./routes/therapist/rest'));
+app.use('/AdminRequest', require('./routes/therapist/AdminRequests'));
+
 app.use('/usersAdmain', require("./routes/Admain/usersAdmain"));
 app.use('/registerRequest', require("./routes/Admain/registerRequest"));
 app.use('/AddRequest', require("./routes/Admain/AddRequest"));

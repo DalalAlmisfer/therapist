@@ -27,7 +27,12 @@ const enviroment = sequelize.define('enviroments', {
         allowNull: false,
 
     },
-    dialogue: {
+    Anees_dialogue: {
+        type: Sequelize.STRING,
+        defaultValue: false,
+        allowNull: false,
+    },
+    therapist_dialogue: {
         type: Sequelize.STRING,
         defaultValue: false,
         allowNull: false,

@@ -7,6 +7,8 @@ const router = express.Router();
 //passport.js
 const passport = require("passport");
 const bycrypt = require("bcrypt");
+const sequelize = require('sequelize');
+const DataTypes = require('sequelize/lib/data-types');
 
 // validate
 const { check, validationResult } = require('express-validator');
@@ -25,43 +27,84 @@ router.get("/loginAdmain", (req, res) => {
   res.render("loginAdmain", {layout: "layoutA" });
 });
 
+router.get('/registerAdmain', (req, res) => {
+  res.render('registerAdmain');
+})
+router.post('/loginAdmain',  (req, res) => {
 
-router.post('/loginAdmain', (req, res) => {
-  if ( req.body.email === 'aneesksuteam@gmail.com' && req.body.password === '12341234') {
-    res.redirect('/usersAdmain/homeAdmain');
-  } else {
-    res.render('/loginAdmain');
+
+  try{
+     User.findOne({
+      where: {
+        email: req.body.email,        
+      },
+    }).then((user) => {
+      if(user) {
+        console.log('email is already used + ', req.body.password  );
+        if( user.password == req.body.password ) {
+          res.redirect('/usersAdmain/homeAdmain');
+        } else {
+          console.log('password is wrong');
+          res.render('loginAdmain');
+        }
+
+      } else {
+        console.log('you are not registered');
+        res.redirect('/usersAdmain/registerAdmain');
+      }
+
+    });
+
+  } catch(err) {
+
+    console.log(err);
+
   }
+  // Admin.findAll().then((data) => {
+
+  // }).catch(err) 
+
+  // if ( req.body.email === 'aneesksuteam@gmail.com' && req.body.password === '12341234') {
+  //   res.redirect('/usersAdmain/homeAdmain');
+  // } else {
+  //   res.render('/loginAdmain');
+  // }
 
 });
 
 
+router.post('/registerAdmain',
+    [
+        check('email', 'Email is required')
+            .isEmail(),
+        check('password', 'Password is requried')
+            .isLength({ min: 8 })
+            .custom((val, { req, loc, path }) => {
+                if (val !== req.body.Confirm_Password) {
+                    throw new Error("Passwords don't match");
+                } else {
+                    return value;
+                }
+            }),
+    ], (req, res) => {
+        var errors = validationResult(req).array();
+        if (errors) {
+            req.session.errors = errors;
+            req.session.success = false;
+            console.log(errors);
+            res.render('registerAdmain',  {errors});
+        } else {
 
-// router.post('/registerAdmain',
-//     [
-//         check('email', 'Email is required')
-//             .isEmail(),
-//         check('password', 'Password is requried')
-//             .isLength({ min: 8 })
-//             .custom((val, { req, loc, path }) => {
-//                 if (val !== req.body.Confirm_Password) {
-//                     throw new Error("Passwords don't match");
-//                 } else {
-//                     return value;
-//                 }
-//             }),
-//     ], (req, res) => {
-//         var errors = validationResult(req).array();
-//         if (errors) {
-//             req.session.errors = errors;
-//             req.session.success = false;
-//             console.log(errors);
-//             res.render('registerAdmain',  {errors});
-//         } else {
-//             req.session.success = true;
-//             res.redirect('/usersAdmain/homeAdmain');
-//         }
-//     });
+          Admin.create({
+            email: req.body.email, 
+            password: req.body.passowrd,
+            conf_password: req.body.Confirm_Password
+          }).catch(err => console.log('err in creating admin', err));
+
+            req.session.success = true;
+            res.redirect('/usersAdmain/homeAdmain');
+        }
+    });
 
 router.get('/homeAdmain', (req, res) => {
   res.render('homeAdmain', {layout: 'admainLayout'});

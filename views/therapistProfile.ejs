@@ -1,0 +1,31 @@
+
+  <% if(typeof data != 'undefined' ) { %>
+    <form class="add-form-box">
+
+        <label class="username"> First Name </label >
+        <input class="uk-input" name="name" value="<%= data.first_name %> " readonly >
+
+        <label class="username"> Last Name </label >
+          <input class="uk-input" name="name" value="<%= data.family_name %> " readonly>
+
+        <label> Email </label>
+        <input class="uk-input" name="email" value="<%= data.email %> " readonly> 
+
+        <label> Gander </label>
+        <input class="uk-input" name="gander" value="<%= data.gander  %> " readonly> 
+
+        <label> Major </label>
+        <input class="uk-input" name="major" value="<%= data.major  %> " readonly> 
+
+        <label> Job title </label>
+        <input class="uk-input" name="job_title" value="<%= data.job_title  %> " readonly> 
+
+        <label> phone_number </label>
+
+        <input class="uk-input" name="phone_number" value="<%= data.phone_number  %> " readonly> 
+
+        <label> Date of birth </label>
+        <input type="text" class="uk-input" name="birth_date" value="<%= data.birth_date %>" readonly> 
+   
+      </form>
+ <% } %> 

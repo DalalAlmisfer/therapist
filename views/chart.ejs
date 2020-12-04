@@ -54,12 +54,17 @@
             </button>
             <div uk-dropdown="animation: uk-animation-slide-top-small; duration: 1000">
                 <% if(typeof userdata != 'undefined' ) { %> 
+                    <% if ( ! userdata.env_title) { %> 
+                            <ul class="uk-nav uk-dropdown-nav">
+                                 <p style="color: black;"> no enviroment yet  </p>
+                            </ul>
+                <% } else { %> 
                 <ul class="uk-nav uk-dropdown-nav">
-                    <li class="uk-active"><a href="/list/chart/:<%= userdata.player_id %>/school"> School </a></li>
-                    <li class="uk-active"><a href="/list/chart/:<%= userdata.player_id %>/market"> Market </a></li>
-                    <li class="uk-active"><a href="/list/chart/:<%= userdata.player_id %>/garden"> Garden </a></li>
+                    <li class="uk-active"><a href="/list/chart/:<%= userdata.player_id %>/<%= userdata.env_title %> "> <%= userdata.env_title %> </a></li>
                 </ul>
+            <% }%> 
             <% } %> 
+
             </div>
         </form>
 </div>
@@ -93,7 +98,7 @@
 </div>
 
 <% } else if (chosen == 'no') { %> 
-    <p> This environment is not available for now. </p>
+    <p> This environment has no analytics for now. </p>
 <% } } else {%> 
     <p> Select an environment to show the anxiety status of the patient for a specific environment</p>
 <% } %>

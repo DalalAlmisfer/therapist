@@ -39,6 +39,24 @@ router.get('/addtherapist', (req,res) => {
     }).catch( err => console.log(err));
 });
 
+router.get('/:id/profile', (req, res) => {
+    var id = req.params.id;
+    console.log('this is id', id);
+    var sub = id.substring(1, 4);
+    console.log('this is sub',sub);
+    var subint = parseInt(sub);
+    console.log('this is sub',subint);
+
+    therapist.findOne({
+        where: {
+            therapist_id: subint
+        }
+    }).then((data) => {
+        res.render('therapistProfile',  {layout: "admainLayout" , data:data})
+
+    }).catch(err => console.log(err));
+});
+
 router.get('/:id/decision/accept', async (req,res) => {
 
     var id = req.params.id;
@@ -85,7 +103,6 @@ router.get('/:id/decision/accept', async (req,res) => {
         
             });
     })
-    .save()
     .catch( err => {
         console.log(err);
 

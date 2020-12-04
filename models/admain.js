@@ -4,38 +4,43 @@ const sequelize = require('../config/database');
 
 const therapists = require('../models/User'); 
 
+const DataTypes = require('sequelize/lib/data-types');
 
-const User = sequelize.define('admains', {
+
+
+const admains = sequelize.define('admains', {
     // Model attributes are defined here
 
     admains_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
 
     },
     name:{
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
 
     },
     email: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       password: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       conf_password: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       }, 
 
 });
 
-User.hasMany(therapists, {foreignKey: 'admains_FK', sourceKey: 'admains_id'});
-therapists.belongsTo(User, {
+admains.hasMany(therapists, {foreignKey: 'admains_FK', sourceKey: 'admains_id'});
+therapists.belongsTo(admains, {
 foreignKey: 'admains_FK',
-targetKey: 'admains_id'
+targetKey: 'admains_id',
 });
+
+module.exports = admains;
