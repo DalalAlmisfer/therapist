@@ -1,6 +1,8 @@
 
             <!-- List of Children  --> 
-            <table >
+ <div class="uk-overflow-auto">
+     <div class="table-scroll">
+         <table  class="uk-table uk-table-striped uk-table-small" id="Table-data">
                 <thead>
                     <tr>
                         <th> id </th>
@@ -34,10 +36,10 @@
                                 <% } %> 
 
                         <td>
-                            <a  href="/AddRequest/:<%=row.player_id %>/decision/accept" > accept </a>
+                            <a style="color: green;" class="uk-button uk-button- uk-margin uk-button-small" href="/AddRequest/:<%=row.player_id %>/decision/accept" type="button"> accept </a>
                         </td> 
                         <td> 
-                            <a href="/AddRequest/:<%=row.player_id %>/decision/terminate" > terminate </a>
+                            <a class="uk-button uk-button-danger uk-margin uk-button-small" href="/AddRequest/:<%=row.player_id %>/decision/terminate" > terminate </a>
                         </td>
                     </tr>
 
@@ -50,5 +52,7 @@
                       
                 </tbody>
             </table>
+</div>
+</div>
 
          

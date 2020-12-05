@@ -64,6 +64,15 @@ router.get('/chart/:id/school', (req, res) => {
     var id = req.params.id;
     var sub = id.substring(1, 3);
     console.log(sub);
+    var progress = "";
+
+    enviroment.findOne({
+        where: {
+            player_FK: sub
+        }
+    }).then((data) => {
+        progress = data;
+    }).catch(err => console.log(err));
 
  player.findOne({
     where: {
@@ -71,7 +80,7 @@ router.get('/chart/:id/school', (req, res) => {
     }
 }).then((playerData) => {
     console.log('this is result sec' , playerData);
-    res.render('chart' ,{layout: "layout", user: json, userdata: playerData, chosen:"yes", title: "Chart"});
+    res.render('chart' ,{layout: "layout", user: json, userdata: playerData, progress:progress , chosen:"yes", title: "Chart"});
 
 });
   

@@ -67,8 +67,8 @@ router.post('/contact', (req,res) => {
     })
     .catch( err => {
         console.log(err);
-        eq.flash('errorMasg', 'there an error');
-        res.redirect('/pagesFunctions/contact');
+       // eq.flash('errorMasg', 'there an error');
+       // res.redirect('/pagesFunctions/contact');
 
     });
   }
@@ -88,32 +88,32 @@ router.post('/add', urlencodedParser, (req,res) => {
 
     let errors = [];
 
-    //Backend Validation 
-    if(!first_name || !last_name) {
-        // errors.push({
-        //     msg: 'Please insert  name'
-        // });
+    var regexname = /^([a-zA-Z]{2,16})$/;
+    var regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+
+    if( !first_name.match(regexname)) {
+        errors.push("please enter a valid name");
+      }
+    
+    if( !last_name.match(regexname)) {
+        errors.push("please enter a valid family name");
+      }
+
+    if( !email.match(regexemail)) {
+        errors.push("please enter a valid email");
+    } 
+
+    if( !password.match(regexpassword)) {
+        errors.push("please enter a 8 long password with uppercase and lowercase Letters, numbers, special characters.");
     }
 
-    if(!email) {
-        // errors.push({
-        //     msg: 'Please insert  email'
-        // });
-    }
 
-    if(!child_birth) {
-        // errors.push({
-        //     msg: 'Please insert  date of birth'
-        // });
-    }
 
     if ( errors.length > 0) {
-        console.log('error cc');
-        res.render('addChild', {errors, layout: "layout" });
-
+        res.render('addChild', { layout: "layout", errors:errors, title: 'add' });
+    
     } else {
-
-    //Insert to database
     player.create({
         email: email,
         password: password,

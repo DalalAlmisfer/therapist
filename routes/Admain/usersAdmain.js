@@ -24,11 +24,11 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true });
 //login form
 router.get("/loginAdmain", (req, res) => {
   console.log(req.isAuthenticated);
-  res.render("loginAdmain", {layout: "layoutA" });
+  res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});
 });
 
 router.get('/registerAdmain', (req, res) => {
-  res.render('registerAdmain');
+  res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA'});
 })
 router.post('/loginAdmain',  (req, res) => {
 
@@ -45,7 +45,7 @@ router.post('/loginAdmain',  (req, res) => {
           res.redirect('/usersAdmain/homeAdmain');
         } else {
           console.log('password is wrong');
-          res.render('loginAdmain');
+          res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});
         }
 
       } else {
@@ -92,7 +92,7 @@ router.post('/registerAdmain',
             req.session.errors = errors;
             req.session.success = false;
             console.log(errors);
-            res.render('registerAdmain',  {errors});
+            res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA', errors});
         } else {
 
           Admin.create({

@@ -122,6 +122,7 @@ app.use('/rest', require('./routes/therapist/rest'));
 app.use('/AdminRequest', require('./routes/therapist/AdminRequests'));
 
 app.use('/usersAdmain', require("./routes/Admain/usersAdmain"));
+app.use('/passwords', require("./routes/Admain/passwords"));
 app.use('/registerRequest', require("./routes/Admain/registerRequest"));
 app.use('/AddRequest', require("./routes/Admain/AddRequest"));
 

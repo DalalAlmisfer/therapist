@@ -2,6 +2,11 @@
 
 <style>
 
+    .levels-charts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
     #chart-box {
         margin-bottom: 30px;
     }
@@ -79,10 +84,18 @@
    <p class="uk-text-lead uk-text-light"> Patient progress </p>
    <hr class="uk-divider-small">
 
-    <div class="chart-zero" style="--v: -90deg"> </div> <!-- zero level -->
-    <div class="chart-one" style="--v:  35deg"></div> <!-- 37.5% first level -->
-    <div class="chart" style="--v:  -45deg"></div><!-- 12.5% second level -->
+   <% if(typeof progress != 'undefined') {%> 
+    <% if(progress.progress == 0 ) {%> 
+        <div class="chart-zero" style="--v: -90deg"> </div> <!-- zero level -->
+    <% } else if(progress.progress == 1 ) {%> 
+        <div class="chart-one" style="--v:  35deg"></div> <!-- 37.5% first level -->
+    <% } else if(progress.progress == 2) {%> 
+        <div class="chart" style="--v:  -45deg"></div><!-- 12.5% second level -->
+    <% } else if(progress.progress == 3) {%> 
     <div class="chart" style="--v:  90deg"></div><!-- 100% third level -->
+    <% }} else { %> 
+        <p> no progress found, contact us to report the issue. </p>
+    <% } %> 
 
 
 </div>
@@ -91,9 +104,17 @@
 
     <p class="uk-text-lead uk-text-light"> Anxiety status </p>
     <hr class="uk-divider-small">
-    <canvas id="myChart" width="250" height="60px">
+    <div class="levels-charts">
 
-    </canvas>
+        <canvas id="level-one" width="320" height="60px">
+
+        </canvas>
+    
+        <canvas id="level-three" width="320" height="60px">
+    
+        </canvas>
+
+    </div>
 
 </div>
 
@@ -105,25 +126,46 @@
 
 
 <script>
-var ctx = document.getElementById('myChart').getContext('2d');
+var ctx = document.getElementById('level-one').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
 
     // The data for our dataset
     data: {
-        labels: ['Level One', 'Level Two', 'Level Three' ],
+        labels: ['Level One'],
         datasets: [{
-            label: 'Anxiety status',
+            label: 'Anxiety status for level one',
             backgroundColor: '#1e87f0',
             borderColor: ' #155ea8',
             data: [0, 1, 2, 3 ]
         }]
     },
 
-    // Configuration options go here
+    // Configuration options go here level-three
     options: {}
 });
+
+var ctx = document.getElementById('level-three').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['Level Three' ],
+        datasets: [{
+            label: 'Anxiety status for level three',
+            backgroundColor: '#1e87f0',
+            borderColor: ' #155ea8',
+            data: [0, 1, 2, 3 ]
+        }]
+    },
+
+    // Configuration options go here level-three
+    options: {}
+});
+
 
 </script>
 

@@ -18,36 +18,12 @@
 
 <div class="wrapper">
 
-  <div class="left-grid">
-    <div class="text-area">
-      <h2>Welcome To Anees Dashboard</h2>
-      <p class="content">
-        This website is a dashboard for Therapists. Its allows therapists to
-        follow up with their patients via visualising data about their patient
-        anxiety status. The data is inferred from patient reactions while
-        playing with Anees Video Game. <br />
-        <br />
-        Anees Video Game and Anees Dashboard are
-        <span class="underline">
-          only available for therapists in King Khalid University Hospital,
-          Riyadh.
-        </span>
-      </p>
-    </div>
-  </div>
 
-  <div class="right-grid">
+  <div>
     <div id="form-area">
-      <img src="/images/Anees logo.png" alt="logo" class="logo" />
-      <form
-        action="/users/register"
-        method="POST"
-        class="uk-grid-small"
-        uk-grid
-        id="form"
-      >
+      <form action="/users/register" method="POST" class="uk-grid-small" uk-grid id="form">
 
-      <div id="form-header-reg">
+      <div class="uk-width-1-1@s" id="form-header-reg">
         <p> 
           Create account
         <small>
@@ -67,7 +43,15 @@
             placeholder="First Name"
             name="first_name"
           />
-          <span class="Firstemsg hidden">Please Enter a Valid Name</span>
+
+          <% if(typeof errors != 'undefined') {%> 
+          <span style="color: red; font-size: 11px;"> <%= errors[0] %> </span>
+          <% } else { %> 
+            <span class="Firstemsg hidden">Please Enter a Valid Name </span>
+          <% } %> 
+
+       
+          
         </div>
 
         <div class="uk-width-1-2@s">
@@ -79,13 +63,25 @@
             placeholder="Family Name"
             name="family_name"
           />
-          <span id="emsg" class="Familyemsg hidden">Please Enter a Valid Family Name</span>
+
+          <% if(typeof errors != 'undefined'){ %> 
+            <span style="color: red; font-size: 11px;"> <%= errors[1] %> </span>
+            <% } else {%> 
+              <span id="emsg" class="Familyemsg hidden">Please Enter a Valid Family Name</span>
+            <% } %> 
+
         </div>
 
         <div class="uk-form-controls uk-width-1-1">
           <label> Email *</label>
           <input class="uk-input" id="email" placeholder="Email" name="email" />
-          <span id="emsg" class="Emailemsg hidden">Please Enter a Valid Email</span>
+          <% if(typeof errors != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= errors[2] %> </span>
+            <% } else {%> 
+              <span id="emsg" class="Emailemsg hidden">Please Enter a Valid Email</span>
+            <% } %> 
+
+         
         </div>
 
         <div class="uk-form-controls uk-width-1-1">
@@ -97,7 +93,14 @@
             placeholder="Phone Number"
             name="phone_number"
           />
-          <span id="emsg" class="Phoneemsg hidden">Please Enter a Valid Phone Number </span>
+
+          <% if(typeof errors != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= errors[3] %> </span>
+            <% } else {%> 
+              <span id="emsg" class="Phoneemsg hidden">Please Enter a Valid Phone Number </span>
+            <% } %> 
+
+         
         </div>
 
         <div class="uk-form-controls uk-width-1-1">
@@ -144,9 +147,15 @@
             placeholder="Password"
             name="password"
           />
-          <span id="emsg" class="Passemsg hidden" >
-            Please Enter a 8 long password with uppercase and lowercase Letters, numbers, special characters.
-          </span>
+     
+          <% if(typeof errors != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= errors[4] %> </span>
+            <% } else { %> 
+              <span id="emsg" class="Passemsg hidden" >
+                Please Enter a 8 long password with uppercase and lowercase Letters, numbers, special characters.
+              </span>
+            <% } %> 
+         
         </div>
 
 
@@ -161,7 +170,12 @@
             placeholder="Confirm Password"
             name="Confirm_Password"
           />
-          <span id="emsg" class="Confemsg hidden"> Doesn't Match Your Password</span>
+          <% if( typeof errors != 'undefined' ) {%> 
+            <span style="color: red; font-size: 11px;"> <%= errors[5] %> </span>
+            <% } else { %> 
+              <span id="emsg" class="Confemsg hidden"> Doesn't Match Your Password</span>
+            <% } %> 
+         
         </div>
 
         <div id="last-form"class="uk-form-controls uk-width-1-1">
@@ -178,6 +192,7 @@
           </p>
         </div>
       </form>
+
     </div>
   </div>
 </div>
@@ -193,7 +208,7 @@
   const password = document.getElementById("password");
   const Confirm_Password = document.getElementById("Confirm_Password");
 
-  var $regexname = /^([a-zA-Z]{3,16})$/;
+  var $regexname = /^([a-zA-Z]{2,16})$/;
   var $regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var $regexnum = /^[0-9][A-Za-z0-9 -]*$/;
   var $regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;

@@ -1,10 +1,10 @@
 
 
         <!-- List of therapists  -->
+        <div class="uk-overflow-auto">
+          <div class="table-scroll">
 
-        <form id="list" method="POST"> 
-
-            <table class="table">
+            <table class="uk-table uk-table-striped uk-table-small" id="Table-data">
               <thead>
                 <tr>
                   <th scope="col"> </th>
@@ -26,7 +26,11 @@
                   <td> <%= i++ %> </td>
                   <td> <%= string.concat(row.first_name, " ", row.family_name) %> </td>
                   <td> 
-                    <a href="/registerRequest/:<%=row.therapist_id %>/profile"> Profile </a>
+                    <a  href="/registerRequest/:<%=row.therapist_id %>/profile"> 
+                        <span uk-icon="icon: user; ratio: 0.7"></span>
+                        view profile
+                    </a>
+
                   </td>
                     <% if( row.accepted == 1) { %> 
                   <td> accepted </td>
@@ -37,10 +41,10 @@
                   <% } %> 
        
                   <td>
-                    <a  href="/registerRequest/:<%=row.therapist_id %>/decision/accept" > accept </a>
+                    <a style="color: green;" class="uk-button uk-button- uk-margin uk-button-small" href="/registerRequest/:<%=row.therapist_id %>/decision/accept" > accept </a>
                   </td>
                   <td>
-                    <a href="/registerRequest/:<%=row.therapist_id %>/decision/reject" > reject </a>
+                    <a style="color: #f0506e;" class="uk-button uk-button- uk-margin uk-button-small" href="/registerRequest/:<%=row.therapist_id %>/decision/reject" > reject </a>
                   </td>
                 </tr>
   
@@ -53,6 +57,7 @@
   
               </tbody>
             </table>
-          </form>
+          </div>
+          </div>
   
   

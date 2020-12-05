@@ -16,28 +16,8 @@
 	}
   </style>
 <div class="wrapper">
-	<div class="left-grid">
-		<div class="text-area">
-		  <h2>Welcome To Anees Dashboard</h2>
-		  <p class="content">
-			This website is a dashboard for Therapists. Its allows therapists to
-			follow up with their patients via visualising data about their patient
-			anxiety status. The data is inferred from patient reactions while
-			playing with Anees Video Game. <br />
-			<br />
-			Anees Video Game and Anees Dashboard are
-			<span class="underline">
-			  only available for therapists in King Khalid University Hospital,
-			  Riyadh.
-			</span>
-		  </p>
-		</div>
-	  </div>
-  
-  
-	<div class="right-grid">
+	<div class="">
 	  <div id="login-form-area"> 
-		<img src="/images/Anees logo.png" alt="logo" class="logo" />
 
 	  <form  id="form" action="/users/login" method="POST" class="uk-grid-small" uk-grid>
 
@@ -66,14 +46,20 @@
 			  </span>	
 		</div>
 
+		<% if(typeof errors != 'undefined') {%> 
+			<span style="color: red; font-size: 11px;"> <%= errors %> </span>
+		<% } %> 
+
         <div id="last-form"class="uk-form-controls uk-width-1-1">
+
 
 			<p class="uk-text-right">
 				
-				<a href="/rest/forget"> Forget password? </a>
+				<a href="/passwords/forgot/therapist"> Forget password? </a>
 			</p>
 
 			<button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Login</button>
+
 
 			<p class="uk-text-center">
 			  You Don't have an account?

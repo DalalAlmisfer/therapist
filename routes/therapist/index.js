@@ -11,7 +11,7 @@ const therapist = require('../../models/User');
 
 
 router.get('/', (req,res) => {
-    res.render('home');
+    res.render('home', {chosen: 'nothing', layout: 'layoutA'});
     // var json = JSON.parse(req.user);
     // console.log('this is therapistid', json['therapist_id']);
 

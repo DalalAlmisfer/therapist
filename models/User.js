@@ -32,11 +32,6 @@ const User = sequelize.define('therapists', {
             //allowNull: false,
             defaultValue: true
           },
-          major: {
-            type: Sequelize.STRING,
-            //allowNull: false,
-            defaultValue: true
-          },
           job_title: {
             type: Sequelize.STRING,
             //allowNull: false,

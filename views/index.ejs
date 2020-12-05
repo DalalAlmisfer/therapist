@@ -15,22 +15,37 @@ td {
   <% if (typeof count != 'undefined') { %>
   <div>
       <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+        <% if( count.length < 1 ) { %> 
+          <h3 class="uk-card-title"> <%= 0 %>  </h3>
+          <p> Total number of patients in the system </p>
+        <% } else { %> 
           <h3 class="uk-card-title"> <%= count[0] %>  </h3>
           <p> Total number of patients in the system </p>
+        <% } %> 
       </div>
   </div>
 
   <div>
       <div class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
+        <% if( count.length < 1 ) { %> 
+          <h3 class="uk-card-title"> <%= 0 %>  </h3>
+          <p> Patients finished all levels </p>
+        <% } else { %> 
           <h3 class="uk-card-title"> <%= count[1] %>  </h3>
           <p> Patients finished all levels </p>
+        <% } %> 
       </div>
   </div>
 
   <div>
     <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light uk-margin">
-        <h3 class="uk-card-title"> <%= count[2]%> </h3>
+      <% if( count.length < 1 ) { %> 
+        <h3 class="uk-card-title"> <%= 0 %> </h3>
         <p> Patients logged in the game </p>
+      <% } else { %>
+        <h3 class="uk-card-title"> <%= count[2] %> </h3>
+        <p> Patients logged in the game </p>
+      <% } %> 
     </div>
 </div>
 <% } %> 

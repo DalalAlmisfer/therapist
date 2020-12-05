@@ -1,27 +1,68 @@
- <div class="uk-margin-right">
+<style>
+  .Firstemsg, .Familyemsg, .Emailemsg, .Passemsg {
+    color: red;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+  }
 
-              <% if(typeof errors != 'undefined') { %>
-                <% errors.forEach(function(error) { %>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <%= error.msg %>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                <% }) %>
-            <% } %>
+  
+
+  .hidden {
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    font-size: 0px;
+  }
+</style>
+ 
+ 
+ 
+ <div class="uk-margin-right">
      
             <div  class="uk-margint"> 
             <form class="add-form-box " method="POST" action="/home/add">
               <p> Fill the form blow to add your patient in our system </p>
+                 <div>
                  <label>  First Name </label>
-                 <input type="text" class="uk-input" name="first_name">
+                 <input type="text" class="uk-input" name="first_name" id="first_name">
+                 <% if(typeof errors != 'undefined') {%> 
+                  <span style="color: red; font-size: 11px;"> <%= errors[0] %> </span>
+                  <% } else { %> 
+                    <span class="Firstemsg hidden">Please Enter a Valid Name </span>
+                  <% } %>                      
+                 </div>
+
+                 <div>
                  <label>  Last Name </label>
-                 <input type="text" class="uk-input" name="last_name"> 
+                 <input type="text" class="uk-input" name="last_name" id="last_name"> 
+                 <% if(typeof errors != 'undefined') {%> 
+                  <span style="color: red; font-size: 11px;"> <%= errors[1] %> </span>
+                  <% } else { %> 
+                    <span class="Familyemsg hidden">Please Enter a Valid Name </span>
+                  <% } %>    
+
+                 </div>
+
+                 <div>
                  <label>  Email </label>
-                 <input type="text" class="uk-input" name="email">
+                 <input type="text" class="uk-input" name="email" id="email">
+                 <% if(typeof errors != 'undefined') {%> 
+                  <span style="color: red; font-size: 11px;"> <%= errors[2] %> </span>
+                  <% } else { %> 
+                    <span class="Emailemsg hidden">Please Enter a Valid Name </span>
+                  <% } %>    
+                 </div>
+
+                 <div>
                  <label>  Password </label>
-                 <input type="password" class="uk-input" name="password">
+                 <input type="password" class="uk-input" name="password" id="password">
+                 <% if(typeof errors != 'undefined') {%> 
+                  <span style="color: red; font-size: 11px;"> <%= errors[3] %> </span>
+                  <% } else { %> 
+                    <span class="Passemsg hidden"> Please Enter a 8 long password with uppercase and lowercase Letters, numbers, special characters. </span>
+                  <% } %>    
+                 </div>
 
                  <label> Gander </label>
                  <select name="gander" class="uk-select">
@@ -48,7 +89,74 @@
 
        
 
+<script  type="text/javascript">
 
+  const first_name = document.getElementById("first_name");
+  const family_name = document.getElementById("last_name");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+
+  var $regexname = /^([a-zA-Z]{2,16})$/;
+  var $regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  var $regexnum = /^[0-9][A-Za-z0-9 -]*$/;
+  var $regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  var $date = "dd/mm/yyyy";
+
+  $(document).ready(function () {
+
+    //check first name field
+    $(first_name).keyup(function () {
+      if (!$(this).val().match($regexname)) {
+        // there is a mismatch, hence show the error message
+        $(".Firstemsg").removeClass("hidden");
+        $(".Firstemsg").show();
+      } else {
+        // else, do not display message
+        $(".Firstemsg").addClass("hidden");
+      }
+    });
+
+    //check family name field
+    $(family_name).keyup(function () {
+      if (!$(this).val().match($regexname)) {
+        // there is a mismatch, hence show the error message
+        $(".Familyemsg").removeClass("hidden");
+        $(".Familyemsg").show();
+      } else {
+        // else, do not display message
+        $(".Familyemsg").addClass("hidden");
+      }
+    });
+
+        //check email field
+        $(email).keyup( function () {
+      if (!$(this).val().match($regexemail)) {
+        // there is a mismatch, hence show the error message
+        $(".Emailemsg").removeClass("hidden");
+        $(".Emailemsg").show();
+      } else {
+        // else, do not display message
+        $(".Emailemsg").addClass("hidden");
+      }
+    });
+
+
+    //check password field
+    $(password).keyup (function () {
+      if (!$(this).val().match($regexpassword)) {
+        // there is a mismatch, hence show the error message
+        $(".Passemsg").removeClass("hidden");
+        $(".Passemsg").show();
+      } else {
+        // else, do not display message
+        $(".Passemsg").addClass("hidden");
+      }
+    });
+  
+
+  })
+</script>
 
 
 

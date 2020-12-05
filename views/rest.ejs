@@ -1,0 +1,97 @@
+<style>
+    .Passemsg,
+    .Confemsg {
+        color: red;
+        font-size: 10px;
+        margin: 0;
+        padding: 0;
+    }
+
+
+
+    .hidden {
+        visibility: hidden;
+        margin: 0;
+        padding: 0;
+        font-size: 0px;
+    }
+</style>
+
+
+<form action="/rest/<%= user %>/:<%=id %> " method="POST">
+    <div class="uk-margin">
+
+    </div>
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+            <label> New Password </label>
+            <input id="password" class="uk-input uk-form-large" type="password" name="password" placeholder="Password">
+            <% if(typeof errors != 'undefined') {%> 
+                <span style="color: red; font-size: 11px;"> <%= errors[0] %> </span>
+                <% } else { %> 
+                  <span id="emsg" class="Passemsg hidden" >
+                    Please Enter a 8 long password with uppercase and lowercase Letters, numbers, special characters.
+                  </span>
+                <% } %> 
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+            <label> Confirm Password </label>
+            <input id="Confirm_Password" class="uk-input uk-form-large" type="password" name="conf_password"
+                placeholder="Confirm Password">
+                <% if( typeof errors != 'undefined' ) {%> 
+                    <span style="color: red; font-size: 11px;"> <%= errors[1] %> </span>
+                    <% } else { %> 
+                      <span id="emsg" class="Confemsg hidden"> Doesn't Match Your Password</span>
+            <% } %> 
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <button type="submit" class="uk-button uk-button-primary uk-button-large uk-width-1-1"> Rest </button>
+    </div>
+
+    <% if(typeof msg != 'undefined') { %>
+        <span style="color: green; font-size: 11px;"> <%= msg %> </span>
+    <% } %> 
+
+</form>
+
+
+<script type="text/javascript">
+    const password = document.getElementById("password");
+    const Confirm_Password = document.getElementById("Confirm_Password");
+
+    var $regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+
+    $(document).ready(function () {
+
+
+        //check password field
+        $(password).keyup(function () {
+            if (!$(this).val().match($regexpassword)) {
+                // there is a mismatch, hence show the error message
+                $(".Passemsg").removeClass("hidden");
+                $(".Passemsg").show();
+            } else {
+                // else, do not display message
+                $(".Passemsg").addClass("hidden");
+            }
+        });
+
+        //check password field
+        $(Confirm_Password).keyup(function () {
+            if (!$(this).val().match(password)) {
+                // there is a mismatch, hence show the error message
+                $(".Confemsg").removeClass("hidden");
+                $(".Confemsg").show();
+            } else {
+                // else, do not display message
+                $(".Confemsg").addClass("hidden");
+            }
+        });
+
+    });
+</script>
