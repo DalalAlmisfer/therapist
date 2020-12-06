@@ -6,8 +6,8 @@ const router = express.Router();
 
 
 router.get('/login', (req,res) => {
-    res.send(req.body);
-    res.json({ message: "---" });
+    res.write(req.body);
+    res.write({ message: "---" });
 });
 
 router.post('/login', (req,res) => {
