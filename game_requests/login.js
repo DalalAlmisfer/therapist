@@ -6,7 +6,17 @@ const router = express.Router();
 
 
 router.get('/login', (req,res) => {
-    res.send('message: "---"' );
+    players.findOne({
+        where: {
+            player_id: 1
+        }
+    }).then((result) => {
+        console.log(result.player_id);
+        res.send(`this is id ${result.player_id}`); 
+    }).catch((err) => {
+        console.log(err);
+    });
+   
     
 });
 
