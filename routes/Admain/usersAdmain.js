@@ -4,7 +4,6 @@ const session = require("express-session");
 const app = express();
 const router = express.Router();
 const passport = require("passport");
-const bycrypt = require("bcrypt");
 const sequelize = require('sequelize');
 const DataTypes = require('sequelize/lib/data-types');
 

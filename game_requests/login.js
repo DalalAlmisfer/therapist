@@ -7,10 +7,11 @@ const router = express.Router();
 
 router.get('/login', (req,res) => {
     res.send(req.body);
+    res.json({ message: "---" });
 });
 
 router.post('/login', (req,res) => {
-    res.send(req.body.username);
+    res.send(req.body.username); 
 });
 
 
