@@ -1,5 +1,7 @@
+//import needed library
 const Sequelize = require('sequelize');
 
+//create connection with database
 const sequelize = new Sequelize('heroku_195f706910a16f0', 'b630bdd6b6e1b9', 'd159c434', {
     host: 'eu-cdbr-west-03.cleardb.net',
     dialect: 'mysql',
@@ -9,7 +11,7 @@ const sequelize = new Sequelize('heroku_195f706910a16f0', 'b630bdd6b6e1b9', 'd15
     }
 });
 
-
+//check the connection
 sequelize
    .authenticate()
    .then( ()=> {

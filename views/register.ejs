@@ -1,5 +1,5 @@
 <style>
-  .Firstemsg, .Familyemsg, .Phoneemsg, .Emailemsg, .Dateemsg, .Passemsg, .Confemsg{
+  .Firstemsg, .Familyemsg, .Phoneemsg, .Genderemsg, .Jobemsg, .Emailemsg, .Dateemsg, .Passemsg, .Confemsg{
     color: red;
     font-size: 10px;
     margin: 0;
@@ -44,8 +44,8 @@
             name="first_name"
           />
 
-          <% if(typeof errors != 'undefined') {%> 
-          <span style="color: red; font-size: 11px;"> <%= errors[0] %> </span>
+          <% if(typeof err_first != 'undefined') {%> 
+          <span style="color: red; font-size: 11px;"> <%= err_first %> </span>
           <% } else { %> 
             <span class="Firstemsg hidden">Please Enter a Valid Name </span>
           <% } %> 
@@ -64,8 +64,8 @@
             name="family_name"
           />
 
-          <% if(typeof errors != 'undefined'){ %> 
-            <span style="color: red; font-size: 11px;"> <%= errors[1] %> </span>
+          <% if(typeof err_last != 'undefined'){ %> 
+            <span style="color: red; font-size: 11px;"> <%= err_last %> </span>
             <% } else {%> 
               <span id="emsg" class="Familyemsg hidden">Please Enter a Valid Family Name</span>
             <% } %> 
@@ -75,14 +75,12 @@
         <div class="uk-form-controls uk-width-1-1">
           <label> Email *</label>
           <input class="uk-input" id="email" placeholder="Email" name="email" />
-          <% if(typeof errors != 'undefined') {%> 
-            <span style="color: red; font-size: 11px;"> <%= errors[2] %> </span>
+          <% if(typeof err_email != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= err_email %> </span>
             <% } else {%> 
               <span id="emsg" class="Emailemsg hidden">Please Enter a Valid Email</span>
             <% } %> 
-
-         
-        </div>
+           </div>
 
         <div class="uk-form-controls uk-width-1-1">
           <label> Phone Number *</label>
@@ -94,8 +92,8 @@
             name="phone_number"
           />
 
-          <% if(typeof errors != 'undefined') {%> 
-            <span style="color: red; font-size: 11px;"> <%= errors[3] %> </span>
+          <% if(typeof err_phone_number != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= err_phone_number%> </span>
             <% } else {%> 
               <span id="emsg" class="Phoneemsg hidden">Please Enter a Valid Phone Number </span>
             <% } %> 
@@ -106,14 +104,19 @@
         <div class="uk-form-controls uk-width-1-1">
           <label> Gander *</label>
           <select name="gander" class="uk-select" id="gander">
+            <option value="select"> select </option>
             <option value="Female">Female</option>
             <option value="Male">Male</option>
           </select>
-          <span id="emsg" class="Genderemsg hidden"> </span>
+          <% if(typeof err_gander != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= err_gander%> </span>
+          <% } else { %> 
+          <span id="emsg" class="Genderemsg hidden"> please select your gander </span>
+            <% } %> 
         </div>
 
         <div class="uk-form-controls uk-width-1-1">
-          <lable> Date of birth *</lable>
+          <lable> Date of birth </lable>
           <input
             class="uk-input"
             id="date"
@@ -127,6 +130,9 @@
         <div class="uk-form-controls uk-width-1-1">
           <label> Job Title *</label>
           <select name="job_title" class="uk-select" id="job_title">
+            <option value="select">
+              select
+            </option>
             <option value="Consultant Psychiatrist">
               Consultant Psychiatrist
             </option>
@@ -135,21 +141,19 @@
             </option>
             <option value="Senior Psychologist">Senior Psychologist</option>
           </select>
-          <span id="emsg" class="Jobemsg hidden"> </span>
+          <% if(typeof err_job != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= err_job%> </span>
+          <% } else { %> 
+          <span id="emsg" class="Jobemsg hidden"> please select your job title </span>
+            <% } %> 
         </div>
 
         <div  class="uk-form-controls uk-width-1-2@s">
           <label> Password *</label>
-          <input
-            class="uk-input"
-            id="password"
-            type="password"
-            placeholder="Password"
-            name="password"
-          />
+          <input class="uk-input" id="password" type="password" placeholder="Password" name="password"/>
      
-          <% if(typeof errors != 'undefined') {%> 
-            <span style="color: red; font-size: 11px;"> <%= errors[4] %> </span>
+          <% if(typeof err_password != 'undefined') {%> 
+            <span style="color: red; font-size: 11px;"> <%= err_password %> </span>
             <% } else { %> 
               <span id="emsg" class="Passemsg hidden" >
                 Please Enter a 8 long password with uppercase and lowercase Letters, numbers, special characters.
@@ -162,16 +166,9 @@
 
         <div class="uk-form-controls uk-width-1-2@s">
           <label> Confirm Password *</label>
-          <input
-            class="uk-input"
-            id="Confirm_Password"
-            for="form-stacked-text"
-            type="password"
-            placeholder="Confirm Password"
-            name="Confirm_Password"
-          />
-          <% if( typeof errors != 'undefined' ) {%> 
-            <span style="color: red; font-size: 11px;"> <%= errors[5] %> </span>
+          <input class="uk-input" id="Confirm_Password" for="form-stacked-text" type="password" placeholder="Confirm Password" name="Confirm_Password"/>
+          <% if( typeof err_conf_password != 'undefined' ) {%> 
+            <span style="color: red; font-size: 11px;"> <%= err_conf_password %> </span>
             <% } else { %> 
               <span id="emsg" class="Confemsg hidden"> Doesn't Match Your Password</span>
             <% } %> 
@@ -299,5 +296,15 @@
         $(".Confemsg").addClass("hidden");
       }
     });
+
+    $('#form').validate({
+      rules: {
+        gander: {
+          required: true
+        }
+      }
+    });
+
+
   });
 </script>

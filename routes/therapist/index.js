@@ -1,51 +1,16 @@
-//express
-const { render } = require('ejs');
+//import needed libraries
 const express = require('express');
-const app = express();
 const router = express.Router();
-const { isAuthenticated } = require('../../config/auth');
 
-//Models 
-const player = require('../../models/player');
+//import models (database table)
 const therapist = require('../../models/User');
 
-
+//GET index page
 router.get('/', (req,res) => {
     res.render('home', {chosen: 'nothing', layout: 'layoutA'});
-    // var json = JSON.parse(req.user);
-    // console.log('this is therapistid', json['therapist_id']);
-
-    // player.findAll({ raw : true,
-    //     where: {
-    //         therapist_FK: json['therapist_id'],
-    //    }
-    //  })
-    // .then( (players) => {
-    //     console.log(players);
-    //         //Get total registered patients 
-    //     player.count({
-    //         where: {
-    //             therapist_FK: json['therapist_id'],
-    //         }
-    //     }).then( (number) => {
-    //     console.log('number_of_patients', number);
-    //     res.render("index", {layout: "layout" , count:number, data:players , user: json, title: "Home"});
-    //     }).catch((error) => console.log(error));
-
-    // }).catch( err => console.log(err));
-
 });
 
-// router.get('/home', isAuthenticated, (req,res) => {
-//     // if a callback is specified, the rendered HTML string has to be sent explicitly
-//      res.render('index', function (err, html) {
-//      res.send(html);
-//   });
-// });
-// router.post('/profile', (req,res) => {
-// });
-
-
+//GET therapist profile page
 router.get('/profile', async (req,res) => {
         //console.log('this profile' + req.user);
         var json = JSON.parse(req.user);
@@ -71,6 +36,7 @@ router.get('/profile', async (req,res) => {
 
 });
 
+//Edit therapist profile
 router.post('/profile', async (req, res) => {
 
     var json = JSON.parse(req.user);
@@ -96,22 +62,5 @@ router.post('/profile', async (req, res) => {
 
 });
 
-
-router.get('/home/add', (req,res) => {
-   var json = JSON.parse(req.user);
-    res.render('addChild', {layout: "layout", user: json, title: "Add patient"});
-});
-
-
-router.get('/home/contact', (req,res) => {
-    var json = JSON.parse(req.user);
-    res.render('contactUs', {layout: "layout", user: json, title: 'contact us'});
-});
-
-router.get('/home/aboutUs', (req, res) => {
-    var json = JSON.parse(req.user);
-    res.render('aboutUs', {layout: "layout", user: json, title: 'about us'});
-
-})
 
 module.exports = router;

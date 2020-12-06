@@ -1,9 +1,6 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcryptjs');
 const User = require("../models/User");
-const { localsName } = require('ejs');
-const { json } = require('body-parser');
 
 
 
@@ -71,14 +68,4 @@ passport.serializeUser(function(user, done) {
   passport.deserializeUser(function(id, done) {
     console.log('this is deserializeUser1 ' + id);
     done(null, id);
-    // User.findOne({
-    //   where: {
-    //     tharapist_id: id
-    //   }
-    // })
-    //   .then(user => {
-    //       console.log('this is deserializeUser2 ' + user);
-    //     done(null, user);
-    //   })
-    //   .catch(err => console.log(err));
   });

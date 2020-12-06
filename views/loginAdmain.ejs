@@ -1,24 +1,88 @@
-          <% if(typeof myJSON != 'undefined' ? myJSON : '') { %>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <%= myJSON %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-    <% } %>
+<style>
+  .Emailemsg, .Passemsg {
+ color: red;
+ font-size: 10px;
+ margin: 0;
+ padding: 0;
+}
 
-      <form action="/usersAdmain/loginAdmain" method="post">
-        <h1>Sign in</h1>
-        <input type="email" placeholder="Email" name="email" />
-        <input type="password" placeholder="Password" name="password" />
-        <a href="/passwords/forgot/admin" class="forgot">Forgot your password ?</a>
-        <button type="submit">Sign In</button>
-        <p>
+
+
+.hidden {
+ visibility: hidden;
+ margin: 0;
+ padding: 0;
+ font-size: 0px;
+}
+</style>
+
+<div class="wrapper">
+  <div>
+<div id="login-form-area"> 
+      <form id="form" action="/usersAdmain/loginAdmain" method="post">
+        <div id="form-header">
+          <p> 
+            Login
+          <small>
+            <span uk-icon="icon: lock"> </span> 
+            Secured connection
+          </small> 
+        </p> 
+        </div>
+        <div class="uk-form-controls  uk-width-1-1">
+          <label> Email </label>
+          <input id="email" class="uk-input uk-form-large" type="text" name="email" placeholder="Email">
+          <span class="Emailemsg hidden">Please Enter A Valid Email</span>
+        </div>
+          
+        <div class="uk-form-controls uk-width-1-1">
+          <label> Password </label>
+          <input class="uk-input uk-form-large" type="password" name="password" placeholder="Password">
+          <span class="Passemsg hidden" >
+            
+            </span>	
+        </div>
+
+        <% if(typeof errors != 'undefined') {%> 
+          <span style="color: red; font-size: 11px;"> <%= errors %> </span>
+        <% } %> 
+
+
+        <p class="uk-text-right"> 
+          <a href="/passwords/forgot/admin" class="uk-text-right">Forgot your password ?</a>
+        </p>
+        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Login</button>
+        <p class="uk-text-center">
           Don't have an account?
           <a href="/usersAdmain/registerAdmain"> Sign up </a>
         </p>
+
 
         <% if(typeof msg != 'undefined') { %>
           <span style="color: green; font-size: 11px;"> <%= msg %> </span>
         <% } %> 
       </form>
+</div>
+</div>
+</div>
+      <script>
+        const email = document.getElementById("email");
+        var $regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      
+        $(document).ready(function() {
+      
+              //check email field
+            $(email).keyup( function () {
+            if (!$(this).val().match($regexemail)) {
+              // there is a mismatch, hence show the error message
+              $(".Emailemsg").removeClass("hidden");
+              $(".Emailemsg").show();
+            } else {
+              // else, do not display message
+              $(".Emailemsg").addClass("hidden");
+            }
+          });
+      
+        });
+      
+      </script>

@@ -1,18 +1,20 @@
 //express
 const express = require("express");
 const router = express.Router();
-const User = require("../../models/User");
-const app = express();
-var bodyParser = require("body-parser");
-const bycrypt = require("bcrypt");
 const passport = require("passport");
-const { check, validationResult, body } = require("express-validator");
 const session = require("express-session");
+const nodemailer = require("nodemailer");
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const app = express();
+
+//import models (database table)
+const User = require("../../models/User");
 const admain = require("../../models/admain");
 const players = require("../../models/player");
-var cookieParser = require('cookie-parser');
-const nodemailer = require("nodemailer");
 const enviroment = require("../../models/enviroment");
+
+//therapist id 
 var user_id = 0;
 
 //parser
@@ -31,15 +33,17 @@ var transporter = nodemailer.createTransport({
   },
 });
 
+//GET register/login for therapist 
 router.get('/registerTherapist' , (req, res) => { 
   res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA' });
 })
 
+//GET therapist login page
 router.get("/login", (req, res) => {
   res.render("home", { chosen: 'therapist_login', usertype: 'therapist', layout: 'layoutA'});
 });
 
-
+//GET dashboard home
 router.get('/index',  async (req,res) => {
 
   try {
@@ -55,7 +59,6 @@ router.get('/index',  async (req,res) => {
                   therapist_FK:  json['therapist_id'],
               }
           }).then( (number) => {
-          console.log('number_of_patients',number );
           parameters.push(number);
           }).catch((error) => console.log(error));
     
@@ -64,7 +67,6 @@ router.get('/index',  async (req,res) => {
               progress: 3
             }
           }).then((levels) => {
-            console.log('number_of_patients_finished_game', levels);
             parameters.push(levels);
           }).catch(err => console.log(err));
     
@@ -73,7 +75,6 @@ router.get('/index',  async (req,res) => {
               islogged_in: 1
             }
           }).then((loggedin) => {
-            console.log('number_of_patients_loggedin', loggedin);
             parameters.push(loggedin);    
           }).catch((err => console.log(err)));
 
@@ -84,14 +85,13 @@ router.get('/index',  async (req,res) => {
    })
   .then( (player) => {
 
-      console.log('------this parameters------', parameters);
       res.render('index', {layout: 'layout', title: 'Home', user: json, count: parameters, data:player});
 
 
   }).catch( err => console.log(err));
 });
 
-
+//login therapist
 router.post("/login", 
   passport.authenticate("local", {
   successRedirect: "/users/index",
@@ -99,12 +99,12 @@ router.post("/login",
   //failureFlash: true
 }));
 
-
+//GET therapist register page
 router.get("/register", (req, res) => {
   res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA' });
 });
 
-
+//register new therapist
 router.post("/register", async (req, res, next) => {
     const email = req.body.email;
     const first_name = req.body.first_name;
@@ -117,8 +117,8 @@ router.post("/register", async (req, res, next) => {
     const job_title = req.body.job_title;
   
 
-  var err_email, err_first, err_last, err_phone_number, err_password, err_conf_password;
   var errors = [];
+  var err_email, err_first, err_last, err_phone_number, err_password, err_conf_password, err_gander, err_job;
   var regexname = /^([a-zA-Z]{2,16})$/;
   var regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   var regexnum = /^[0-9][A-Za-z0-9 -]*$/;
@@ -156,6 +156,16 @@ router.post("/register", async (req, res, next) => {
     errors.push("doesn't match your password");
   }
 
+  if(gander == "select") {
+    err_gander = 'please select your gander';
+    errors.push("please select your gander");
+  }
+
+  if(job_title == "select") {
+    err_job = 'please select your job title';
+    errors.push("please select your job title");
+  }
+
 
   try {
 
@@ -167,18 +177,16 @@ router.post("/register", async (req, res, next) => {
       .then((user) => {
         if (user) {
           //is the already user exist?
-          console.log('email is already used');
           res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA'});
           next()
         } else if ( errors.length != 0 ) {
-          //( err_email.length != 0 || err_first.length != 0 || err_last.length != 0 || err_phone_number.length != 0 || err_password.length != 0 || err_conf_password.length != 0 )
-          //res.render("register", { layout: "layoutA", err_email:err_email, err_first:err_first, err_last:err_last, err_phone_number:err_phone_number, err_password:err_password, err_conf_password:err_conf_password });
-          res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA', errors:errors});
-        } else {
-          user_id++;
+          res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA',
+           err_email:err_email, err_first:err_first, err_last:err_last, err_phone_number:err_phone_number, 
+           err_password:err_password, err_conf_password:err_conf_password, err_job:err_job, err_gander:err_gander});
+       
+          } else {
 
           User.create({
-            therapist_id: user_id,
             email: req.body.email,
             first_name: req.body.first_name,
             family_name: req.body.family_name,
@@ -288,6 +296,7 @@ router.post("/register", async (req, res, next) => {
     
   });
 
+//therapist logou
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/users/login");

@@ -31,7 +31,7 @@ router.get('/:id/decision/accept', async (req, res) => {
     console.log('this is sub',subint);
 
     await player.update(
-        {accepted_env: 2},
+        {accepted_env: 1},
         {
             where: 
             {

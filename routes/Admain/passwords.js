@@ -3,9 +3,9 @@ const express = require('express');
 const app = express();
 const User = require('../../models/admain');
 const therapist = require('../../models/User');
-
-
 const router = express.Router();
+
+
 
 router.get('/forgot/therapist', (req, res) => {
     res.render('restpassword' , {layout: "layoutA" , user:'therapist'});

@@ -1,13 +1,14 @@
+//import needed libraries
 const express = require("express");
-const app = express();
 const router = express.Router();
-
-const player = require("../../models/player");
-const enviroment = require("../../models/enviroment");
-
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
+//import models (database table)
+const player = require("../../models/player");
+const enviroment = require("../../models/enviroment");
+
+//GET add enviromenet page
 router.get("/addEnv/:id", (req, res) => {
   var json = JSON.parse(req.user);
   var id = req.params.id;
@@ -34,6 +35,7 @@ router.get("/addEnv/:id", (req, res) => {
     });
 });
 
+//Submit add enviromenet 
 router.post("/:id/submit", async (req, res) => {
   const { Enviroment } = req.body;
   console.log("this is env", Enviroment);
@@ -41,7 +43,16 @@ router.post("/:id/submit", async (req, res) => {
   var id = req.params.id;
   var sub = id.substring(1, 3);
   var subint = parseInt(sub);
-  console.log("this is sec id ", id);
+  console.log("this is sec id ", sub);
+
+  player.update(
+    { request_sent: 1, env_title: Enviroment, accepted_env:0 },
+    {
+      where: {
+        player_id: subint,
+      },
+    }
+  ).catch((err) => console.log("err in updating", err));
 
   player.findOne({
       where: {
@@ -60,7 +71,10 @@ router.post("/:id/submit", async (req, res) => {
             player_FK: subint,
           },
         }
-      ).catch((err) => console.log(err));
+      ).then((result) => {
+        res.redirect('/users/index');
+      })
+      .catch((err) => console.log(err));
     } else {
         enviroment.create({
         title: Enviroment,
@@ -73,20 +87,12 @@ router.post("/:id/submit", async (req, res) => {
       { include: [player] }
       ).then((result) => {
           console.log("this is user", result);
-          res.render("list", {layout: "layout",user: json,title: "edit ",body: "done",});
+          //res.render("list", {layout: "layout",user: json,title: "edit ",body: "done",});
+          res.redirect('/users/index');
       }).catch((err) => {
           console.log(err);
         });
     }
-
-     player.update(
-        { request_sent: 1, env_title: Enviroment },
-        {
-          where: {
-            player_id: subint,
-          },
-        }
-      ).catch((err) => console.log("err in updating", err));
 
 
 });

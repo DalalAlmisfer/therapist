@@ -1,26 +1,21 @@
-
+//import needed libraries
 const express = require('express');
+const router = express.Router();
 const app = express();
-
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+
+//let express use cookie parser
 app.use(cookieParser());
 
-
-const router = express.Router();
+//import models (database table)
 const player = require('../../models/player');
 const therapist = require('../../models/User');
 const enviroment = require('../../models/enviroment');
-//id set and get 
-var idObject = ''; 
 
-function idgetter(){
-        return idObject;
-    }
-function idsetter(val) {
-        idObject = val;
-    }
 
+
+//GET list of patient list 
 router.get('/list', (req,res) => {
    var json = JSON.parse(req.user);
     console.log('this is therapistid', json['therapist_id']);
@@ -30,26 +25,24 @@ router.get('/list', (req,res) => {
             therapist_FK: json['therapist_id'],}
 })
     .then( (players) => {
-       // var id = json.therapist_id; 
         console.log(players);
         res.render("list", {layout: "layout" , data:players , user: json, title: "list"});
 
     }).catch( err => console.log(err));
 });
 
+//GET anxiety status analytics
 router.get('/chart/:id', async (req,res) => {
 
     var json = JSON.parse(req.user);
-    var id = req.params.id;
+    var id = (req.params.id).toString();
     var sub = id.substring(1, 3);
-    console.log(sub);
 
  player.findOne({
     where: {
         player_id: sub
     }
 }).then((playerData) => {
-    console.log('this is result sec' , playerData);
     res.render('chart' ,{layout: "layout", user: json, userdata: playerData, title: "Chart"});
 
 });
@@ -57,13 +50,12 @@ router.get('/chart/:id', async (req,res) => {
 
 });
 
+//GET anxiety status analytics for school
 router.get('/chart/:id/school', (req, res) => {
-    console.log('we are in skool');
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
     var sub = id.substring(1, 3);
-    console.log(sub);
     var progress = "";
 
     enviroment.findOne({
@@ -79,15 +71,14 @@ router.get('/chart/:id/school', (req, res) => {
         player_id: sub
     }
 }).then((playerData) => {
-    console.log('this is result sec' , playerData);
     res.render('chart' ,{layout: "layout", user: json, userdata: playerData, progress:progress , chosen:"yes", title: "Chart"});
 
 });
   
 });
 
+//GET anxiety status analytics for market
 router.get('/chart/:id/market', (req, res) => {
-    console.log('we are in market');
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
@@ -106,57 +97,33 @@ router.get('/chart/:id/market', (req, res) => {
   
 });
 
+//GET anxiety status analytics for garden
 router.get('/chart/:id/garden', (req, res) => {
     console.log('we are in garden');
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
     var sub = id.substring(1, 3);
-    console.log(sub);
+
 
  player.findOne({
     where: {
         player_id: sub
     }
 }).then((playerData) => {
-    console.log('this is result sec' , playerData);
     res.render('chart' ,{layout: "layout", user: json, userdata: playerData, chosen:"no",title: "Chart"});
 
 });
   
 });
 
-router.get('/note/:id', (req,res) => {
-
-    var json = JSON.parse(req.user);
-    var id = req.params.id;
-    console.log('id is', id);
-    var sub = id.substring(1, 3);
-    console.log(sub);
-    
-    player.findOne({
-        where: {
-            player_id: sub
-        }
-    })
-    .then((result) => {
-        console.log("this is res" , result);
-        idsetter(sub);
-        res.render('notes' , {layout: "layout" , user: json, data: result, title: " note "});
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-});
-
+//GET edit patient profile page
 router.get('/:id/edit', (req,res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
     var sub = id.substring(1, 3);
-    console.log('this is id', sub);
-    console.log('this is id user', json['therapist_id']);
+
     
     player.findOne({
         where: {
@@ -166,8 +133,6 @@ router.get('/:id/edit', (req,res) => {
         }
     })
     .then((result) => {
-        console.log("this is res" , result);
-        idsetter(sub);
         res.render('edit' ,{layout: "layout" , user: json, title: "Edit patient profile", data: result});
     })
     .catch((err) => {
@@ -176,6 +141,7 @@ router.get('/:id/edit', (req,res) => {
 
 });
 
+//Submit edited data of patient's profile 
 router.post('/:id/edit/submit', async (req, res) => {
 
     const input = { name, email, birth_date } = req.body;
@@ -183,7 +149,6 @@ router.post('/:id/edit/submit', async (req, res) => {
     var json = JSON.parse(req.user);
     var id = req.params.id;
     var sub = id.substring(1, 3);
-    console.log("this is sec id ", sub);
 
     await player.update(
         input,
@@ -195,7 +160,6 @@ router.post('/:id/edit/submit', async (req, res) => {
         },
     )
     .then( (result) => {
-        console.log('this is user', result);
         res.render('index', {layout: "layout", user: json, title: 'edit ', body:'done' });
 
 
@@ -205,7 +169,7 @@ router.post('/:id/edit/submit', async (req, res) => {
     })
 });
 
-
+//DELETE patient
 router.get('/delete/:id', async (req, res) => {
     var json = JSON.parse(req.user);
     var id = req.params.id;

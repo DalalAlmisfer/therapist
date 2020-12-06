@@ -6,6 +6,7 @@
 
 
 $user = addslashes($_POST['user']);
+$table = addslashes($_POST['table']);
 
             // Create connection
             $conn = new mysqli("localhost", "root", "","anees_DB");
@@ -15,7 +16,10 @@ $user = addslashes($_POST['user']);
                die("Connection failed: " . $conn->connect_error);
             }
 
-mysqli_query($conn,"UPDATE enviroments set progress='2' where title='school' and player_FK='$user' ");
+$control = mysqli_fetch_array(mysqli_query($conn,"SELECT * from enviroments where player_FK='".$user."' "));
+
+$count = 1+ $control["$table"];
+mysqli_query($conn,"UPDATE enviroments set $table='$count' where  player_FK='$user' ");
 echo $user;
 		 }
 

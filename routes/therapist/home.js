@@ -1,27 +1,36 @@
-
+//import needed libraries
 const express = require('express');
 const app = express();
 const router = express.Router();
+const body_parser = require('body-parser');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
-const { check, validationResult } = require('express-validator');
-
-const db = require('../../config/database');
-
+//import models (database table)
 const page = require('../../models/contact_us');
 const player = require('../../models/player');
 const thearpists = require('../../models/User');
 const enviroment = require('../../models/enviroment');
-var body_parser = require('body-parser');
+
+//let express use json
 app.use(body_parser.json());
 var urlencodedParser = body_parser.urlencoded({ extended: true });
-var user_id = 0;
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
+//paitent id 
+var user_id = 0;
+
+
+//GET about us page
+ router.get('/aboutUs', (req, res) => {
+     var json = JSON.parse(req.user);
+     res.render('aboutUs', {layout: "layout", user: json, title: 'about us'});
+ 
+ });
 
 //------- Constact us --------
 router.get('/contact', (req,res) => {
-    res.render('contactUs', {layout: "layout" });
+    var json = JSON.parse(req.user);
+    res.render('contactUs', {layout: "layout", user: json, title: 'contact us'});
 });
 
 router.post('/contact', (req,res) => {
@@ -57,14 +66,12 @@ router.post('/contact', (req,res) => {
     })
     .then( (user) => {
           console.log('msg right');
-          req.flash('successMasg', 'your msg is submitted');
           res.redirect('/users/index');
 
     })
     .catch( err => {
         console.log(err);
-       // eq.flash('errorMasg', 'there an error');
-       // res.redirect('/pagesFunctions/contact');
+         res.redirect('/home/contact');
 
     });
   }
@@ -72,8 +79,9 @@ router.post('/contact', (req,res) => {
 
 // -------- Add Patient -------- 
 router.get('/add', (req,res) => {
-    res.render('addChild', {layout: "layout" } );
-});
+    var json = JSON.parse(req.user);
+     res.render('addChild', {layout: "layout", user: json, title: "Add patient"});
+    });
 
 router.post('/add', urlencodedParser, (req,res) => {
 
@@ -129,14 +137,12 @@ router.post('/add', urlencodedParser, (req,res) => {
     {include: [thearpists]})
     .then( (user) => {
           console.log(' right');
-          req.flash('successMasg', 'your msg is submitted');
           res.redirect('/users/index');
 
     })
     .catch( err => {
         console.log(err);
-        eq.flash('errorMasg', 'there an error');
-        res.redirect('/pagesFunctions/add', {errors:err});
+        res.redirect('/home/add', {errors:err});
 
     });
 }

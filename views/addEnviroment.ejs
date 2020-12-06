@@ -27,13 +27,11 @@
                         <td> <%= string.concat(row.first_name,"  " ,row.last_name) %> </td>
                         <td> <%= row.env_title %> </td>
                         <td> <%= row.anxiety_type %> </td>
-                           <% if(row.accepted_env == 2){ %> 
+                           <% if(row.accepted_env == 1){ %> 
                             <td> accepted </td>
-                           <% } else if (row.accepted_env == 1){ %> 
-                                 <td> rejected </td>
-                                 <% } else {%> 
+                            <% } else { %> 
                                 <td> Not decieded yet </td>
-                                <% } %> 
+                            <% } %> 
 
                         <td>
                             <a style="color: green;" class="uk-button uk-button- uk-margin uk-button-small" href="/AddRequest/:<%=row.player_id %>/decision/accept" type="button"> accept </a>

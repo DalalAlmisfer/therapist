@@ -5,7 +5,6 @@ const sequelize = require('../config/database');
 const players = require('../models/player');
 
 const User = sequelize.define('therapists', {
-        // Model attributes are defined here
         therapist_id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
@@ -24,38 +23,31 @@ const User = sequelize.define('therapists', {
         }, 
         family_name: {
           type: Sequelize.STRING,
-          //allowNull: false,
           defaultValue: true
         },
           phone_number: {
             type: Sequelize.STRING,
-            //allowNull: false,
             defaultValue: true
           },
           job_title: {
             type: Sequelize.STRING,
-            //allowNull: false,
             defaultValue: true
           },
           gander: {
             type: Sequelize.STRING,
-            //allowNull: false,
             defaultValue: true
           },
           birth_date: {
             type: Sequelize.DATE,
-            //allowNull: false,
             defaultValue: true
           },
           password: {
             type: Sequelize.STRING,
-            //allowNull: false,
             defaultValue: false,
             
           },
           conf_password: {
             type: Sequelize.STRING,
-            //allowNull: false,
             defaultValue: false
 
         },

@@ -15,12 +15,10 @@ const player = sequelize.define('players', {
     first_name: {
         type: Sequelize.TEXT,
         defaultValue: false,
-        //allowNull: false,
     },
     last_name: {
         type: Sequelize.TEXT,
         defaultValue: false,
-       // allowNull: false,
     },
     email: {
         type: Sequelize.STRING,
@@ -35,22 +33,18 @@ const player = sequelize.define('players', {
     gander: {
         type: Sequelize.STRING,
         defaultValue: false,
-       // allowNull: false,
     },
     birth_date: {
         type: Sequelize.DATEONLY,
         defaultValue: false,
-     //   allowNull: false,
     },
     env_title: {
         type: Sequelize.STRING,
         defaultValue: false,
-     //   allowNull: false,
     },
     anxiety_type: {
         type: Sequelize.STRING,
         defaultValue: false,
-     //   allowNull: false,
     },
     accepted_env: {
          type: Sequelize.INTEGER,

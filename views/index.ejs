@@ -60,7 +60,7 @@ td {
       <th scope="col"></th>
       <th scope="col"> Name </th>
       <th scope="col"> Anxiety Status </th>
-      <th scope="col"> Note </th>
+      <th scope="col"> Admin reponse </th>
      
     </tr>
   </thead>
@@ -84,12 +84,16 @@ td {
       </td>
 
       <td>
-        <a href="/list/note/:<%=row.player_id%> ">
+          <% if( row.accepted_env == 1 ) {%> 
           <span class="title">
-
-            Note
+            request accepted
           </span>
-        </a>
+        <% } else {%> 
+          <span class="title">
+            no reponse 
+          </span>
+        <% } %> 
+    
       </td>
 
     </tr>

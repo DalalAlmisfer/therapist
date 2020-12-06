@@ -2,8 +2,6 @@ const Sequelize  = require('sequelize');
 
 const sequelize = require('../config/database');
 
-
-//contact us page 
 const information = sequelize.define('contact_us', {
 
     id: {
