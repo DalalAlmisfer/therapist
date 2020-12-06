@@ -17,4 +17,8 @@
           Don't have an account?
           <a href="/usersAdmain/registerAdmain"> Sign up </a>
         </p>
+
+        <% if(typeof msg != 'undefined') { %>
+          <span style="color: green; font-size: 11px;"> <%= msg %> </span>
+        <% } %> 
       </form>

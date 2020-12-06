@@ -65,6 +65,10 @@
 			  You Don't have an account?
 			  <a href="/users/register"> Register </a>
 			</p>
+
+			<% if(typeof msg != 'undefined') { %>
+				<span style="color: green; font-size: 11px;"> <%= msg %> </span>
+			<% } %> 
 	  
 	  </form>
 
