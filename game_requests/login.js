@@ -6,8 +6,7 @@ const router = express.Router();
 
 
 router.get('/login', (req,res) => {
-    res.json({ message: "---" });
-    res.send(req.body);
+    res.send('message: "---"' );
     
 });
 
