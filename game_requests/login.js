@@ -6,7 +6,6 @@ const router = express.Router();
 
 
 router.get('/login', (req,res) => {
-    res.write(req.body);
     res.write({ message: "---" });
 });
 
