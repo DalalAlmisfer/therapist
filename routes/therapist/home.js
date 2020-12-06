@@ -14,7 +14,7 @@ const enviroment = require('../../models/enviroment');
 var body_parser = require('body-parser');
 app.use(body_parser.json());
 var urlencodedParser = body_parser.urlencoded({ extended: true });
-
+var user_id = 0;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -25,31 +25,27 @@ router.get('/contact', (req,res) => {
 });
 
 router.post('/contact', (req,res) => {
-    const { phone_number, contact_email, contact_msg } = req.body;
+    const { contact_email, contact_msg } = req.body;
     let errors = [];
 
-    //Backend Validation 
-    if(!contact_name) {
-        errors.push({
-            msg: 'Please insert your name'
-        });
-    }
+    var regexname = /^([a-zA-Z]{2,80})$/;
+    var regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var regexnum = /^[0-9][A-Za-z0-9 -]*$/;
 
-    if(!contact_email) {
-        errors.push({
-            msg: 'Please insert your email'
-        });
-    }
 
-    if(contact_msg.length < 0) {
-        errors.push({
-            msg: 'Please insert your message'
-        });
-    }
+  if( !contact_email.match(regexemail)) {
+    errors.push("please enter a valid email");
+
+  } 
+
+  if( !contact_msg.match(regexname)) {
+    errors.push("please enter a valid message");
+
+  }
 
     if ( errors.length > 0) {
         console.log('error cc');
-        res.render('contactUS', {errors:errors, layout: "layout" })
+        res.render('contactUS', {errors:errors, layout: "layout", title: 'contact us'})
 
     } else {
 
@@ -62,7 +58,7 @@ router.post('/contact', (req,res) => {
     .then( (user) => {
           console.log('msg right');
           req.flash('successMasg', 'your msg is submitted');
-          res.redirect('/');
+          res.redirect('/users/index');
 
     })
     .catch( err => {
@@ -87,6 +83,7 @@ router.post('/add', urlencodedParser, (req,res) => {
     const  {first_name, last_name, child_birth, email, anxiety_type, env_title, gander, password} = req.body;
 
     let errors = [];
+    
 
     var regexname = /^([a-zA-Z]{2,16})$/;
     var regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -114,7 +111,9 @@ router.post('/add', urlencodedParser, (req,res) => {
         res.render('addChild', { layout: "layout", errors:errors, title: 'add' });
     
     } else {
+        user_id++;
     player.create({
+        player_id: user_id,
         email: email,
         password: password,
         first_name: first_name,
@@ -147,14 +146,17 @@ router.post('/add', urlencodedParser, (req,res) => {
 // ------- search ---------
 router.get('/search', (res, req, next) => {
    const { search_value } = res.query;
+   console.log(search_value);
 
-   player.findAll({ raw : true,
-        where: { name: { [Op.like]: '%'+ search_value +'%'}
+   player.findAll(
+       { raw : true,
+        where: { 
+            first_name: { [Op.like]: '%'+ search_value +'%'},
        }
     })
     .then( (result) => {
-        req.render('list', {layout: "layout" , data:result, title: "search"});
         console.log(result);
+        req.render('list', {layout: "layout" , data:result, found: 'no',title: "search"});
     })
     .catch( err => console.log(err));
 });

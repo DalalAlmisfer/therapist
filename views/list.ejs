@@ -91,12 +91,18 @@
               </td>
 
             </tr>
-            <% })} else{ %>
-              <tr>
-                  <td colspan="6">No records is there yet</td>
-                  
+            <% })} else { %>
+              <% if (typeof found != 'undefined') {%> 
+                <% if(found == 'no') {%> 
+                  <tr>
+                    <td colspan="6"> No patient found </td>
+                    
+                  </tr>
+                <% } else { %> 
+                <tr>
+                  <td colspan="6">No records is there yet</td> 
                 </tr>
-              <% } %>
+              <% } } }%>
           </tbody>
         </table>
   </div>

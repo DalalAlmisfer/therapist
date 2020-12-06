@@ -13,7 +13,7 @@ const players = require("../../models/player");
 var cookieParser = require('cookie-parser');
 const nodemailer = require("nodemailer");
 const enviroment = require("../../models/enviroment");
-
+var user_id = 0;
 
 //parser
 app.use(bodyParser.json());
@@ -35,7 +35,6 @@ router.get('/registerTherapist' , (req, res) => {
   res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA' });
 })
 
-//login form
 router.get("/login", (req, res) => {
   res.render("home", { chosen: 'therapist_login', usertype: 'therapist', layout: 'layoutA'});
 });
@@ -100,40 +99,7 @@ router.post("/login",
   //failureFlash: true
 }));
 
-// router.post('/login', function(req, res, next) {
-//   passport.authenticate('local', 
-//   { session : false , 
-//     //successRedirect: "/",
-//     //failureRedirect: "/users/login",
-//     failureFlash: true
-//   },
-//     function(error, user, info) {
-//     if (error) return next(error);
-//     if (! user) {
-//       var infoString = JSON.stringify(info).toString();
-//       var myJSON ='';
-      
-//       if( infoString ){
-//          myJSON = "Enter both email and password";
-//       } else {
-//         myJSON = "Either password or email is wrong";
-//       }
 
-//       var errors = "either your password or email is wrong"
-     
-//       res.render('login', {errors: errors});
-//       console.log(info);
-//       //return res.status(400).json(info);
-//     } else {
-//       res.redirect('/users/index');
-//     }
-   
-//   })(req, res, next);
-// });
-
-
-
-// register form
 router.get("/register", (req, res) => {
   res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA' });
 });
@@ -191,7 +157,6 @@ router.post("/register", async (req, res, next) => {
   }
 
 
-
   try {
 
     await User.findOne({
@@ -209,10 +174,11 @@ router.post("/register", async (req, res, next) => {
           //( err_email.length != 0 || err_first.length != 0 || err_last.length != 0 || err_phone_number.length != 0 || err_password.length != 0 || err_conf_password.length != 0 )
           //res.render("register", { layout: "layoutA", err_email:err_email, err_first:err_first, err_last:err_last, err_phone_number:err_phone_number, err_password:err_password, err_conf_password:err_conf_password });
           res.render('home', { chosen: 'therapist_reg', usertype: 'therapist', layout: 'layoutA', errors:errors});
-        
-        
         } else {
+          user_id++;
+
           User.create({
+            therapist_id: user_id,
             email: req.body.email,
             first_name: req.body.first_name,
             family_name: req.body.family_name,
@@ -227,7 +193,7 @@ router.post("/register", async (req, res, next) => {
           })
           .then((user) => {
               console.log("new account created");
-              mail(email).then((res) => {
+              mail(email, first_name).then((res) => {
               })
               .catch((err) => {
                   console.log('err from mail func', err);
@@ -322,7 +288,6 @@ router.post("/register", async (req, res, next) => {
     
   });
 
-//logout
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/users/login");

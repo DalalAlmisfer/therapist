@@ -7,7 +7,6 @@ const therapists = require('../models/User');
 const DataTypes = require('sequelize/lib/data-types');
 
 
-
 const admains = sequelize.define('admains', {
     // Model attributes are defined here
 

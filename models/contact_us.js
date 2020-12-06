@@ -17,11 +17,6 @@ const information = sequelize.define('contact_us', {
         defaultValue: false,
         allowNull: false,
     },
-    phone_number: {
-        type: Sequelize.STRING,
-        defaultValue: false,
-        allowNull: false,
-    },
     msg: {
         type: Sequelize.TEXT,
         defaultValue: false,

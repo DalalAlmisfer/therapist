@@ -120,7 +120,7 @@ router.get('/homeAdmain', (req, res) => {
 //logout
 router.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/users/loginAdmain");
+  res.redirect("/usersAdmain/loginAdmain");
 });
 
 module.exports = router;
