@@ -1,7 +1,7 @@
 const express = require("express");
-const User = require("../../models/User");
-const players = require("../../models/player");
-const enviroment = require("../../models/enviroment");
+const User = require("../models/User");
+const players = require("../models/player");
+const enviroment = require("../models/enviroment");
 const router = express.Router();
 
 
