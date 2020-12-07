@@ -1,56 +1,59 @@
+<!-- List of Children  -->
+<div class="uk-overflow-auto">
+  <div class="table-scroll">
+    <table class="uk-table uk-table-striped uk-table-small" id="Table-data">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th scope="col">Full Name</th>
+          <th scope="col">Title</th>
+          <th scope="col">Anxiety type</th>
+          <th scope="col">Status</th>
+          <th scope="col">Accept</th>
+          <th scope="col">Terminate</th>
+        </tr>
+      </thead>
 
-            <!-- List of Children  --> 
- <div class="uk-overflow-auto">
-     <div class="table-scroll">
-         <table  class="uk-table uk-table-striped uk-table-small" id="Table-data">
-                <thead>
-                    <tr>
-                        <th> id </th>
-                        <th scope="col">  Full Name </th> 
-                        <th scope="col">  Title </th>
-                        <th scope="col">  Anxiety type </th>
-                        <th scope="col">  Status        </th>
-                        <th scope="col">  Accept     </th>
-                        <th scope="col">  Terminate     </th>
+      <tbody id="Table-data">
+        <% if(typeof data != 'undefined' ){ %> <% var string = '' %> <% var i =
+        1 %> <% data.forEach(function(row) { %>
+        <tr>
+          <td><%= i++ %></td>
+          <td><%= string.concat(row.first_name," " ,row.last_name) %></td>
+          <td><%= row.env_title %></td>
+          <td><%= row.anxiety_type %></td>
+          <% if(row.accepted_env == 1){ %>
+          <td>accepted</td>
+          <% } else { %>
+          <td>Not decieded yet</td>
+          <% } %>
 
+          <td>
+            <a
+              style="color: green"
+              class="uk-button uk-button- uk-margin uk-button-small"
+              href="/AddRequest/:<%=row.player_id %>/decision/accept"
+              type="button"
+            >
+              accept
+            </a>
+          </td>
+          <td>
+            <a
+              class="uk-button uk-button-danger uk-margin uk-button-small"
+              href="/AddRequest/:<%=row.player_id %>/decision/terminate"
+            >
+              terminate
+            </a>
+          </td>
+        </tr>
 
-                     </tr>
-                </thead>
-        
-                <tbody id="Table-data">
-                    <% if(typeof data != 'undefined' ){ %>
-                        <% var string = '' %> 
-                        <% var i = 1 %> 
-                        <%  data.forEach(function(row)  { %>
-                    <tr>
-                        <td> <%= i++ %> </td>
-                        <td> <%= string.concat(row.first_name,"  " ,row.last_name) %> </td>
-                        <td> <%= row.env_title %> </td>
-                        <td> <%= row.anxiety_type %> </td>
-                           <% if(row.accepted_env == 1){ %> 
-                            <td> accepted </td>
-                            <% } else { %> 
-                                <td> Not decieded yet </td>
-                            <% } %> 
-
-                        <td>
-                            <a style="color: green;" class="uk-button uk-button- uk-margin uk-button-small" href="/AddRequest/:<%=row.player_id %>/decision/accept" type="button"> accept </a>
-                        </td> 
-                        <td> 
-                            <a class="uk-button uk-button-danger uk-margin uk-button-small" href="/AddRequest/:<%=row.player_id %>/decision/terminate" > terminate </a>
-                        </td>
-                    </tr>
-
-                    <% })} else{ %>
-                        <tr>
-                          <td colspan="6">No Record Found</td>
-                          
-                        </tr>
-                      <% } %>
-                      
-                </tbody>
-            </table>
+        <% })} else{ %>
+        <tr>
+          <td colspan="6">No Record Found</td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
 </div>
-</div>
-
-         

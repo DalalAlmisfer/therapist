@@ -46,11 +46,6 @@ const User = sequelize.define('therapists', {
             defaultValue: false,
             
           },
-          conf_password: {
-            type: Sequelize.STRING,
-            defaultValue: false
-
-        },
         accepted: {
           type: Sequelize.TINYINT,
           defaultValue: false
