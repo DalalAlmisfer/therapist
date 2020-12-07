@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get("/login", function (req, res, next) {
     var user_id = req.params;
-  console.log(user_id);
-  res.send(user_id);
+    console.log(user_id);
+    res.send(user_id);
 
 
 //   var id = req.params.username;
@@ -32,42 +32,43 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", (req, res) => {
-    console.log(req.params.username);
-    var id = req.params.username;
-    var leng = id.length;
-    var sub = id.substring(1, leng);
+    var user_id = req.params;
+    console.log(user_id);
+    res.send(user_id);
+//     var leng = id.length;
+//     var sub = id.substring(1, leng);
 
-  players
-    .findOne({
-        where: {
-            email: sub,
-          },
-    })
-    .then((user) => {
-      if (user) {
-        players
-          .update(
-            { islogged_in: 1 },
-            {
-              where: {
-                email: sub,
-              },
-            }
-          )
-          .then((result) => {
-            console.log(result);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        console.log("the user dosent exit");
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send("err");
-    });
+//   players
+//     .findOne({
+//         where: {
+//             email: sub,
+//           },
+//     })
+//     .then((user) => {
+//       if (user) {
+//         players
+//           .update(
+//             { islogged_in: 1 },
+//             {
+//               where: {
+//                 email: sub,
+//               },
+//             }
+//           )
+//           .then((result) => {
+//             console.log(result);
+//           })
+//           .catch((err) => {
+//             console.log(err);
+//           });
+//       } else {
+//         console.log("the user dosent exit");
+//       }
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.send("err");
+//     });
 });
 
 module.exports = router;
