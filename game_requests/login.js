@@ -4,15 +4,18 @@ const players = require("../models/player");
 const enviroment = require("../models/enviroment");
 const router = express.Router();
 
-router.get("/login/:id", (req, res) => {
-  console.log(req.params.id);
-  var id = req.params.id;
-  var sub = id.substring(1, 3);
+router.get("/login/:username", (req, res) => {
+  console.log(req.params.username);
+  var id = req.params.username;
+  var leng = id.length;
+  //res.send(`this is id ${id}`);
+  var sub = id.substring(1, leng);
+  //res.send(`this is id ${sub}`);
 
   players
     .findOne({
       where: {
-        player_id: sub,
+        email: sub,
       },
     })
     .then((result) => {
@@ -23,17 +26,20 @@ router.get("/login/:id", (req, res) => {
       console.log(err);
       res.send("err");
     });
+
 });
 
-router.post("/login/:id", (req, res) => {
-  var id = req.params.id;
-  var sub = id.substring(1, 3);
+router.post("/login/:username", (req, res) => {
+    console.log(req.params.username);
+    var id = req.params.username;
+    var leng = id.length;
+  var sub = id.substring(1, leng);
 
   players
     .findOne({
-      where: {
-        player_id: sub,
-      },
+        where: {
+            email: sub,
+          },
     })
     .then((user) => {
       if (user) {
@@ -42,7 +48,7 @@ router.post("/login/:id", (req, res) => {
             { islogged_in: 1 },
             {
               where: {
-                player_id: sub,
+                email: sub,
               },
             }
           )
