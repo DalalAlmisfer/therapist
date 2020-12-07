@@ -4,36 +4,38 @@ const players = require("../models/player");
 const enviroment = require("../models/enviroment");
 const router = express.Router();
 
-router.get("/login/:username", (req, res) => {
-  console.log(req.params.username);
-  var id = req.params.username;
-  var leng = id.length;
-  //res.send(`this is id ${id}`);
-  var sub = id.substring(1, leng);
-  //res.send(`this is id ${sub}`);
+router.get("/login", function (req, res, next) {
+    var user_id = req.params;
+  console.log(user_id);
+  res.send(user_id);
 
-  players
-    .findOne({
-      where: {
-        email: sub,
-      },
-    })
-    .then((result) => {
-      console.log(result.player_id);
-      res.send(`this is id ${result.player_id}`);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send("err");
-    });
+
+//   var id = req.params.username;
+//   var leng = id.length;
+//   var sub = id.substring(1, leng);
+
+//   players
+//     .findOne({
+//       where: {
+//         email: sub,
+//       },
+//     })
+//     .then((result) => {
+//       console.log(result.player_id);
+//       res.send(`this is id ${result.player_id}`);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.send("err");
+//     });
 
 });
 
-router.post("/login/:username", (req, res) => {
+router.post("/login", (req, res) => {
     console.log(req.params.username);
     var id = req.params.username;
     var leng = id.length;
-  var sub = id.substring(1, leng);
+    var sub = id.substring(1, leng);
 
   players
     .findOne({
