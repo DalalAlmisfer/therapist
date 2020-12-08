@@ -28,7 +28,7 @@ router.get("/login", function (req, res, next) {
 
 router.post("/login", (req, res) => {
     var user_email = req.query;
-    console.log(user_email);
+    console.log(user_email.user);
 
   players
     .findOne({
@@ -59,7 +59,8 @@ router.post("/login", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.send("err");
+      res.send(`this is user email: ${user_email.user}`);
+
     });
 });
 
