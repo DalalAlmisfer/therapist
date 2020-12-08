@@ -87,6 +87,7 @@ router.get("/index", async (req, res) => {
     .count({
       where: {
         islogged_in: 1,
+        therapist_FK: json["therapist_id"]
       },
     })
     .then((loggedin) => {

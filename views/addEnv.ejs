@@ -1,6 +1,12 @@
+<style>
+  #text {
+    margin-top: 15px;
+  }
+</style>
 <div class="uk-margin uk-margin-right">
   <% if(typeof data != 'undefined' ) { %>
   <form class="add-form-box">
+    <div class="uk-width-1-2@s">
     <label class="username"> First Name </label>
     <input
       class="uk-input"
@@ -8,7 +14,10 @@
       value="<%= data.first_name %> "
       readonly
     />
+    </div>
 
+
+    <div class="uk-width-1-2@s">
     <label class="username"> Last Name </label>
     <input
       class="uk-input"
@@ -16,10 +25,14 @@
       value="<%= data.last_name %> "
       readonly
     />
+    </div>
 
+    <div class="uk-width-1-2@s">
     <label> Email </label>
     <input class="uk-input" name="email" value="<%= data.email %> " readonly />
+    </div>
 
+    <div class="uk-width-1-2@s">
     <label> Gander </label>
     <input
       class="uk-input"
@@ -27,7 +40,9 @@
       value="<%= data.gander  %> "
       readonly
     />
+    </div>
 
+    <div class="uk-width-1-2@s">
     <label> Date of birth </label>
     <input
       type="text"
@@ -36,29 +51,36 @@
       value="<%= data.birth_date %>"
       readonly
     />
+    </div>
+
   </form>
   <% } %>
 
-  <p class="add-form-box" style="color: black">
-    * You are about to add environment to the above patient, if the patient
-    already has an environment then its will change the current environment
-    after this process
-  </p>
+  <div id="text" class="uk-width-1-2@s">
+    <p class="add-form-box" style="color: black">
+      * You are about to add environment to the above patient, if the patient
+      already has an environment then its will change the current environment
+      after this process
+    </p>
+  </div>
+
 
   <form
     class="add-form-box"
     action="/AdminRequest/:<%= data.player_id %>/submit"
     method="POST"
   >
+  <div  class="uk-width-1-2@s">
     <label class="uk-text-light"> Select Enviroment </label>
     <select class="uk-select" name="Enviroment">
       <option class="option" value="school">School</option>
       <option class="option" value="market">Market</option>
       <option class="option" value="garden">Garden</option>
     </select>
+    </div>
 
     <button
-      class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-margin-small-top"
+      class="uk-button uk-button-primary uk-width-1-2@s uk-margin-small-bottom uk-margin-small-top"
       type="submit"
     >
       Add

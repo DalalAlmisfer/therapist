@@ -2,29 +2,46 @@
   <% if(typeof data != 'undefined' ) { %>
     <form class="add-form-box" method="POST" action="/list/:<%= data.player_id %> /edit/submit">
 
+      <div class="uk-width-1-2@s">
         <label class="username"> First Name </label >
-        <input class="uk-input" name="name" value="<%= data.first_name %> " >
+          <input class="uk-input" name="name" value="<%= data.first_name %> " >
+      </div>
 
+      <div class="uk-width-1-2@s">
         <label class="username"> Last Name </label >
           <input class="uk-input" name="name" value="<%= data.last_name %> " >
+      </div>
 
+
+      <div class="uk-width-1-2@s">
         <label> Email </label>
         <input class="uk-input" name="email" value="<%= data.email %> "> 
+      </div>
 
-        <label> Gander </label>
-        <select name="gander" class="uk-select"  value="<%= data.gander %> ">
-            <option value="Female"> Female </option>
-            <option value="Male"> Male </option>
-        </select>
 
-        <label> Date of birth </label>
-        <input type="date" class="uk-input" name="birth_date" value="<%= data.birth_date %>"> 
+      <div class="uk-width-1-2@s">
+          <label> Gander </label>
+          <select name="gander" class="uk-select"  value="<%= data.gander %> ">
+              <option value="Female"> Female </option>
+              <option value="Male"> Male </option>
+          </select>
+
+      </div>
+
+
+      <div class="uk-width-1-2@s">
+          <label> Date of birth </label>
+          <input type="date" class="uk-input" name="birth_date" value="<%= data.birth_date %>"> 
+
+      </div>
+
+
 
         <div class="uk-margin-top">
           <a href="/rest/patient/:<%= data.player_id %> " class="uk-button uk-button-danger uk-margin "> Rest Password </a>
         </div>
       
-        <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small "> Save Change </button>
+        <button type="submit" class="uk-button uk-button-primary uk-width-1-2@s uk-margin-small "> Save Change </button>
    
       </form>
       <% } %> 

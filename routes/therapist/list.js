@@ -55,8 +55,8 @@ router.get('/chart/:id/school', (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
-    var progress = "";
+    var sub = id.substring(1, 4);
+    var progress = 0;
 
     enviroment.findOne({
         where: {
