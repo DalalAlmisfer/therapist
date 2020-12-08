@@ -12,7 +12,7 @@ router.get("/login", function (req, res, next) {
   players
     .findOne({
       where: {
-        email: user_email.email,
+        email: user_email.user,
       },
     })
     .then((result) => {
@@ -33,7 +33,7 @@ router.post("/login", (req, res) => {
   players
     .findOne({
         where: {
-            email: user_email.email,
+            email: user_email.user,
           },
     })
     .then((user) => {
@@ -43,7 +43,7 @@ router.post("/login", (req, res) => {
             { islogged_in: 1 },
             {
               where: {
-                email: user_email.email,
+                email: user_email.user,
               },
             }
           )
