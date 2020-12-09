@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/login", function (req, res, next) {
     var user_email = req.query;
     console.log(user_email.user);
-    //res.send(user_id);
+    res.send(user_id);
 
   players
     .findOne({
