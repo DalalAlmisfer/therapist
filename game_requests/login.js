@@ -6,23 +6,23 @@ const router = express.Router();
 
 router.get("/login", function (req, res, next) {
     var user_email = req.query;
-    console.log(user_email.user);
-    res.send(user_id);
+    console.log(user_email);
+    res.send(user_email);
 
-  players
-    .findOne({
-      where: {
-        email: user_email.user,
-      },
-    })
-    .then((result) => {
-      console.log(result.player_id);
-      res.send(`this is id ${result.player_id}`);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send(`this is user email: ${user_info.user}`);
-    });
+  // players
+  //   .findOne({
+  //     where: {
+  //       email: user_email.user,
+  //     },
+  //   })
+  //   .then((result) => {
+  //     console.log(result.player_id);
+  //     res.send(`this is id ${result.player_id}`);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.send(`this is user email: ${user_info.user}`);
+  //   });
 
 });
 
