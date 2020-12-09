@@ -6,36 +6,53 @@
 
 
           <% if(typeof user != 'undefined') { %>
+
+            <div class="uk-width-1-2@s">
           <label> First Name </label>
           <input class="uk-input" name="name" value="<%= user.first_name %> " >
+          </div>
+          <div class="uk-width-1-2@s">
           <label> First Name </label>
           <input class="uk-input" name="name" value="<%= user.family_name %> " >
+          </div>
+          <div class="uk-width-1-2@s">
           <label> Email </label>
           <input class="uk-input" name="email" value="<%= user.email %> "> 
+          </div>
+          <div class="uk-width-1-2@s">
           <label> Phone number </label>
           <input class="uk-input" name="phone_number" value="<%= user.phone_number %>"> 
+          </div>
+          <div class="uk-width-1-2@s">
           <label> Gander </label>
           <select name="gander" class="uk-select"  value="<%= user.gander %> ">
               <option value="Female"> Female </option>
               <option value="Male"> Male </option>
           </select>
+          </div>
 
+
+          <div class="uk-width-1-2@s">
           <label> Job Title </label>
           <select name="job_title" class="uk-select" value="<%= user.job_title %>">
             <option value="Consultant Psychiatrist"> Consultant Psychiatrist </option>
             <option value="Practitioner Psychologist"> Practitioner Psychologist</option>
             <option value="Senior Psychologist">Senior Psychologist</option>
           </select>
+          </div>
 
+
+          <div class="uk-width-1-2@s">
           <label> Date of birth </label>
-          <input type="date" class="uk-input" name="birth_date" value="<%= user.birth_date %>"> 
+          <input type="date" class="uk-input" name="birth_date" value="<%= user.birth_date %>">
+          </div> 
           
           <% } %> 
   
           <div class="uk-margin-top">
             <a href="/rest/therapist/:<%= user.therapist_id %> " class="uk-button uk-button-danger  uk-margin "> Rest Password </a>
           </div>
-           <div id="last-button">
+           <div id="last-button" class="uk-width-1-2@s">
             <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small"> Save Change </button>
            </div>
 
