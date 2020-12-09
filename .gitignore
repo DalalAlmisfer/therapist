@@ -1,6 +1,8 @@
 # Node build artifacts
 node_modules
 npm-debug.log
+vendor
+web/vendor/
 
 # Local development
 .DS_Store
