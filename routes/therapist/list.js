@@ -36,7 +36,7 @@ router.get('/chart/:id', async (req,res) => {
 
     var json = JSON.parse(req.user);
     var id = (req.params.id).toString();
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
 
  player.findOne({
     where: {
@@ -56,22 +56,22 @@ router.get('/chart/:id/school', (req, res) => {
     var json = JSON.parse(req.user);
     var id = req.params.id;
     var sub = id.substring(1, 4);
-    var progress = 0;
-
-    enviroment.findOne({
-        where: {
-            player_FK: sub
-        }
-    }).then((data) => {
-        progress = data;
-    }).catch(err => console.log(err));
 
  player.findOne({
     where: {
         player_id: sub
     }
 }).then((playerData) => {
-    res.render('chart' ,{layout: "layout", user: json, userdata: playerData, progress:progress , chosen:"yes", title: "Chart"});
+    enviroment.findOne({
+        where: {
+            player_FK: sub,
+        }
+    }).then((data) => {
+        console.log('therapist d--------', data.therapist_dialogue );
+        console.log('anees d--------', data.Anees_dialogue );
+        console.log('progress--------', data.progress );
+        res.render('chart' ,{layout: "layout", user: json, userdata: playerData, data:data, chosen:"yes",title: "Chart"});
+    })
 
 });
   
@@ -82,7 +82,7 @@ router.get('/chart/:id/market', (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
     console.log(sub);
 
  player.findOne({
@@ -103,7 +103,7 @@ router.get('/chart/:id/garden', (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
 
 
  player.findOne({
@@ -111,7 +111,10 @@ router.get('/chart/:id/garden', (req, res) => {
         player_id: sub
     }
 }).then((playerData) => {
+
     res.render('chart' ,{layout: "layout", user: json, userdata: playerData, chosen:"no",title: "Chart"});
+
+    
 
 });
   
@@ -122,7 +125,7 @@ router.get('/:id/edit', (req,res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
 
     
     player.findOne({
@@ -148,7 +151,7 @@ router.post('/:id/edit/submit', async (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
 
     await player.update(
         input,
@@ -173,7 +176,7 @@ router.post('/:id/edit/submit', async (req, res) => {
 router.get('/delete/:id', async (req, res) => {
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
     console.log(sub);
     
     player.destroy({

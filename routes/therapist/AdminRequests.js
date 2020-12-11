@@ -12,7 +12,7 @@ const enviroment = require("../../models/enviroment");
 router.get("/addEnv/:id", (req, res) => {
   var json = JSON.parse(req.user);
   var id = req.params.id;
-  var sub = id.substring(1, 3);
+  var sub = id.substring(1, 4);
   console.log(sub);
 
   player
@@ -41,7 +41,7 @@ router.post("/:id/submit", async (req, res) => {
   console.log("this is env", Enviroment);
   var json = JSON.parse(req.user);
   var id = req.params.id;
-  var sub = id.substring(1, 3);
+  var sub = id.substring(1, 4);
   var subint = parseInt(sub);
   console.log("this is sec id ", sub);
 

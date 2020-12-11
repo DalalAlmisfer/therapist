@@ -119,9 +119,9 @@ router.post('/add', urlencodedParser, (req,res) => {
         res.render('addChild', { layout: "layout", errors:errors, title: 'add' });
     
     } else {
-        user_id++;
+
     player.create({
-        player_id: user_id,
+
         email: email,
         password: password,
         first_name: first_name,

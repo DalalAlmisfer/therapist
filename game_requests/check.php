@@ -18,7 +18,7 @@
 
       $userinfo = mysqli_fetch_array(mysqli_query($conn, "SELECT * from players where player_id='$user' "));
 
-      $schoolcontrol = mysqli_fetch_array(mysqli_query($conn, "SELECT * from enviroments where player_FK='$user' and title='school'"));
+      $schoolcontrol = mysqli_fetch_array(mysqli_query($conn, "SELECT * from enviroments where player_FK='$user' and title='school' and ishedden=2"));
 
       if ($schoolcontrol) {
          $school = 1;
@@ -27,7 +27,7 @@
       }
 
 
-      $gardencontrol = mysqli_fetch_array(mysqli_query($conn, "SELECT * from enviroments where player_FK='$user' and title='garden'"));
+      $gardencontrol = mysqli_fetch_array(mysqli_query($conn, "SELECT * from enviroments where player_FK='$user' and title='garden' and ishedden=2"));
 
       if ($gardencontrol) {
          $garden = 1;
@@ -36,7 +36,7 @@
       }
 
 
-      $marketcontrol = mysqli_fetch_array(mysqli_query($conn, "SELECT * from enviroments where player_FK='$user' and title='market'"));
+      $marketcontrol = mysqli_fetch_array(mysqli_query($conn, "SELECT * from enviroments where player_FK='$user' and title='market' and ishedden=2"));
 
       if ($marketcontrol) {
          $market = 1;

@@ -11,12 +11,13 @@ router.get('/', (req,res) => {
 });
 
 //GET therapist profile page
-router.get('/profile', async (req,res) => {
+router.get('/profile',  (req,res) => {
         //console.log('this profile' + req.user);
         var json = JSON.parse(req.user);
+
         console.log('this is josn:', json);
 
-        await therapist.findOne(
+         therapist.findOne(
             {
                 where: {
                     therapist_id: json.therapist_id
@@ -25,8 +26,9 @@ router.get('/profile', async (req,res) => {
             },
         )
         .then( (result) => {
-            console.log(result);
-            res.render('profile', {layout: "layout", user: result, title: 'profile '});
+            console.log('this is res:', result);
+            //res.send(`this is res: ${json.therapist_id}`)
+            res.render('profile', {layout: "layout", user: json, title: 'profile'});
         })
         .catch( err => {
             console.log(err);
@@ -40,20 +42,42 @@ router.get('/profile', async (req,res) => {
 router.post('/profile', async (req, res) => {
 
     var json = JSON.parse(req.user);
-    const input = { name, email, phone_number, address } = req.body;
+    const { first_name, family_name, job_title, gander, birth_date, email, phone_number } = req.body;
 
     await therapist.update(
-        address, 
+       { first_name: first_name,
+        family_name:family_name, 
+        job_title: job_title, 
+        gander:gander, 
+        birth_date: birth_date, 
+        email: email, 
+        phone_number: phone_number
+    }, 
         {
             where: {
-                tharapist_id: json.therapist_id
+                therapist_id: json.therapist_id
             }
 
         },
     )
     .then( (result) => {
-        console.log(result);
-        res.render('index', {layout: "layout", user: json, title: 'edit ', body:'done' });
+         therapist.findOne(
+            {
+                where: {
+                    therapist_id: json.therapist_id
+                }
+    
+            },
+        )
+        .then( (result) => {
+            console.log('this after unpdate', result);
+            //res.send(`this is res: ${json.therapist_id}`)
+            res.render('profile', {layout: "layout", user: result, title: 'profile', confirm:'The change was successful!'});
+        })
+        .catch( err => {
+            console.log(err);
+    
+        });
     })
     .catch( err => {
         console.log(err);
