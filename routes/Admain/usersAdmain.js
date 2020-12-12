@@ -25,9 +25,9 @@ router.get("/loginAdmain", (req, res) => {
 });
 
 //GET register admin page
-router.get('/registerAdmain', (req, res) => {
-  res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA'});
-})
+// router.get('/registerAdmain', (req, res) => {
+//   res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA'});
+// })
 
 //login admin
 router.post('/loginAdmain',  (req, res) => {
@@ -49,7 +49,7 @@ router.post('/loginAdmain',  (req, res) => {
         }
 
       } else {
-        console.log('you are not registered');
+        console.log('you are not authirazed to be admin');
         res.redirect('/usersAdmain/registerAdmain');
       }
 
@@ -64,38 +64,38 @@ router.post('/loginAdmain',  (req, res) => {
 });
 
 //register admin
-router.post('/registerAdmain',
-    [
-        check('email', 'Email is required')
-            .isEmail(),
-        check('password', 'Password is requried')
-            .isLength({ min: 8 })
-            .custom((val, { req, loc, path }) => {
-                if (val !== req.body.Confirm_Password) {
-                    throw new Error("Passwords don't match");
-                } else {
-                    return value;
-                }
-            }),
-    ], (req, res) => {
-        var errors = validationResult(req).array();
-        if (errors) {
-            req.session.errors = errors;
-            req.session.success = false;
-            console.log(errors);
-            res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA', errors});
-        } else {
+// router.post('/registerAdmain',
+//     [
+//         check('email', 'Email is required')
+//             .isEmail(),
+//         check('password', 'Password is requried')
+//             .isLength({ min: 8 })
+//             .custom((val, { req, loc, path }) => {
+//                 if (val !== req.body.Confirm_Password) {
+//                     throw new Error("Passwords don't match");
+//                 } else {
+//                     return value;
+//                 }
+//             }),
+//     ], (req, res) => {
+//         var errors = validationResult(req).array();
+//         if (errors) {
+//             req.session.errors = errors;
+//             req.session.success = false;
+//             console.log(errors);
+//             res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA', errors});
+//         } else {
 
-          Admin.create({
-            email: req.body.email, 
-            password: req.body.passowrd,
-            conf_password: req.body.Confirm_Password
-          }).catch(err => console.log('err in creating admin', err));
+//           Admin.create({
+//             email: req.body.email, 
+//             password: req.body.passowrd,
+//             conf_password: req.body.Confirm_Password
+//           }).catch(err => console.log('err in creating admin', err));
 
-            req.session.success = true;
-            res.redirect('/usersAdmain/homeAdmain');
-        }
-    });
+//             req.session.success = true;
+//             res.redirect('/usersAdmain/homeAdmain');
+//         }
+//     });
 
 //GET admin dashboard
 router.get('/homeAdmain', (req, res) => {

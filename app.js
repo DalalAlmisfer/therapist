@@ -72,7 +72,6 @@ app.use('/passwords', require("./routes/Admain/passwords"));
 app.use('/registerRequest', require("./routes/Admain/registerRequest"));
 app.use('/AddRequest', require("./routes/Admain/AddRequest"));
 
-app.use('/game_requests', require('./game_requests/login'));
 
 //Let express listen to the server port or to the localhost
 app.listen( process.env.PORT || 8443, function() {

@@ -14,6 +14,10 @@
  padding: 0;
  font-size: 0px;
 }
+
+#email {
+  margin-bottom: 20px;
+}
 </style>
 
 <div class="wrapper">
@@ -29,36 +33,28 @@
           </small> 
         </p> 
         </div>
-        <div class="uk-form-controls  uk-width-1-1">
+        <div id="email" class="uk-form-controls uk-width-1-1">
           <label> Email </label>
           <input id="email" class="uk-input uk-form-large" type="text" name="email" placeholder="Email">
           <span class="Emailemsg hidden">Please Enter A Valid Email</span>
         </div>
           
-        <div class="uk-form-controls uk-width-1-1">
+        <!-- <div class="uk-form-controls uk-width-1-1">
           <label> Password </label>
           <input class="uk-input uk-form-large" type="password" name="password" placeholder="Password">
           <span class="Passemsg hidden" >
             
             </span>	
-        </div>
+        </div> -->
 
         <% if(typeof errors != 'undefined') {%> 
           <span style="color: red; font-size: 11px;"> <%= errors %> </span>
         <% } %> 
 
-
-        <p class="uk-text-right"> 
-          <a href="/passwords/forgot/admin" class="uk-text-right">Forgot your password ?</a>
-        </p>
-        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Login</button>
-        <p class="uk-text-center">
-          Don't have an account?
-          <a href="/usersAdmain/registerAdmain"> Sign up </a>
-        </p>
+        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Login via email </button>
 
 
-        <% if(typeof msg != 'undefined') { %>
+    <% if(typeof msg != 'undefined') { %>
           <span style="color: green; font-size: 11px;"> <%= msg %> </span>
         <% } %> 
       </form>

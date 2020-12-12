@@ -6,6 +6,9 @@ const session = require("express-session");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const jwt = require('jsonwebtoken');
+const crypto =  require('crypto');
+
 const app = express();
 
 //import models (database table)
@@ -133,6 +136,10 @@ router.get("/register", (req, res) => {
   });
 });
 
+router.get('/confirmation/:id', (req, res) => {
+  res.redirect('/users/index');
+})
+
 //register new therapist
 router.post("/register", async (req, res, next) => {
   const email = req.body.email;
@@ -146,6 +153,7 @@ router.post("/register", async (req, res, next) => {
   const job_title = req.body.job_title;
 
   var errors = [];
+  var link="";
   var err_email,
     err_first,
     err_last,
@@ -245,7 +253,13 @@ router.post("/register", async (req, res, next) => {
             admains_FK: 1,
           })
             .then((user) => {
-              mail(email, first_name).catch((err) => {
+              // var hash = crypto.createHash('sha256', user.therapist_id);
+              // hash.update(user.therapist_id).digest('hex');
+              var str = (user.therapist_id).toString();
+             var hash = crypto.createHash("sha256").update( str, "binary").digest("base64");
+              console.log('this is id', user.therapist_id , 'this is hash', hash)
+              link = `https://dashbaordanees.herokuapp.com/confirmation/:${hash}`;
+              mail(email, first_name, link).catch((err) => {
                 console.log("err from mail func", err);
               });
 
@@ -264,7 +278,7 @@ router.post("/register", async (req, res, next) => {
     res.status(500);
   }
 
-  async function mail(email, name) {
+  async function mail(email, name, link) {
     // create a message for register request confirmation
     // send mail with defined transport object
     let info = await transporter.sendMail({
@@ -307,7 +321,7 @@ router.post("/register", async (req, res, next) => {
           <tr>
           <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
           <p style="margin: 0;">
-              We received Your Request Is Received, Please Wait For The Admain to Accept Your Request. You Will Recive An Email If Your Request Is Accepted.
+              ${link}
           </p>
           </td>
           </tr>

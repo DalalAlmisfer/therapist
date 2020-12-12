@@ -17,16 +17,17 @@ router.get('/patient/:id', (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
     res.render('rest', {layout:'layout', title: 'rest password', user:json, id: sub, user:'patient'});
 
 });
 
 //Submit new password after resting patient password
-router.post('/patient/:id', (req, res) => {
+router.post('/patient', function(req, res) {
     var json = JSON.parse(req.user);
-    var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var id = req.query;
+    console.log('this is id', id);
+    //var sub = id.substring(1, 3);
 
     var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
@@ -49,11 +50,11 @@ router.post('/patient/:id', (req, res) => {
         player.update({password: req.body.password},
             {
                 where: {
-                     player_id: sub
+                     player_id: id.id
                 }
             }
             ).then((data) => {
-                res.render('rest', {layout:'layout', title: 'rest password', user:json , id: sub, user:'therapist', msg: 'Password has been successfully updated'});
+                res.render('rest', {layout:'layout', title: 'rest password', user:json , id: id.id, user:'therapist', msg: 'Password has been successfully updated'});
             }).catch((err) => {
                 console.log(err);
             })
