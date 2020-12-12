@@ -46,7 +46,9 @@ router.post("/:id/submit", async (req, res) => {
   console.log("this is sec id ", sub);
 
   player.update(
-    { request_sent: 1, env_title: Enviroment, accepted_env:0 },
+    { request_sent: 1, 
+      env_title: Enviroment, 
+      accepted_env:0 },
     {
       where: {
         player_id: subint,

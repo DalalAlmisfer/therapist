@@ -55,6 +55,7 @@ router.get("/login", (req, res) => {
 router.get("/index", async (req, res) => {
   try {
     var json = JSON.parse(req.user);
+    console.log(json);
   } catch (err) {
     console.log("err is parsing json", err);
   }

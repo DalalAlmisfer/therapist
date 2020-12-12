@@ -32,20 +32,15 @@
                     </a>
 
                   </td>
-                    <% if( row.accepted == 1) { %> 
-                  <td> accepted </td>
-                    <% } else if (row.accepted == 0){ %> 
-                      <td> rejected </td>
+                    <% if( row.status == 1) { %> 
+                  <td> registered </td>
+                    <% } else if (row.status == 0){ %> 
+                      <td> pandding </td>
                   <% } else { %> 
-                    <td> Not decieded yet </td>
+                    <td> pandding </td>
                   <% } %> 
        
-                  <td>
-                    <a style="color: green;" class="uk-button uk-button- uk-margin uk-button-small" href="/registerRequest/:<%=row.therapist_id %>/decision/accept" > accept </a>
-                  </td>
-                  <td>
-                    <a style="color: #f0506e;" class="uk-button uk-button- uk-margin uk-button-small" href="/registerRequest/:<%=row.therapist_id %>/decision/reject" > reject </a>
-                  </td>
+
                 </tr>
   
                 <% })} else{ %>

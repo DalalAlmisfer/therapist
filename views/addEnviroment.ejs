@@ -9,7 +9,7 @@
           <th scope="col">Title</th>
           <th scope="col">Anxiety type</th>
           <th scope="col">Status</th>
-          <th scope="col">Accept</th>
+          <th scope="col"> unlock </th>
           <th scope="col">Terminate</th>
         </tr>
       </thead>
@@ -23,9 +23,9 @@
           <td><%= row.env_title %></td>
           <td><%= row.anxiety_type %></td>
           <% if(row.accepted_env == 1){ %>
-          <td>accepted</td>
+          <td> unlocked </td>
           <% } else { %>
-          <td>Not decieded yet</td>
+          <td> no response </td>
           <% } %>
 
           <td>
@@ -35,7 +35,7 @@
               href="/AddRequest/:<%=row.player_id %>/decision/accept"
               type="button"
             >
-              accept
+            unlock
             </a>
           </td>
           <td>

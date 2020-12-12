@@ -51,8 +51,11 @@ router.get('/:id/decision/accept', async (req, res) => {
         }
     ).then((result) => {
 
-        player.findAll({raw: true}).then((data) => {
-             res.render('addEnviroment', {layout: 'admainLayout', data:data });
+        player.findAll({raw: true,
+        where: {
+            accepted_env: 1
+        }}).then((data) => {
+            res.render('addEnviroment', {layout: 'admainLayout', data:data });
 
         });
 

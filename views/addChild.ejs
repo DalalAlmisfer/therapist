@@ -93,6 +93,9 @@
         </button>
       </div>
     </form>
+    <% if(typeof already != 'undefined') {%>
+      <span style="color: red; font-size: 11px"> <%= already %> </span>
+      <% } %>
   </div>
 </div>
 

@@ -37,9 +37,7 @@ router.post('/contact', (req,res) => {
     const { contact_email, contact_msg } = req.body;
     let errors = [];
 
-    var regexname = /^([a-zA-Z]{2,80})$/;
     var regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    var regexnum = /^[0-9][A-Za-z0-9 -]*$/;
 
 
   if( !contact_email.match(regexemail)) {
@@ -47,11 +45,7 @@ router.post('/contact', (req,res) => {
 
   } 
 
-  if( !contact_msg.match(regexname)) {
-    errors.push("please enter a valid message");
-
-  }
-
+ 
     if ( errors.length > 0) {
         console.log('error cc');
         res.render('contactUS', {errors:errors, layout: "layout", title: 'contact us'})
@@ -61,7 +55,6 @@ router.post('/contact', (req,res) => {
     //Insert to database
     page.create({
         email: contact_email,
-        phone_number: phone_number,
         msg: contact_msg
     })
     .then( (user) => {
@@ -91,6 +84,7 @@ router.post('/add', urlencodedParser, (req,res) => {
     const  {first_name, last_name, child_birth, email, anxiety_type, env_title, gander, password} = req.body;
 
     let errors = [];
+    let already ="";
     
 
     var regexname = /^([a-zA-Z]{2,16})$/;
@@ -116,35 +110,47 @@ router.post('/add', urlencodedParser, (req,res) => {
 
 
     if ( errors.length > 0) {
-        res.render('addChild', { layout: "layout", errors:errors, title: 'add' });
+        res.render('addChild', { layout: "layout", errors:errors, user:json, title: 'add' });
     
     } else {
+        player.findOne({
+            where: {
+                email: email
+            }
+        }).then((user) => {
+            if(user) {
+                already = "the patient's email already added"
+                res.render('addChild', { layout: "layout", already:already, user:json, title: 'add' });
+ 
+            } else {
+                player.create({
 
-    player.create({
+                    email: email,
+                    password: password,
+                    first_name: first_name,
+                    last_name: last_name,
+                    gander: gander,
+                    env_title: '',
+                    anxiety_type: anxiety_type,
+                    birth_date: child_birth,
+                    therapist_FK: json['therapist_id'],
+                    islogged_in:0,
+                    request_sent: 0,
+                },
+                {include: [thearpists]})
+                .then( (user) => {
+                      console.log(' right');
+                      res.redirect('/users/index');
+            
+                })
+                .catch( err => {
+                    console.log(err);
+                    res.redirect('/home/add', {errors:err});
+            
+                });
+            }
+        }).catch(err => console.log(err));
 
-        email: email,
-        password: password,
-        first_name: first_name,
-        last_name: last_name,
-        gander: gander,
-        env_title: '',
-        anxiety_type: anxiety_type,
-        birth_date: child_birth,
-        therapist_FK: json['therapist_id'],
-        islogged_in:0,
-        request_sent: 0,
-    },
-    {include: [thearpists]})
-    .then( (user) => {
-          console.log(' right');
-          res.redirect('/users/index');
-
-    })
-    .catch( err => {
-        console.log(err);
-        res.redirect('/home/add', {errors:err});
-
-    });
 }
 
 });

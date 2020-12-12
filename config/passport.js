@@ -21,7 +21,7 @@ passport.use( new localStrategy(
             } else {
                 console.log('user is found');
 
-                if(user.accepted == 0) {
+                if(user.status == 0) {
                     console.log('not authorized yet');
                     return done(null, false, {
                         message: 'not authorized yet'

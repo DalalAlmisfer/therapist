@@ -46,7 +46,7 @@ const User = sequelize.define('therapists', {
             defaultValue: false,
             
           },
-        accepted: {
+          status: {
           type: Sequelize.TINYINT,
           defaultValue: false
         },
