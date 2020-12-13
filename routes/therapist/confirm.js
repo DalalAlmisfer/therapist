@@ -5,13 +5,13 @@ const router = express.Router();
 //import models (database table)
 const User = require("../../models/User");
 
-router.get('/:id', async function (req, res)  {
-    var id = req.params.id;
+router.get('/login', async function (req, res)  {
+    var id = req.query;
     var leng = id.length;
     var sub = id.substring(1, leng);
     console.log('here confirm', sub);
   
-    User.update({status:1}, {
+    await User.update({status:1}, {
       where: {
         therapist_id: sub,
       }
