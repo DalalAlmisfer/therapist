@@ -50,6 +50,10 @@ const User = sequelize.define('therapists', {
           type: Sequelize.TINYINT,
           defaultValue: false
         },
+        token: {
+          type: Sequelize.STRING,
+          defaultValue: false,
+        },
         admains_FK: 
         {type: Sequelize.INTEGER}
 

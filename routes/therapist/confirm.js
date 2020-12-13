@@ -10,7 +10,7 @@ router.get('/login', function (req, res)  {
     console.log("this is id ", id.id);
     User.findOne({
         where: {
-            therapist_id: 591,
+            token: id.id,
         }
     }).then((user) => {
         console.log('user --------', user);
@@ -18,7 +18,7 @@ router.get('/login', function (req, res)  {
   
      User.update({status:1}, {
       where: {
-        therapist_id: id.id,
+        token: id.id,
       }
     }).then((result) => {
         res.render("home", {
