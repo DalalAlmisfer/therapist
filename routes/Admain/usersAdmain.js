@@ -98,7 +98,7 @@ router.post('/loginAdmain',  (req, res) => {
       <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
       <tr>
       <td align="center" bgcolor="#0000" style="padding: 40px 0 30px 0;">
-          <img src="/images/Anees logo.png" alt="logo" class="logo"/>
+          <img src="Anees logo.png" alt="logo" class="logo"/>
       </td>
       </tr>
       <tr>
