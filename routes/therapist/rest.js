@@ -69,7 +69,7 @@ router.get('/therapist/:id', (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
     res.render('rest', {layout:'layout', title: 'rest password', user:json , id: sub, user:'therapist'});
 
 });
@@ -78,7 +78,7 @@ router.get('/therapist/:id', (req, res) => {
 router.post('/therapist/:id', (req, res) => {
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 3);
+    var sub = id.substring(1, 4);
 
     var regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 

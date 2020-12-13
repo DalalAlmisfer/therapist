@@ -5,6 +5,7 @@ const router = express.Router();
 //import models (database table)
 const therapist = require('../../models/User');
 
+
 //GET index page
 router.get('/', (req,res) => {
     res.render('home', {chosen: 'nothing', layout: 'layoutA'});

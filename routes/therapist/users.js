@@ -136,9 +136,6 @@ router.get("/register", (req, res) => {
   });
 });
 
-router.get('/confirmation/:id', (req, res) => {
-  res.redirect('/users/index');
-})
 
 //register new therapist
 router.post("/register", async (req, res, next) => {
@@ -240,7 +237,10 @@ router.post("/register", async (req, res, next) => {
             err_gander: err_gander,
           });
         } else {
+          var str = "token"
+          var hash = crypto.createHash("sha256").update( str, "binary").digest("base64");
           User.create({
+            therapist_id: hash,
             email: email,
             first_name: first_name,
             family_name: family_name,
@@ -255,10 +255,9 @@ router.post("/register", async (req, res, next) => {
             .then((user) => {
               // var hash = crypto.createHash('sha256', user.therapist_id);
               // hash.update(user.therapist_id).digest('hex');
-              var str = (user.therapist_id).toString();
-             var hash = crypto.createHash("sha256").update( str, "binary").digest("base64");
               console.log('this is id', user.therapist_id , 'this is hash', hash)
               link = `https://dashbaordanees.herokuapp.com/confirmation/:${hash}`;
+              //link = `https://dashbaordanees.herokuapp.com/users/login`
               mail(email, first_name, link).catch((err) => {
                 console.log("err from mail func", err);
               });
@@ -321,7 +320,13 @@ router.post("/register", async (req, res, next) => {
           <tr>
           <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
           <p style="margin: 0;">
-              ${link}
+            <a href='${link}'> ${link} </a> 
+
+<p> 
+            
+            
+            ${link}
+            </p>
           </p>
           </td>
           </tr>
@@ -346,6 +351,7 @@ router.post("/register", async (req, res, next) => {
     });
   }
 });
+
 
 //therapist logou
 router.get("/logout", (req, res) => {

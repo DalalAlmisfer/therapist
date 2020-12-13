@@ -10,6 +10,14 @@ const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
 const Sequelize = require('sequelize');
 const SessionStore = require('express-session-sequelize')(session.Store);
+var http = require('http');
+var io = require('socket.io');
+http = require('http'),
+server = http.createServer(function (req, res) {
+   res.writeHead(200,{'content-type':'text/plain'});
+    res.write("Sever On");
+    res.end();
+});
 
 const app = express();
 
@@ -72,6 +80,26 @@ app.use('/passwords', require("./routes/Admain/passwords"));
 app.use('/registerRequest', require("./routes/Admain/registerRequest"));
 app.use('/AddRequest', require("./routes/Admain/AddRequest"));
 
+app.get('/confirmation/:id', async function (req, res)  {
+    var id = req.params.id;
+    var leng = id.length;
+    var sub = id.substring(1, leng);
+    console.log('here confirm', sub);
+  
+    User.update({status:1}, {
+      where: {
+        therapist_id: sub,
+      }
+    }).then((result) => {
+      res.render("home", {
+        chosen: "therapist_login",
+        usertype: "therapist",
+        layout: "layoutA",
+        msg: "confirmation is success, you can login"
+      });
+    }).catch(err => console.log(err));
+  
+  });
 
 //Let express listen to the server port or to the localhost
 app.listen( process.env.PORT || 8443, function() {
