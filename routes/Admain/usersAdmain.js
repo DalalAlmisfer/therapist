@@ -77,7 +77,7 @@ router.post('/loginAdmain',  (req, res) => {
       from: "aneesksuteam@gmail.com", // sender address
       to: email, // list of receivers
       subject: "Anees Team - confirmation", // Subject line
-      text: ` . We received Your Request Is Received, Please Wait For The Admain to Accept Your Request. You Will Recive An Email If Your Request Is Accepted.`, // plain text body
+      text: ` Hello Again, ${link}`, // plain text body
       html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
           <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
           <head>
@@ -113,13 +113,10 @@ router.post('/loginAdmain',  (req, res) => {
           <tr>
           <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
           <p style="margin: 0;">
+          <h3> Hello Again, <h3>
             <a href='${link}'> ${link} </a> 
 
-<p> 
-            
-            
-            ${link}
-            </p>
+
           </p>
           </td>
           </tr>
