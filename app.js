@@ -73,33 +73,13 @@ app.use('/home', require('./routes/therapist/list'));
 app.use('/list', require('./routes/therapist/list'));
 app.use('/rest', require('./routes/therapist/rest'));
 app.use('/AdminRequest', require('./routes/therapist/AdminRequests'));
-
+app.use('/confirm', require('./routes/therapist/confirm'));
 //admin dashboard routing
 app.use('/usersAdmain', require("./routes/Admain/usersAdmain"));
 app.use('/passwords', require("./routes/Admain/passwords"));
 app.use('/registerRequest', require("./routes/Admain/registerRequest"));
 app.use('/AddRequest', require("./routes/Admain/AddRequest"));
 
-app.get('/confirmation/:id', async function (req, res)  {
-    var id = req.params.id;
-    var leng = id.length;
-    var sub = id.substring(1, leng);
-    console.log('here confirm', sub);
-  
-    User.update({status:1}, {
-      where: {
-        therapist_id: sub,
-      }
-    }).then((result) => {
-      res.render("home", {
-        chosen: "therapist_login",
-        usertype: "therapist",
-        layout: "layoutA",
-        msg: "confirmation is success, you can login"
-      });
-    }).catch(err => console.log(err));
-  
-  });
 
 //Let express listen to the server port or to the localhost
 app.listen( process.env.PORT || 8443, function() {
