@@ -98,7 +98,7 @@ router.post('/loginAdmain',  (req, res) => {
       <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
       <tr>
       <td align="center" bgcolor="#0000" style="padding: 40px 0 30px 0;">
-          <img src="../public/images/Anees logo.png" alt="logo" class="logo"/>
+          <img src="/images/Anees logo.png" alt="logo" class="logo"/>
       </td>
       </tr>
       <tr>
@@ -107,13 +107,17 @@ router.post('/loginAdmain',  (req, res) => {
       <tr>
       <td style="color: #153643; font-family: Arial, sans-serif;">
       <h1 style="font-size: 24px; margin: 0;">
-          Hello, Again </h1>
+          Hello again, </h1>
       </td>
       </tr>
       <tr>
       <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
       <p style="margin: 0;">
-      <a href=${link}> ${link} </a>
+        <a href='${link}'> ${link} </a> 
+
+<p> 
+
+        </p>
       </p>
       </td>
       </tr>
@@ -124,7 +128,7 @@ router.post('/loginAdmain',  (req, res) => {
       <tr>
           <td align="center" bgcolor="#0000" style="padding: 40px 0 30px 0; color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
               <p style="margin: 0;">&reg; Anees 2020 <br/>
-              King Saud University. </p>
+              <a href="#" style="color: #ffffff;">Unsubscribe</a> King Saud University. </p>
       
           </td>
       </tr>
