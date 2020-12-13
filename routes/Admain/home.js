@@ -6,6 +6,7 @@ const User = require("../../models/admain");
 
 router.get('/home', (req, res) => {
     res.render('homeAdmain', {layout: 'admainLayout'});
+
 })
 
 

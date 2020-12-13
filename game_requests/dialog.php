@@ -6,7 +6,7 @@
 
 
 $user = addslashes($_POST['user']);
-$table = addslashes($_POST['table']);
+$count = addslashes($_POST['count']);
 
             // Create connection
             $conn = new mysqli("eu-cdbr-west-03.cleardb.net", "b630bdd6b6e1b9", "d159c434","heroku_195f706910a16f0");
@@ -17,10 +17,7 @@ $table = addslashes($_POST['table']);
             }
 
 
-$control = mysqli_fetch_array(mysqli_query($conn,"SELECT * from enviroments where player_FK='".$user."' "));
-
-$count = 1+ $control["$table"];
-mysqli_query($conn,"UPDATE enviroments set $table='$count' where  player_FK='$user' ");
+mysqli_query($conn,"UPDATE enviroments set Anees_dialogue='$count' where  player_FK='$user' ");
 echo $user;
 		 }
 

@@ -57,7 +57,7 @@ router.post('/loginAdmain',  (req, res) => {
           mail(req.body.email, link).catch((err) => {
             console.log("err from mail func", err);
           });
-          res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});
+          res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA', msg:'email sent'});
               } else {
         console.log('you are not authirazed to be admin');
         res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});      }
