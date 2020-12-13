@@ -256,8 +256,7 @@ router.post("/register", async (req, res, next) => {
               // var hash = crypto.createHash('sha256', user.therapist_id);
               // hash.update(user.therapist_id).digest('hex');
               console.log('this is id', user.therapist_id , 'this is hash', hash)
-              link = `https://dashbaordanees.herokuapp.com/confirm/:${hash}`;
-              //link = `https://dashbaordanees.herokuapp.com/users/login`
+              link = `https://dashbaordanees.herokuapp.com/confirm/${hash}`;
               mail(email, first_name, link).catch((err) => {
                 console.log("err from mail func", err);
               });
