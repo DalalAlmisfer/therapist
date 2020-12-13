@@ -238,7 +238,7 @@ router.post("/register", async (req, res, next) => {
           });
         } else {
           var str = "token";
-          var hash = crypto.createHash("sha256").update( m, "binary").digest("base64");
+          var hash = crypto.createHash("sha256").update( str, "binary").digest("base64");
 
           User.create({
             email: email,
@@ -258,7 +258,7 @@ router.post("/register", async (req, res, next) => {
              
               // var hash = crypto.createHash('sha256', user.therapist_id);
               // hash.update(user.therapist_id).digest('hex');
-              console.log('this is token', token , 'this is hash', hash)
+              console.log('this is token', str , 'this is hash', hash)
               link = `https://dashbaordanees.herokuapp.com/confirm/login?id=${hash}`;
               mail(email, first_name, link).catch((err) => {
                 console.log("err from mail func", err);
