@@ -79,7 +79,7 @@ app.use('/usersAdmain', require("./routes/Admain/usersAdmain"));
 app.use('/passwords', require("./routes/Admain/passwords"));
 app.use('/registerRequest', require("./routes/Admain/registerRequest"));
 app.use('/AddRequest', require("./routes/Admain/AddRequest"));
-
+app.use('/admin', require('./routes/Admain/home'));
 
 //Let express listen to the server port or to the localhost
 app.listen( process.env.PORT || 8443, function() {

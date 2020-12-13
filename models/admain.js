@@ -28,6 +28,9 @@ const admains = sequelize.define('admains', {
         type: DataTypes.STRING,
         allowNull: false
       }, 
+      token: {
+        type: DataTypes.STRING,
+      }
 
 });
 
