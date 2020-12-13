@@ -240,7 +240,6 @@ router.post("/register", async (req, res, next) => {
           var str = "token"
           var hash = crypto.createHash("sha256").update( str, "binary").digest("base64");
           User.create({
-            therapist_id: hash,
             email: email,
             first_name: first_name,
             family_name: family_name,
@@ -253,6 +252,13 @@ router.post("/register", async (req, res, next) => {
             admains_FK: 1,
           })
             .then((user) => {
+
+              User.update({therapist_id:hash}, {
+                where: {
+                  email: email
+                }
+              }).catch(err => console.log(err));
+            
               // var hash = crypto.createHash('sha256', user.therapist_id);
               // hash.update(user.therapist_id).digest('hex');
               console.log('this is id', user.therapist_id , 'this is hash', hash)

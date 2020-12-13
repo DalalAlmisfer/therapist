@@ -8,6 +8,13 @@ const User = require("../../models/User");
 router.get('/login', function (req, res)  {
     var id = req.query;
     console.log("this is id ", id.id);
+    User.findOne({
+        where: {
+            therapist_id: 591,
+        }
+    }).then((user) => {
+        console.log('user --------', user);
+    }).catch(err=> console.log(err));
   
      User.update({status:1}, {
       where: {
