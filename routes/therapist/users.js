@@ -67,6 +67,7 @@ router.get("/index", async (req, res) => {
   //Get total registered patients
   await players
     .count({
+      include: [User],
       where: {
         therapist_FK: json["therapist_id"],
       },
@@ -76,16 +77,6 @@ router.get("/index", async (req, res) => {
     })
     .catch((error) => console.log(error));
 
-  await enviroment
-    .count({
-      where: {
-        progress: 3,
-      },
-    })
-    .then((levels) => {
-      parameters.push(levels);
-    })
-    .catch((err) => console.log(err));
 
   players
     .count({
@@ -107,6 +98,9 @@ router.get("/index", async (req, res) => {
       },
     })
     .then((player) => {
+
+      console.log(parameters);
+
       res.render("index", {
         layout: "layout",
         title: "Home",
@@ -238,7 +232,7 @@ router.post("/register", async (req, res, next) => {
           });
         } else {
           var str = "token";
-          var hash = crypto.createHash("sha256").update( str, "binary").digest("base64");
+          var hash = crypto.createHash("sha1").update( str, "binary").digest("base64");
 
           User.create({
             email: email,

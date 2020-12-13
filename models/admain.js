@@ -4,32 +4,23 @@ const sequelize = require('../config/database');
 
 const therapists = require('../models/User'); 
 
-const DataTypes = require('sequelize/lib/data-types');
 
 
 const admains = sequelize.define('admains', {
     // Model attributes are defined here
 
     admains_id: {
-      type: DataTypes.INTEGER,
+      type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true
 
     },
     email: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      conf_password: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }, 
       token: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
       }
 
 });

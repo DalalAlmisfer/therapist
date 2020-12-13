@@ -7,7 +7,7 @@ const passport = require("passport");
 const sequelize = require('sequelize');
 const DataTypes = require('sequelize/lib/data-types');
 const nodemailer = require("nodemailer");
-
+const crypto =  require('crypto');
 
 // create reusable transporter object using SMTP transport
 var transporter = nodemailer.createTransport({
@@ -19,8 +19,6 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-// validate
-const { check, validationResult } = require('express-validator');
 
 
 //model
@@ -32,19 +30,13 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 //GET login admin page
 router.get("/loginAdmain", (req, res) => {
-  console.log(req.isAuthenticated);
   res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});
 });
 
-//GET register admin page
-// router.get('/registerAdmain', (req, res) => {
-//   res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA'});
-// })
+
 
 //login admin
 router.post('/loginAdmain',  (req, res) => {
-
-
   try{
      User.findOne({
       where: {
@@ -54,9 +46,13 @@ router.post('/loginAdmain',  (req, res) => {
       if(user) {
         var str = "token";
         var hash = crypto.createHash("sha256").update( str, "binary").digest("base64");
-        User.create({
+        User.update({
           token: hash
-          }).catch(err => console.log('err in creating admin', err));
+          }, {
+            where: {
+              email: req.body.email
+            }
+          }).catch(err => console.log('err in uupating admin', err));
           link = `https://dashbaordanees.herokuapp.com/admin/home?id=${hash}`;
           mail(req.body.email, link).catch((err) => {
             console.log("err from mail func", err);
@@ -64,8 +60,7 @@ router.post('/loginAdmain',  (req, res) => {
           res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});
               } else {
         console.log('you are not authirazed to be admin');
-        res.redirect('/usersAdmain/registerAdmain');
-      }
+        res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});      }
 
     });
 
@@ -151,39 +146,7 @@ router.post('/loginAdmain',  (req, res) => {
 
 });
 
-//register admin
-// router.post('/registerAdmain',
-//     [
-//         check('email', 'Email is required')
-//             .isEmail(),
-//         check('password', 'Password is requried')
-//             .isLength({ min: 8 })
-//             .custom((val, { req, loc, path }) => {
-//                 if (val !== req.body.Confirm_Password) {
-//                     throw new Error("Passwords don't match");
-//                 } else {
-//                     return value;
-//                 }
-//             }),
-//     ], (req, res) => {
-//         var errors = validationResult(req).array();
-//         if (errors) {
-//             req.session.errors = errors;
-//             req.session.success = false;
-//             console.log(errors);
-//             res.render('home', {chosen: 'admin_reg', usertype: 'admin', layout: 'layoutA', errors});
-//         } else {
 
-//           Admin.create({
-//             email: req.body.email, 
-//             password: req.body.passowrd,
-//             conf_password: req.body.Confirm_Password
-//           }).catch(err => console.log('err in creating admin', err));
-
-//             req.session.success = true;
-//             res.redirect('/usersAdmain/homeAdmain');
-//         }
-//     });
 
 //GET admin dashboard
 router.get('/homeAdmain', (req, res) => {

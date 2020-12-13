@@ -1,6 +1,7 @@
 const Sequelize  = require('sequelize');
 
 const sequelize = require('../config/database');
+const player = require('../models/player');
 
 const enviroment = sequelize.define('enviroments', {
 
@@ -42,6 +43,8 @@ const enviroment = sequelize.define('enviroments', {
     }
 
 });
+
+
 
 
 

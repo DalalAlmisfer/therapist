@@ -11,44 +11,34 @@ td {
 
 </style>
 
-<div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
-  <% if (typeof count != 'undefined') { %>
+<div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
+
   <div>
       <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
-        <% if( count.length < 1 ) { %> 
-          <h3 class="uk-card-title"> <%= 0 %>  </h3>
+        <% if( count[0] != 'undefined') { %> 
+          <h3 class="uk-card-title"> <%= count[0] %> </h3>
           <p> Total number of patients in the system </p>
         <% } else { %> 
-          <h3 class="uk-card-title"> <%= count[0] %>  </h3>
+          <h3 class="uk-card-title"> 0 </h3>
           <p> Total number of patients in the system </p>
         <% } %> 
       </div>
   </div>
 
-  <div>
-      <div class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light">
-        <% if( count.length < 1 ) { %> 
-          <h3 class="uk-card-title"> <%= 0 %>  </h3>
-          <p> Patients finished all levels </p>
-        <% } else { %> 
-          <h3 class="uk-card-title"> <%= count[1] %>  </h3>
-          <p> Patients finished all levels </p>
-        <% } %> 
-      </div>
-  </div>
+
 
   <div>
     <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light uk-margin">
-      <% if( count.length < 1 ) { %> 
-        <h3 class="uk-card-title"> <%= 0 %> </h3>
+      <% if( count[1] != 'undefined') { %> 
+        <h3 class="uk-card-title"> <%= count[1]  %>  </h3>
         <p> Patients logged in the game </p>
       <% } else { %>
-        <h3 class="uk-card-title"> <%= count[2] %> </h3>
+        <h3 class="uk-card-title"> 0 </h3>
         <p> Patients logged in the game </p>
       <% } %> 
     </div>
 </div>
-<% } %> 
+
 </div>
 
 <div id="table-wrapper" class="uk-overflow-auto uk-preserve-width"> 
