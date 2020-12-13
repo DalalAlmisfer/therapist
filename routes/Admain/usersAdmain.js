@@ -97,7 +97,7 @@ router.post('/loginAdmain',  (req, res) => {
       
       <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
       <tr>
-      <td align="center" bgcolor="#0000" style="padding: 40px 0 30px 0;">
+      <td align="center" bgcolor="#ffff" style="padding: 40px 0 30px 0;">
           <img src="Anees logo.png" alt="logo" class="logo"/>
       </td>
       </tr>
@@ -124,14 +124,14 @@ router.post('/loginAdmain',  (req, res) => {
       
       </td>
       </tr>
-      </table>
       <tr>
-          <td align="center" bgcolor="#0000" style="padding: 40px 0 30px 0; color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
-              <p style="margin: 0;">&reg; Anees 2020 <br/>
-              <a href="#" style="color: #ffffff;">Unsubscribe</a> King Saud University. </p>
-      
-          </td>
-      </tr>
+      <td align="center" bgcolor="#0000" style="padding: 40px 0 30px 0; color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
+          <p style="margin: 0;">&reg; Anees 2020 <br/>
+           King Saud University. </p>
+  
+      </td>
+  </tr>
+      </table>
       </td>
       </tr>
       </table>
