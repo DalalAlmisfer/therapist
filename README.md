@@ -1,4 +1,4 @@
-#Installation:
+## Installation:
 Below commands should be installed in order to run the app. 
 
 1. npm i
@@ -8,6 +8,6 @@ jsonwebtoken mysql mysql-express-session mysql2 nodemailer passport passport-her
 addon passport-local sequelize socket.io uikit
 
 
-#How to use?
+## How to use?
 Run the follow command line at the project directory 
 1. npm run start
