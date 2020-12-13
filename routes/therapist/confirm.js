@@ -11,7 +11,7 @@ router.get('/login', async function (req, res)  {
     var sub = id.substring(1, leng);
     console.log('here confirm', sub);
   
-    await User.update({status:1}, {
+     User.update({status:1}, {
       where: {
         therapist_id: sub,
       }
