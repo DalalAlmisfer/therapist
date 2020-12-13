@@ -5,7 +5,7 @@ const router = express.Router();
 const User = require("../../models/admain");
 
 router.get('/home', (req, res) => {
-    res.render('homeAdmain', {layout: 'admainLayout'});
+    res.redirect('/registerRequest/addtherapist');
 
 })
 
