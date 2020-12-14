@@ -8,7 +8,7 @@ const enviroment = require('../../models/enviroment');
 const router = express.Router();
 
 function ensureAuthenticated(req, res, next) {
-    if (req.admin == 'auth') {
+    if (req.user == 'auth') {
       return next();
     } else{
       // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
@@ -16,7 +16,7 @@ function ensureAuthenticated(req, res, next) {
     }
   }
 
-router.get('/addenv', ensureAuthenticated, (req,res) => {
+router.get('/addenv', (req,res) => {
     player.findAll({
         raw: true, 
         where: {
