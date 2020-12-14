@@ -5,6 +5,14 @@ const router = express.Router();
 //import models (database table)
 const therapist = require('../../models/User');
 
+function ensureAuthenticated(req, res, next) {
+    if (req.user) {
+      return next();
+    } else{
+      // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
+      res.redirect('/');
+    }
+  }
 
 //GET index page
 router.get('/', (req,res) => {
@@ -12,13 +20,13 @@ router.get('/', (req,res) => {
 });
 
 //GET therapist profile page
-router.get('/profile',  (req,res) => {
+router.get('/profile', ensureAuthenticated,  async (req,res) => {
         //console.log('this profile' + req.user);
         var json = JSON.parse(req.user);
 
         console.log('this is josn:', json);
 
-         therapist.findOne(
+        await therapist.findOne(
             {
                 where: {
                     therapist_id: json.therapist_id
@@ -29,7 +37,7 @@ router.get('/profile',  (req,res) => {
         .then( (result) => {
             console.log('this is res:', result);
             //res.send(`this is res: ${json.therapist_id}`)
-            res.render('profile', {layout: "layout", user: json, title: 'profile'});
+            res.render('profile', {layout: "layout", user: result, title: 'profile'});
         })
         .catch( err => {
             console.log(err);
@@ -40,7 +48,7 @@ router.get('/profile',  (req,res) => {
 });
 
 //Edit therapist profile
-router.post('/profile', async (req, res) => {
+router.post('/profile', ensureAuthenticated, async (req, res) => {
 
     var json = JSON.parse(req.user);
     const { first_name, family_name, job_title, gander, birth_date, email, phone_number } = req.body;

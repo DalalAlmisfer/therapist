@@ -15,7 +15,7 @@ var transporter = nodemailer.createTransport({
   port: 465,
   auth: {
     user: "aneesksuteam@gmail.com",
-    pass: "0504258108",
+    pass: "dee0504258108",
   },
 });
 
@@ -23,6 +23,8 @@ var transporter = nodemailer.createTransport({
 
 //model
 const User = require("../../models/admain");
+
+
 
 //parser
 var bodyParser = require("body-parser");
@@ -56,11 +58,12 @@ router.post('/loginAdmain',  (req, res) => {
           link = `https://dashbaordanees.herokuapp.com/admin/home?id=${hash}`;
           mail(req.body.email, link).catch((err) => {
             console.log("err from mail func", err);
+            req.admin = 'auth';
           });
           res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA', msg:'email sent'});
               } else {
         console.log('you are not authirazed to be admin');
-        res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA'});      }
+        res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA', err:'you dont recognize you'});      }
 
     });
 

@@ -8,11 +8,21 @@ const Op = Sequelize.Op;
 const player = require("../../models/player");
 const enviroment = require("../../models/enviroment");
 
+function ensureAuthenticated(req, res, next) {
+  if (req.user) {
+    return next();
+  } else{
+    // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
+    res.redirect('/');
+  }
+}
+
 //GET add enviromenet page
-router.get("/addEnv/:id", (req, res) => {
+router.get("/addEnv/:id", ensureAuthenticated, (req, res) => {
   var json = JSON.parse(req.user);
   var id = req.params.id;
-  var sub = id.substring(1, 4);
+  var leng = id.length
+  var sub = id.substring(1, leng);
   console.log(sub);
 
   player
@@ -36,14 +46,14 @@ router.get("/addEnv/:id", (req, res) => {
 });
 
 //Submit add enviromenet 
-router.post("/:id/submit", async (req, res) => {
+router.post("/:id/submit", ensureAuthenticated, async (req, res) => {
   const { Enviroment } = req.body;
   console.log("this is env", Enviroment);
   var json = JSON.parse(req.user);
   var id = req.params.id;
-  var sub = id.substring(1, 4);
+  var leng = id.length
+  var sub = id.substring(1, leng);
   var subint = parseInt(sub);
-  console.log("this is sec id ", sub);
 
   player.update(
     { request_sent: 1, 

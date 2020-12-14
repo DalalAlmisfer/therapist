@@ -19,21 +19,29 @@ var urlencodedParser = body_parser.urlencoded({ extended: true });
 //paitent id 
 var user_id = 0;
 
+function ensureAuthenticated(req, res, next) {
+    if (req.user) {
+      return next();
+    } else{
+      // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
+      res.redirect('/');
+    }
+  }
 
 //GET about us page
- router.get('/aboutUs', (req, res) => {
+ router.get('/aboutUs', ensureAuthenticated, (req, res) => {
      var json = JSON.parse(req.user);
      res.render('aboutUs', {layout: "layout", user: json, title: 'about us'});
  
  });
 
 //------- Constact us --------
-router.get('/contact', (req,res) => {
+router.get('/contact', ensureAuthenticated, (req,res) => {
     var json = JSON.parse(req.user);
     res.render('contactUs', {layout: "layout", user: json, title: 'contact us'});
 });
 
-router.post('/contact', (req,res) => {
+router.post('/contact', ensureAuthenticated, (req,res) => {
     const { contact_email, contact_msg } = req.body;
     let errors = [];
 
@@ -71,12 +79,12 @@ router.post('/contact', (req,res) => {
 });
 
 // -------- Add Patient -------- 
-router.get('/add', (req,res) => {
+router.get('/add', ensureAuthenticated, (req,res) => {
     var json = JSON.parse(req.user);
      res.render('addChild', {layout: "layout", user: json, title: "Add patient"});
     });
 
-router.post('/add', urlencodedParser, (req,res) => {
+router.post('/add', urlencodedParser, ensureAuthenticated, (req,res) => {
 
    var json = JSON.parse(req.user);
    console.log('this is therapistid in add', json['therapist_id']);
@@ -156,7 +164,7 @@ router.post('/add', urlencodedParser, (req,res) => {
 });
 
 // ------- search ---------
-router.get('/search', (res, req, next) => {
+router.get('/search', ensureAuthenticated, (res, req, next) => {
    const { search_value } = res.query;
    console.log(search_value);
 

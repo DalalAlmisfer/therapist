@@ -45,10 +45,15 @@
         <% } %> 
 
         <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Login via email </button>
+        
 
 
     <% if(typeof msg != 'undefined') { %>
           <span style="color: green; font-size: 11px;"> <%= msg %> </span>
+        <% } %> 
+
+        <% if(typeof err != 'undefined') { %>
+          <span style="color: red; font-size: 11px;"> <%= err %> </span>
         <% } %> 
       </form>
 </div>

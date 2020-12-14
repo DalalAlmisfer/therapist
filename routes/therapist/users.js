@@ -32,9 +32,18 @@ var transporter = nodemailer.createTransport({
   port: 465,
   auth: {
     user: "aneesksuteam@gmail.com",
-    pass: "0504258108",
+    pass: "dee0504258108",
   },
 });
+
+function ensureAuthenticated(req, res, next) {
+  if (req.user) {
+    return next();
+  } else{
+    // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
+    res.redirect('/users/login');
+  }
+}
 
 //GET register/login for therapist
 router.get("/registerTherapist", (req, res) => {
@@ -55,7 +64,7 @@ router.get("/login", (req, res) => {
 });
 
 //GET dashboard home
-router.get("/index", async (req, res) => {
+router.get("/index",  ensureAuthenticated , async (req, res) => {
   try {
     var json = JSON.parse(req.user);
     console.log(json);

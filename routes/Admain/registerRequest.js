@@ -14,9 +14,16 @@ var transporter = nodemailer.createTransport({
     pass: "0504258108",
   },
 });
+function ensureAuthenticated(req, res, next) {
+    if (req.admin == 'auth') {
+      return next();
+    } else{
+      // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
+      res.redirect('/');
+    }
+  }
 
-
-router.get('/addtherapist', (req,res) => {
+router.get('/addtherapist', ensureAuthenticated ,(req,res) => {
     therapist.findAll({ raw : true,
     where: 
        {admains_FK: 1}
@@ -28,9 +35,10 @@ router.get('/addtherapist', (req,res) => {
     }).catch( err => console.log(err));
 });
 
-router.get('/:id/profile', (req, res) => {
+router.get('/:id/profile', ensureAuthenticated, (req, res) => {
     var id = req.params.id;
-    var sub = id.substring(1, 4);
+    var leng = id.length
+    var sub = id.substring(1, leng);
     var subint = parseInt(sub);
 
     therapist.findOne({
@@ -43,101 +51,6 @@ router.get('/:id/profile', (req, res) => {
     }).catch(err => console.log(err));
 });
 
-// router.get('/:id/decision/accept', async (req,res) => {
-
-//     var id = req.params.id;
-//     var sub = id.substring(1, 4);
-//     var subint = parseInt(sub);
-
-//     await therapist.update(
-//         {accepted: 1} , 
-
-//         {
-//             where: 
-//             {
-//                 therapist_id: subint
-//             }
-
-//         }
-//     )
-//     .then( (result) => {
-//         therapist.findAll({ raw : true,
-//             where: 
-//                {admains_FK: 1}
-//              })
-//             .then( (result ) => {
-
-//                  therapist.findOne({ raw: true,
-//                     where: { therapist_id: subint}
-
-//                  }).then((data) => {
-
-//                     var msg ="Your Request Is Accepted,You Can Use Anees Dashboard.";
-//                     var title = "Registration Is Accepted";
-
-//                   mail( data.email, data.first_name, msg, title)
-//                   .then((r) =>{
-//                       console.log('mail sent');
-//                   }).catch((err) =>{
-//                    console.log('err from mail', err);
-//                 });
-
-
-//                  })
-
-//                 res.render("addTherapist", {layout: "admainLayout" , data:result, status: 'accepted'});
-        
-//             });
-//     })
-//     .catch( err => {
-//         console.log(err);
-
-//     });
-
-// });
-
-
-// router.get('/:id/decision/reject', async (req,res) => {
-
-//     var id = req.params.id;
-//     var sub = id.substring(1, 4);
-//     var subint = parseInt(sub);
-
-//     await therapist.update(
-//         {accepted: 0} , 
-//         {
-//             where: {
-//                 therapist_id: subint
-//             }
-
-//         },
-//     )
-//     .then( (result) => {
-//         therapist.findAll({ raw : true,
-//             where: 
-//                {admains_FK: 1}
-//              })
-//             .then( (result ) => {
-
-//                 var msg = " We received Your Request Is rejected or you are being diabled to access the dashboard";
-//                 var title = ""
-//                 mail( data.email, data.first_name, msg, title)
-//                 .then((r) =>{
-//                     console.log('mail sent');
-//                 }).catch((err) =>{
-//                  console.log('err from mail', err);
-//               });
-
-//                 res.render("addTherapist", {layout: "admainLayout" , data:result, status: 'rejected'});
-        
-//             });
-//     }).catch( err => {
-//         console.log(err);
-
-//     });
-
-  
-// });
 
 
 async function mail(email, name, msg, title) {

@@ -7,7 +7,16 @@ const enviroment = require('../../models/enviroment');
 
 const router = express.Router();
 
-router.get('/addenv', (req,res) => {
+function ensureAuthenticated(req, res, next) {
+    if (req.admin == 'auth') {
+      return next();
+    } else{
+      // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
+      res.redirect('/');
+    }
+  }
+
+router.get('/addenv', ensureAuthenticated, (req,res) => {
     player.findAll({
         raw: true, 
         where: {
@@ -24,11 +33,9 @@ router.get('/addenv', (req,res) => {
 
 router.get('/:id/decision/accept', async (req, res) => {
     var id = req.params.id;
-    console.log('this is id', id);
-    var sub = id.substring(1, 4);
-    console.log('this is sub',sub);
+    var leng = id.length
+    var sub = id.substring(1, leng);
     var subint = parseInt(sub);
-    console.log('this is sub',subint);
 
     await player.update(
         {accepted_env: 1},
@@ -67,11 +74,10 @@ router.get('/:id/decision/accept', async (req, res) => {
 
 router.get('/:id/decision/terminate', async (req, res) => {
     var id = req.params.id;
-    console.log('this is id', id);
-    var sub = id.substring(1, 4);
-    console.log('this is sub',sub);
+    var leng = id.length
+    var sub = id.substring(1, leng);
     var subint = parseInt(sub);
-    console.log('this is sub',subint);
+
 
     await enviroment.destroy({
             where: 

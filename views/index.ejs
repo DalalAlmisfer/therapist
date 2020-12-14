@@ -15,7 +15,7 @@ td {
 
   <div>
       <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
-        <% if( count[0] != 'undefined') { %> 
+        <% if( typeof count[0] != 'undefined') { %> 
           <h3 class="uk-card-title"> <%= count[0] %> </h3>
           <p> Total number of patients in the system </p>
         <% } else { %> 
@@ -29,7 +29,7 @@ td {
 
   <div>
     <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light uk-margin">
-      <% if( count[1] != 'undefined') { %> 
+      <% if( typeof count[1] != 'undefined') { %> 
         <h3 class="uk-card-title"> <%= count[1]  %>  </h3>
         <p> Patients logged in the game </p>
       <% } else { %>

@@ -13,10 +13,17 @@ const player = require('../../models/player');
 const therapist = require('../../models/User');
 const enviroment = require('../../models/enviroment');
 
-
+function ensureAuthenticated(req, res, next) {
+    if (req.user) {
+      return next();
+    } else{
+      // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
+      res.redirect('/');
+    }
+  }
 
 //GET list of patient list 
-router.get('/list', (req,res) => {
+router.get('/list', ensureAuthenticated , (req,res) => {
    var json = JSON.parse(req.user);
     console.log('this is therapistid', json['therapist_id']);
     player.findAll({ 
@@ -32,7 +39,7 @@ router.get('/list', (req,res) => {
 });
 
 //GET anxiety status analytics
-router.get('/chart/:id', async (req,res) => {
+router.get('/chart/:id', ensureAuthenticated,  async (req,res) => {
 
     var json = JSON.parse(req.user);
     var id = (req.params.id).toString();
@@ -51,11 +58,12 @@ router.get('/chart/:id', async (req,res) => {
 });
 
 //GET anxiety status analytics for school
-router.get('/chart/:id/school', (req, res) => {
+router.get('/chart/:id/school', ensureAuthenticated,  (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 4);
+    var leng = id.length
+    var sub = id.substring(1, leng);
 
  player.findOne({
     where: {
@@ -78,11 +86,12 @@ router.get('/chart/:id/school', (req, res) => {
 });
 
 //GET anxiety status analytics for market
-router.get('/chart/:id/market', (req, res) => {
+router.get('/chart/:id/market', ensureAuthenticated, (req, res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 4);
+    var leng = id.length
+    var sub = id.substring(1, leng);
     console.log(sub);
 
  player.findOne({
@@ -98,12 +107,13 @@ router.get('/chart/:id/market', (req, res) => {
 });
 
 //GET anxiety status analytics for garden
-router.get('/chart/:id/garden', (req, res) => {
+router.get('/chart/:id/garden', ensureAuthenticated,  (req, res) => {
     console.log('we are in garden');
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 4);
+    var leng = id.length
+    var sub = id.substring(1, leng);
 
 
  player.findOne({
@@ -121,11 +131,12 @@ router.get('/chart/:id/garden', (req, res) => {
 });
 
 //GET edit patient profile page
-router.get('/:id/edit', (req,res) => {
+router.get('/:id/edit', ensureAuthenticated, (req,res) => {
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 4);
+    var leng = id.length
+    var sub = id.substring(1, leng);
 
     
     player.findOne({
@@ -145,13 +156,14 @@ router.get('/:id/edit', (req,res) => {
 });
 
 //Submit edited data of patient's profile 
-router.post('/:id/edit/submit', async (req, res) => {
+router.post('/:id/edit/submit', ensureAuthenticated, async (req, res) => {
 
     const input = { name, email, birth_date } = req.body;
 
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 4);
+    var leng = id.length
+    var sub = id.substring(1, leng);
 
     await player.update(
         input,
@@ -173,11 +185,11 @@ router.post('/:id/edit/submit', async (req, res) => {
 });
 
 //DELETE patient
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id', ensureAuthenticated, async (req, res) => {
     var json = JSON.parse(req.user);
     var id = req.params.id;
-    var sub = id.substring(1, 4);
-    console.log(sub);
+    var leng = id.length
+    var sub = id.substring(1, leng);
     
     player.destroy({
         where: {

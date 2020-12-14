@@ -25,20 +25,41 @@
           </div>
           <div class="uk-width-1-2@s">
           <label> Gander </label>
-          <select name="gander" class="uk-select"  value="<%= user.gander %> ">
-              <option value="Female"> Female </option>
+          <% if(user.gander == 'Female' ) {%> 
+          <select  name="gander" class="uk-select">
+              <option value="Female" selected> Female </option>
               <option value="Male"> Male </option>
           </select>
+          <% } else if( user.gander == 'Male' ) {  %> 
+            <select name="gander" class="uk-select">
+              <option value="Male" selected> Male </option>
+              <option value="Female" > Female </option>
+          </select>
+          <% } %> 
           </div>
 
 
           <div class="uk-width-1-2@s">
           <label> Job Title </label>
-          <select name="job_title" class="uk-select" value="<%= user.job_title %>">
-            <option value="Consultant Psychiatrist"> Consultant Psychiatrist </option>
+          <% if( user.job_title == 'Consultant Psychiatrist') { %> 
+          <select name="job_title" class="uk-select">
+            <option value="Consultant Psychiatrist" selected> Consultant Psychiatrist </option>
             <option value="Practitioner Psychologist"> Practitioner Psychologist</option>
             <option value="Senior Psychologist">Senior Psychologist</option>
           </select>
+          <% } else if( user.job_title == 'Practitioner Psychologist') { %> 
+            <select name="job_title" class="uk-select" >
+              <option value="Practitioner Psychologist" selected> Practitioner Psychologist</option>
+              <option value="Consultant Psychiatrist" > Consultant Psychiatrist </option>
+              <option value="Senior Psychologist">Senior Psychologist</option>
+            </select>
+            <% } else if( user.job_title == 'Senior Psychologist') {%> 
+              <select name="job_title" class="uk-select">
+                <option value="Senior Psychologist" selected>Senior Psychologist</option>
+                <option value="Consultant Psychiatrist" > Consultant Psychiatrist </option>
+                <option value="Practitioner Psychologist"> Practitioner Psychologist</option>
+              </select>
+              <% } %> 
           </div>
 
 
