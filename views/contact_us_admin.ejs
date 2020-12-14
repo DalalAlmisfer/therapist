@@ -1,0 +1,162 @@
+<style>
+    .alert {
+      padding: 20px;
+      background-color: green;
+      color: white;
+    }
+  
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+  
+    .closebtn:hover {
+      color: black;
+    }
+  
+    .Emailemsg,
+    .Passemsg,
+    .Confemsg {
+      color: red;
+      font-size: 10px;
+      margin: 0;
+      padding: 0;
+    }
+  
+  
+  
+    .hidden {
+      visibility: hidden;
+      margin: 0;
+      padding: 0;
+      font-size: 0px;
+    }
+  </style>
+  
+  
+  <% if (typeof success != 'undefined') {%>
+  <% if( success == 'yes') {%>
+  <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    We are sorry for facing a problem! we will contact you as soon as possible.
+  </div>
+  <% } %>
+  <% } %>
+  
+  <div class="header">
+    <img class="top-center" src="/images/Anees logo.png" alt="logo" class="logo" />
+  
+  </div>
+  
+  
+  <div class="uk-section uk-flex uk-flex-middle uk-animation-fade">
+  
+    <div class="uk-width-1-1">
+      <div class="uk-container">
+        <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+          <div class=" uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+            <div id="form-header-rest">
+              <p>
+                Contact us
+                <small>
+                  <span uk-icon="icon: lock"> </span>
+                  Secured connection
+                </small>
+              </p>
+            </div>
+  
+            <form action="/admin/contactus" method="POST">
+  
+              <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                  <label> Email </label>
+                  <input id="email" class="uk-input uk-form-large" type="text" name="email" placeholder="Email">
+                  <span class="Emailemsg hidden">Please Enter A Valid Email</span>
+                </div>
+              </div>
+              <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
+                  <label> message </label>
+                  <textarea class="uk-input uk-form-large"  name="msg">
+
+                  </textarea>
+
+
+                </div>
+              </div>
+  
+
+  
+              <div class="uk-margin">
+                <button type="submit" class="uk-button uk-button-primary uk-button-large uk-width-1-1"> Rest </button>
+              </div>
+  
+            </form>
+
+            <% if(typeof errors != 'undefined') {%> 
+                <% if (errors.length == 1) { %> 
+                <span style="color: red; font-size: 11px;"> <%= errors %> </span>
+              <% } else if (errors.length == 2) {%> 
+                <span style="color: red; font-size: 11px;">  either the email or the message are invalid </span>
+              <% }} %> 
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <script>
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const Confirm_Password = document.getElementById("Confirm_Password");
+    var $regexemail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var $regexpassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  
+    $(document).ready(function () {
+  
+      //check email field
+      $(email).keyup(function () {
+        if (!$(this).val().match($regexemail)) {
+          // there is a mismatch, hence show the error message
+          $(".Emailemsg").removeClass("hidden");
+          $(".Emailemsg").show();
+        } else {
+          // else, do not display message
+          $(".Emailemsg").addClass("hidden");
+        }
+      });
+  
+      //check password field
+      $(password).keyup(function () {
+        if (!$(this).val().match($regexpassword)) {
+          // there is a mismatch, hence show the error message
+          $(".Passemsg").removeClass("hidden");
+          $(".Passemsg").show();
+        } else {
+          // else, do not display message
+          $(".Passemsg").addClass("hidden");
+        }
+      });
+  
+      //check password field
+      $(Confirm_Password).keyup(function () {
+        if (!$(this).val().match(password)) {
+          // there is a mismatch, hence show the error message
+          $(".Confemsg").removeClass("hidden");
+          $(".Confemsg").show();
+        } else {
+          // else, do not display message
+          $(".Confemsg").addClass("hidden");
+        }
+      });
+  
+    });
+  </script>
