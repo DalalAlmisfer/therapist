@@ -15,7 +15,7 @@ var transporter = nodemailer.createTransport({
   },
 });
 function ensureAuthenticated(req, res, next) {
-    if (req.admin == 'auth') {
+    if (req.session.admin =='auth') {
       return next();
     } else{
       // Return error content: res.jsonp(...) or redirect: res.redirect('/login')
@@ -23,7 +23,7 @@ function ensureAuthenticated(req, res, next) {
     }
   }
 
-router.get('/addtherapist' ,(req,res) => {
+router.get('/addtherapist' , ensureAuthenticated, (req,res) => {
     therapist.findAll({ raw : true,
     where: 
        {admains_FK: 1}

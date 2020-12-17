@@ -58,7 +58,7 @@ router.post('/loginAdmain',  (req, res) => {
           link = `https://dashbaordanees.herokuapp.com/admin/home?id=${hash}`;
           mail(req.body.email, link).catch((err) => {
             console.log("err from mail func", err);
-            req.admin = 'auth';
+            req.session.admin = 'auth';
           });
           res.render("home", {chosen: "admin_login" , usertype: 'admin', layout: 'layoutA', msg:'email sent'});
               } else {
