@@ -23,7 +23,7 @@ function ensureAuthenticated(req, res, next) {
     }
   }
 
-router.get('/addtherapist' , ensureAuthenticated, (req,res) => {
+router.get('/addtherapist' , (req,res) => {
     therapist.findAll({ raw : true,
     where: 
        {admains_FK: 1}
