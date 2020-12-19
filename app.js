@@ -8,6 +8,7 @@ const ejs = require('ejs');
 var engine = require('ejs-locals');
 const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
+require('dotenv').config()
 const Sequelize = require('sequelize');
 const SessionStore = require('express-session-sequelize')(session.Store);
 var http = require('http');
