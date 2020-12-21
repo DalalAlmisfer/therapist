@@ -67,7 +67,7 @@ router.post('/contact', ensureAuthenticated, (req,res) => {
     })
     .then( (user) => {
           console.log('msg right');
-          res.render('contactUS', {msg:"message sent!", layout: "layout", title: 'contact us'})
+          res.render('contactUS', {layout: "layout", msg:"message sent!", title: 'contact us'})
 
     })
     .catch( err => {
