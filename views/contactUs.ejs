@@ -21,6 +21,11 @@
             
           </div>
 
+          <% if(typeof msg != 'undefined') {%> 
+            <span style="color: green; font-size: 11px;"> <%= msg %> </span>
+            <% } %> 
+
+
           <% if(typeof errors != 'undefined') {%> 
             <% if (errors.length == 1) { %> 
             <span style="color: red; font-size: 11px;"> <%= errors %> </span>
