@@ -56,7 +56,6 @@ router.post('/contact', (req,res) => {
  
     if ( errors.length > 0) {
         console.log('error cc');
-        res.render('contactUS', {errors:errors, layout: "layout", title: 'contact us'})
 
     } else {
 
@@ -72,8 +71,7 @@ router.post('/contact', (req,res) => {
     })
     .catch( err => {
         console.log(err);
-         res.redirect('/home/contact');
-
+        res.render('contactUS', {msg:"message sent!", layout: "layout", title: 'contact us'})
     });
   }
 });
