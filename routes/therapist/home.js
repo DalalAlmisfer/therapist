@@ -41,7 +41,7 @@ router.get('/contact', ensureAuthenticated, (req,res) => {
     res.render('contactUs', {layout: "layout", user: json, title: 'contact us'});
 });
 
-router.post('/contact', ensureAuthenticated, (req,res) => {
+router.post('/contact', (req,res) => {
     const { contact_email, contact_msg } = req.body;
     let errors = [];
 
