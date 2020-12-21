@@ -175,8 +175,20 @@ router.post('/:id/edit/submit', ensureAuthenticated, async (req, res) => {
         },
     )
     .then( (result) => {
-        res.render('index', {layout: "layout", user: json, title: 'edit ', body:'done' });
 
+        player.findOne({
+            where: {
+                player_id: sub,
+                therapist_FK: json['therapist_id']
+    
+            }
+        })
+        .then((result) => {
+            res.render('edit' ,{layout: "layout" , user: json, title: "Edit patient profile", data: result, msg: "changed successfully!"});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
     })
     .catch(err => {
