@@ -36,7 +36,7 @@ function ensureAuthenticated(req, res, next) {
  });
 
 //------- Constact us --------
-router.get('/contact', ensureAuthenticated, (req,res) => {
+router.get('/contact', (req,res) => {
     var json = JSON.parse(req.user);
     res.render('contactUs', {layout: "layout", user: json, title: 'contact us'});
 });
