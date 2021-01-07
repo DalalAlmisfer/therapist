@@ -2,11 +2,8 @@
   <?php
 
          if(isset($_POST["user"])){
-
-
-
-$user = addslashes($_POST['user']);
-$count = addslashes($_POST['count']);
+          $user = addslashes($_POST['user']);
+          $count = addslashes($_POST['count']);
 
             // Create connection
             $conn = new mysqli("eu-cdbr-west-03.cleardb.net", "b630bdd6b6e1b9", "d159c434","heroku_195f706910a16f0");
